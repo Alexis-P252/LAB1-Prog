@@ -47,6 +47,18 @@ public abstract class Usuario {
         return this.fecha_nac;
     }
     
+    public void SetNombre(String nombre){
+        this.nombre = nombre;
+    }
+    
+    public void SetApellido(String apellido){
+        this.apellido = apellido;
+    }
+    
+    public void SetFecha(DtFecha f){
+        this.fecha_nac = f;
+    }
+    
     public abstract DtUsuario ArmarDT();
     
     

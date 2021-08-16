@@ -12,6 +12,10 @@ import Logica.Sistema;
 import Logica.DtUsuario;
 import Logica.DtEspectador;
 import Logica.DtArtista;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
  
 /**
  *
@@ -23,8 +27,9 @@ public class main extends javax.swing.JFrame {
     /**
      * Creates new form main
      */
-    public main() {
+    public main(){
         initComponents();
+        
     
         //Inicialización
         SistemaFactory fabrica = SistemaFactory.getInstance();
@@ -37,6 +42,13 @@ public class main extends javax.swing.JFrame {
         //
         GroupTipoUsuario.add(EspectadorButton);
         GroupTipoUsuario.add(ArtistaButton);
+        
+        try{
+            Image img=ImageIO.read(new File("ticket.png"));
+            this.setIconImage(img);
+        } catch(Exception e){
+            System.out.println(e);
+        }
     }
 
     /**
@@ -125,7 +137,7 @@ public class main extends javax.swing.JFrame {
         ComboBoxDia3 = new javax.swing.JComboBox<>();
         ComboBoxMes3 = new javax.swing.JComboBox<>();
         ComboBoxAnio3 = new javax.swing.JComboBox<>();
-        BotonConfirmar4 = new javax.swing.JButton();
+        BotonConfirmar3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuUsuario = new javax.swing.JMenu();
         AltaUsuario = new javax.swing.JMenuItem();
@@ -562,11 +574,11 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        BotonConfirmar4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        BotonConfirmar4.setText("Confirmar");
-        BotonConfirmar4.addActionListener(new java.awt.event.ActionListener() {
+        BotonConfirmar3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        BotonConfirmar3.setText("Confirmar");
+        BotonConfirmar3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonConfirmar4ActionPerformed(evt);
+                BotonConfirmar3ActionPerformed(evt);
             }
         });
 
@@ -617,7 +629,7 @@ public class main extends javax.swing.JFrame {
                                     .addGroup(FrameModificarUsuarioLayout.createSequentialGroup()
                                         .addComponent(BotonCancelar3)
                                         .addGap(18, 18, 18)
-                                        .addComponent(BotonConfirmar4)))))))
+                                        .addComponent(BotonConfirmar3)))))))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
         FrameModificarUsuarioLayout.setVerticalGroup(
@@ -664,10 +676,10 @@ public class main extends javax.swing.JFrame {
                         .addGroup(FrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ComboBoxAnio3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LabelAnio3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
                         .addGroup(FrameModificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(BotonCancelar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BotonConfirmar4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BotonConfirmar3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19))))
         );
 
@@ -806,7 +818,7 @@ public class main extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(FrameModificarUsuario)
+                .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1283,47 +1295,64 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboBoxAnio3ActionPerformed
 
-    private void BotonConfirmar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmar4ActionPerformed
-        // TODO add your handling code here:
+    private void BotonConfirmar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmar3ActionPerformed
+        
         if(this.FieldBiografia3.isShowing()){
             //EL USUARIO ES ARTISTA
             if(this.FieldNombre3.getText().isBlank() || this.FieldApellido3.getText().isBlank() || this.FieldBiografia3.getText().isBlank() ||
                this.FieldDescripcion3.getText().isBlank() || this.FieldLink3.getText().isBlank()){
-            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Registro", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            //CAPTURO LOS DATOS Y LOS MANDO A LA FUNCION DE MODIFICAR
-            String nickname = this.ListaUsuarios3.getSelectedValue().replace(" (A)","");
+            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Modificar Usuario", JOptionPane.INFORMATION_MESSAGE);
             
-            int anio = this.ComboBoxAnio3.getSelectedIndex()+1960;
-            int mes = this.ComboBoxMes3.getSelectedIndex()+1;
-            int dia = this.ComboBoxDia3.getSelectedIndex()+1;
-   
-            DtFecha f = new DtFecha(dia,mes,anio,0,0,0);
-            
-            sis.ModificarArtista(nickname,this.FieldNombre3.getText(),this.FieldApellido3.getText(),f,this.FieldDescripcion3.getText(),
-                    this.FieldBiografia3.getText(),this.FieldLink3.getText());
-        }
+            }else{
+                //CAPTURO LOS DATOS Y LOS MANDO A LA FUNCION DE MODIFICAR
+                String nickname = this.ListaUsuarios3.getSelectedValue().replace(" (A)","");
+
+                int anio = this.ComboBoxAnio3.getSelectedIndex()+1960;
+                int mes = this.ComboBoxMes3.getSelectedIndex()+1;
+                int dia = this.ComboBoxDia3.getSelectedIndex()+1;
+
+                DtFecha f = new DtFecha(dia,mes,anio,0,0,0);
+
+                sis.ModificarArtista(nickname,this.FieldNombre3.getText(),this.FieldApellido3.getText(),f,this.FieldDescripcion3.getText(),
+                        this.FieldBiografia3.getText(),this.FieldLink3.getText());
+                JOptionPane.showMessageDialog(this, "Datos del artista modificados correctamente", "Modificar Usuario", JOptionPane.INFORMATION_MESSAGE);
+                this.FieldApellido3.setText("");
+                this.FieldNombre3.setText("");
+                this.FieldBiografia3.setText("");
+                this.FieldDescripcion3.setText("");
+                this.FieldLink3.setText("");
+                this.ComboBoxDia3.setSelectedIndex(0);
+                this.ComboBoxMes3.setSelectedIndex(0);
+                this.ComboBoxAnio3.setSelectedIndex(0);
+                this.FrameModificarUsuario.setVisible(false);
+            }
             
         }else{
             //EL USUARIO ES ESPECTADOR
-        if(this.FieldNombre3.getText().isBlank() || this.FieldApellido3.getText().isBlank()){
-            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Registro", JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            //CAPTURO LOS DATOS Y LOS MANDO A LA FUNCION DE MODIFICAR
-            String nickname = this.ListaUsuarios3.getSelectedValue().replace(" (E)","");
-            
-            int anio = this.ComboBoxAnio3.getSelectedIndex()+1960;
-            int mes = this.ComboBoxMes3.getSelectedIndex()+1;
-            int dia = this.ComboBoxDia3.getSelectedIndex()+1;
-   
-            DtFecha f = new DtFecha(dia,mes,anio,0,0,0);
-            
-            sis.modificarEspectador(nickname,this.FieldNombre3.getText(),this.FieldApellido3.getText(),f);
-            //modificarEspectador(String nickname, String nombre, String apellido, DtFecha f)
-        }  
+            if(this.FieldNombre3.getText().isBlank() || this.FieldApellido3.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Complete todos los campos", "Modificar Usuario", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                //CAPTURO LOS DATOS Y LOS MANDO A LA FUNCION DE MODIFICAR
+                String nickname = this.ListaUsuarios3.getSelectedValue().replace(" (E)","");
+
+                int anio = this.ComboBoxAnio3.getSelectedIndex()+1960;
+                int mes = this.ComboBoxMes3.getSelectedIndex()+1;
+                int dia = this.ComboBoxDia3.getSelectedIndex()+1;
+
+                DtFecha f = new DtFecha(dia,mes,anio,0,0,0);
+
+                sis.modificarEspectador(nickname,this.FieldNombre3.getText(),this.FieldApellido3.getText(),f);
+                JOptionPane.showMessageDialog(this, "Datos del espectador modificados correctamente", "Modificar Usuario", JOptionPane.INFORMATION_MESSAGE);
+                this.FieldApellido3.setText("");
+                this.FieldNombre3.setText("");
+                this.ComboBoxDia3.setSelectedIndex(0);
+                this.ComboBoxMes3.setSelectedIndex(0);
+                this.ComboBoxAnio3.setSelectedIndex(0);
+                this.FrameModificarUsuario.setVisible(false);
+            }  
         }
         
-    }//GEN-LAST:event_BotonConfirmar4ActionPerformed
+    }//GEN-LAST:event_BotonConfirmar3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1368,7 +1397,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuItem AltaUsuario;
     private javax.swing.JRadioButton ArtistaButton;
     private javax.swing.JButton BotonCancelar3;
-    private javax.swing.JButton BotonConfirmar4;
+    private javax.swing.JButton BotonConfirmar3;
     private javax.swing.JButton BotonSalir2;
     private javax.swing.JButton ButtonCancelar;
     private javax.swing.JButton ButtonConfirmar;
