@@ -1285,6 +1285,44 @@ public class main extends javax.swing.JFrame {
 
     private void BotonConfirmar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmar4ActionPerformed
         // TODO add your handling code here:
+        if(this.FieldBiografia3.isShowing()){
+            //EL USUARIO ES ARTISTA
+            if(this.FieldNombre3.getText().isBlank() || this.FieldApellido3.getText().isBlank() || this.FieldBiografia3.getText().isBlank() ||
+               this.FieldDescripcion3.getText().isBlank() || this.FieldLink3.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Registro", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            //CAPTURO LOS DATOS Y LOS MANDO A LA FUNCION DE MODIFICAR
+            String nickname = this.ListaUsuarios3.getSelectedValue().replace(" (A)","");
+            
+            int anio = this.ComboBoxAnio3.getSelectedIndex()+1960;
+            int mes = this.ComboBoxMes3.getSelectedIndex()+1;
+            int dia = this.ComboBoxDia3.getSelectedIndex()+1;
+   
+            DtFecha f = new DtFecha(dia,mes,anio,0,0,0);
+            
+            sis.ModificarArtista(nickname,this.FieldNombre3.getText(),this.FieldApellido3.getText(),f,this.FieldDescripcion3.getText(),
+                    this.FieldBiografia3.getText(),this.FieldLink3.getText());
+        }
+            
+        }else{
+            //EL USUARIO ES ESPECTADOR
+        if(this.FieldNombre3.getText().isBlank() || this.FieldApellido3.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Complete todos los campos", "Registro", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            //CAPTURO LOS DATOS Y LOS MANDO A LA FUNCION DE MODIFICAR
+            String nickname = this.ListaUsuarios3.getSelectedValue().replace(" (E)","");
+            
+            int anio = this.ComboBoxAnio3.getSelectedIndex()+1960;
+            int mes = this.ComboBoxMes3.getSelectedIndex()+1;
+            int dia = this.ComboBoxDia3.getSelectedIndex()+1;
+   
+            DtFecha f = new DtFecha(dia,mes,anio,0,0,0);
+            
+            sis.modificarEspectador(nickname,this.FieldNombre3.getText(),this.FieldApellido3.getText(),f);
+            //modificarEspectador(String nickname, String nombre, String apellido, DtFecha f)
+        }  
+        }
+        
     }//GEN-LAST:event_BotonConfirmar4ActionPerformed
 
     /**
