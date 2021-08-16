@@ -86,6 +86,24 @@ public class Sistema implements ISistema {
         
     }
     
+    public void modificarEspectador(String nickname, String nombre, String apellido, DtFecha f){
+        Usuario u = (Espectador) this.Usuarios.get(nickname);
+        u.SetNombre(nombre);
+        u.SetApellido(apellido);
+        u.SetFecha(f);
+    }
+    
+    public void ModificarArtista (String nickname, String nombre,String apellido, DtFecha f,String descripcion, String biografia, String link){
+        Artista u = (Artista) this.Usuarios.get(nickname);
+        u.SetNombre(nombre);
+        u.SetApellido (apellido);
+        u.SetFecha (f);
+        u.SetDescripcion (descripcion);
+        u.SetBiografia (biografia);
+        u.SetLink (link);
+    }
+    
+    
 
 }
 

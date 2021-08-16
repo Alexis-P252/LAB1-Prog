@@ -39,6 +39,18 @@ public class Artista extends Usuario {
         return this.link;
     }
     
+    public void SetDescripcion (String des){
+        this.descripcion = des;
+    }
+
+    public void SetLink(String _link){
+        this.link = _link;
+    }
+
+    public void SetBiografia (String bio){
+        this.biografia = bio;
+    } 
+     
     @Override 
     public DtArtista ArmarDT(){
          DtArtista dt = new DtArtista(nombre, apellido, email, nickname, fecha_nac, descripcion, biografia, link);

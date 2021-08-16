@@ -16,5 +16,7 @@ public interface ISistema {
     public abstract boolean UsuarioxEmail(String email);
     public abstract String[] ColNickname();
     public abstract DtUsuario GetDtUsuario(String nickname);
+    public abstract void modificarEspectador(String nickname, String nombre, String apellido, DtFecha f);
+    public abstract void ModificarArtista (String nickname, String nombre,String apellido, DtFecha f,String descripcion, String biografia, String link);
     
 }
