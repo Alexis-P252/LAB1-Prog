@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 import Logica.Usuario;
+import Logica.Plataforma;
 import Logica.DtUsuario;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -19,9 +20,11 @@ import javax.swing.JOptionPane;
 public class Sistema implements ISistema {
     
     private Map Usuarios;
+    private Map Plataformas;
     
     public Sistema(){
         this.Usuarios = new HashMap();
+        this.Plataformas = new HashMap();
     }
     
     public void ingresarEspectador(String nombre, String apellido, String correo, String nickname, DtFecha fecha_nac){
@@ -101,6 +104,15 @@ public class Sistema implements ISistema {
         u.SetDescripcion (descripcion);
         u.SetBiografia (biografia);
         u.SetLink (link);
+    }
+    
+    public void PreCargaPlataforma(String nombre, String descripcion, String url){
+        Plataforma twitch = new Plataforma("Twitch","Twitch is the worlds leading live streaming platform for gamers and the things we love","www.twitch.com");
+        Plataforma facebook_live = new Plataforma("Facebook Live", "Facebook Live es la herramienta de vídeo en streaming que ofrece la red social por el momento para usuarios de dispositivos móviles y que permite realizar transmisiones en vivo de manera muy sencilla y rápida ya sea desde tu perfil personal o desde tu página de empresa" , "www.facebooklive.com");
+        Plataforma youtube = new Plataforma("YouTube", "YouTube es un portal del Internet que permite a sus usuarios subir y visualizar videos. Fue creado en febrero de 2005 por Chad Hurley, Steve Chen y Jawed Karim", "www.youtube.com");
+        this.Plataformas.put(twitch.GetNombre(), twitch);
+        this.Plataformas.put(youtube.GetNombre(), youtube);
+        this.Plataformas.put(facebook_live.GetNombre(), facebook_live);
     }
     
     
