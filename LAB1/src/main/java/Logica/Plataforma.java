@@ -36,6 +36,14 @@ public class Plataforma {
     }
      
      public void agregarEspectaculo(Espectaculo e){
-         Espectaculos.put(e.getnombre(),e);
+         Espectaculos.put(e.getNombre(),e);
+     }
+     
+     public boolean existeEspectaculo(String espectaculo){
+         if(this.Espectaculos.get(espectaculo)==null){
+             return false;
+         }else{
+             return true;
+         }
      }
 }

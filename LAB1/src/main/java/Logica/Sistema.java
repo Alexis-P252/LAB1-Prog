@@ -34,13 +34,22 @@ public class Sistema implements ISistema {
         while(itPlataformas.hasNext()){
             p = (Plataforma) itPlataformas.next();
             if(p.GetNombre().equals(Plataforma)){
+                Espectaculo e = new Espectaculo(nombre,fecha_registro,costo,url,cant_max_espec,cant_min_espec,duracion,descripcion);
+                p.agregarEspectaculo(e);
                 break;
             }
-        }
+        }  
+    }
+    public boolean verificarEspectacunoEnPlataforma(String plataforma,String espectaculo){
+        Plataforma p = (Plataforma)this.Plataformas.get(plataforma);
         
-        Espectaculo e = new Espectaculo(nombre,fecha_registro,costo,url,cant_max_espec,cant_min_espec,duracion,descripcion);
-        p.agregarEspectaculo(e);
         
+        if(p.existeEspectaculo(espectaculo))
+                return true;
+            else
+                return false;
+    
+    
     }
     public String[] listarArtistas(){
         String res[] = new String[this.Usuarios.size()];
