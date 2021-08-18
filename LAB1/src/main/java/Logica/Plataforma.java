@@ -34,4 +34,16 @@ public class Plataforma {
      public String GetUrl(){
       return this.url;
     }
+     
+     public void agregarEspectaculo(Espectaculo e){
+         Espectaculos.put(e.getNombre(),e);
+     }
+     
+     public boolean existeEspectaculo(String espectaculo){
+         if(this.Espectaculos.get(espectaculo)==null){
+             return false;
+         }else{
+             return true;
+         }
+     }
 }

@@ -18,5 +18,8 @@ public interface ISistema {
     public abstract DtUsuario GetDtUsuario(String nickname);
     public abstract void modificarEspectador(String nickname, String nombre, String apellido, DtFecha f);
     public abstract void ModificarArtista (String nickname, String nombre,String apellido, DtFecha f,String descripcion, String biografia, String link);
-    
+    public abstract String[] listarArtistas();
+    public abstract DtArtista[] listarDtArtistas();
+    public abstract void crearEspectaculo(String Plataforma,String nombre,DtFecha fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion);
+    public abstract boolean verificarEspectacunoEnPlataforma(String plataforma,String espectaculo);
 }
