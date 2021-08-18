@@ -34,4 +34,8 @@ public class Plataforma {
      public String GetUrl(){
       return this.url;
     }
+     
+     public void agregarEspectaculo(Espectaculo e){
+         Espectaculos.put(e.getnombre(),e);
+     }
 }

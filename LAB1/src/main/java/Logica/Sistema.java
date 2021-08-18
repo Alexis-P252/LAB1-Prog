@@ -27,6 +27,73 @@ public class Sistema implements ISistema {
         this.Plataformas = new HashMap();
     }
     
+    public void crearEspectaculo(String Plataforma,String nombre,DtFecha fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion){
+        //Espectaculo e = New Espectaculo();
+        Iterator itPlataformas = this.Plataformas.values().iterator();
+        Plataforma p;
+        while(itPlataformas.hasNext()){
+            p = (Plataforma) itPlataformas.next();
+            if(p.GetNombre().equals(Plataforma)){
+                break;
+            }
+        }
+        
+        Espectaculo e = new Espectaculo(nombre,fecha_registro,costo,url,cant_max_espec,cant_min_espec,duracion,descripcion);
+        p.agregarEspectaculo(e);
+        
+    }
+    public String[] listarArtistas(){
+        String res[] = new String[this.Usuarios.size()];
+        
+        Iterator it = this.Usuarios.values().iterator();
+
+        int i = 0;
+        while (it.hasNext()){
+            Usuario u = (Usuario) it.next();
+            if(u instanceof Artista){
+                res[i] = u.GetNombre();
+                i++;
+            }
+            else{
+               
+            }
+        }
+        return res;
+    }
+    
+    public DtArtista[] listarDtArtistas(){
+        DtArtista res[] = new DtArtista[this.Usuarios.size()];
+        
+        Iterator it = this.Usuarios.values().iterator();
+
+        int i = 0;
+        while (it.hasNext()){
+            Usuario u = (Usuario) it.next();
+            if(u instanceof Artista){
+                res[i] = (DtArtista)u.ArmarDT();
+                i++;
+            }
+            else{
+               
+            }
+        }
+        return res;
+    }
+    
+    public String[] listarPlataformas(){
+        Iterator it = this.Plataformas.values().iterator();
+        
+        String res[] = new String[this.Plataformas.size()];
+        
+        int i = 0;
+        while (it.hasNext()){
+            Plataforma p = (Plataforma) it.next();
+            res[i] = p.GetNombre();
+            i++;
+        }
+        return res;
+    } 
+    
     public void ingresarEspectador(String nombre, String apellido, String correo, String nickname, DtFecha fecha_nac){
         
         Usuario u = new Espectador(nombre, apellido, correo, nickname, fecha_nac);
