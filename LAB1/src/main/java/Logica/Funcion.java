@@ -62,4 +62,6 @@ public class Funcion {
         DtFuncion dt = new DtFuncion (this.nombre, this.fecha_registro,this.fecha_hora);
         return dt;
     } 
+    
+
 }

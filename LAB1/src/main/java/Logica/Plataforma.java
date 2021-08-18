@@ -5,6 +5,7 @@
  */
 package Logica;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 /**
  *
@@ -44,6 +45,25 @@ public class Plataforma {
              return false;
          }else{
              return true;
-         }
+         }         
+     }
+     
+     public String[] listarEspectaculoxPlataforma(){
+         String res[] = new String[this.Espectaculos.size()];
+        
+         Iterator it = this.Espectaculos.values().iterator();
+
+        int i = 0;
+        while (it.hasNext()){
+            Espectaculo e = (Espectaculo) it.next();
+            if(e instanceof Espectaculo){
+                res[i] = e.getNombre();
+                i++;
+            }
+            else{
+               
+            }
+        }
+        return res;
      }
 }

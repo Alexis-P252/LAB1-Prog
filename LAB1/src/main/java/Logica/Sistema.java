@@ -191,8 +191,12 @@ public class Sistema implements ISistema {
         this.Plataformas.put(facebook_live.GetNombre(), facebook_live);
     }
     
-    
+    public String[] listarEspectaculos(String n){
+                      
+        Plataforma p =  (Plataforma) this.Plataformas.get(n);
+        return p.listarEspectaculoxPlataforma();
+        
+    }
 
 }
-
 
