@@ -51,6 +51,8 @@ public class Sistema implements ISistema {
     
     
     }
+    
+    
     public String[] listarArtistas(){
         String res[] = new String[this.Usuarios.size()];
         

@@ -15,6 +15,7 @@ import Logica.DtArtista;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import javax.imageio.ImageIO;
  
 /**
@@ -867,7 +868,6 @@ public class main extends javax.swing.JFrame {
         jPanel5.add(LabelNombre4);
         LabelNombre4.setBounds(20, 200, 70, 15);
 
-        FieldEspMin4.setEditable(false);
         FieldEspMin4.setBackground(new java.awt.Color(204, 204, 204));
         FieldEspMin4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -883,7 +883,6 @@ public class main extends javax.swing.JFrame {
         jPanel5.add(LabelEsp_Min4);
         LabelEsp_Min4.setBounds(290, 200, 130, 15);
 
-        FieldURL4.setEditable(false);
         FieldURL4.setBackground(new java.awt.Color(204, 204, 204));
         FieldURL4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -899,7 +898,6 @@ public class main extends javax.swing.JFrame {
         jPanel5.add(LabelDescripcion4);
         LabelDescripcion4.setBounds(20, 250, 70, 15);
 
-        FieldDescripcion4.setEditable(false);
         FieldDescripcion4.setBackground(new java.awt.Color(204, 204, 204));
         FieldDescripcion4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -915,7 +913,6 @@ public class main extends javax.swing.JFrame {
         jPanel5.add(LabelDuracion4);
         LabelDuracion4.setBounds(20, 300, 90, 15);
 
-        FieldNombre4.setEditable(false);
         FieldNombre4.setBackground(new java.awt.Color(204, 204, 204));
         FieldNombre4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -931,7 +928,6 @@ public class main extends javax.swing.JFrame {
         jPanel5.add(LabelURL4);
         LabelURL4.setBounds(20, 350, 50, 15);
 
-        FieldCosto4.setEditable(false);
         FieldCosto4.setBackground(new java.awt.Color(204, 204, 204));
         FieldCosto4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -947,7 +943,6 @@ public class main extends javax.swing.JFrame {
         jPanel5.add(LabelCosto4);
         LabelCosto4.setBounds(290, 300, 130, 15);
 
-        FieldDuracion4.setEditable(false);
         FieldDuracion4.setBackground(new java.awt.Color(204, 204, 204));
         FieldDuracion4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -963,7 +958,6 @@ public class main extends javax.swing.JFrame {
         jPanel5.add(LabelEsp_Max4);
         LabelEsp_Max4.setBounds(290, 250, 130, 15);
 
-        FieldEspMax4.setEditable(false);
         FieldEspMax4.setBackground(new java.awt.Color(204, 204, 204));
         FieldEspMax4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1202,7 +1196,6 @@ public class main extends javax.swing.JFrame {
         this.ListaPlataforma4.setListData(listaPlataforma);
         String[] listaArtista = sis.listarArtistas();
         this.ListaArtista4.setListData(listaArtista);
-        
         
     }//GEN-LAST:event_AltaEspectaculoActionPerformed
 
@@ -1740,6 +1733,89 @@ public class main extends javax.swing.JFrame {
 
     private void ButtonConfirmar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmar4ActionPerformed
         // TODO add your handling code here:
+        String Scosto = this.FieldCosto4.getText();
+        String nombre = this.FieldNombre4.getText();
+        String url = this.FieldURL4.getText();
+        String descripcion = this.FieldDescripcion4.getText();
+        
+        int espMin = 0,espMax = 0,duracion = 0;
+        float costo = 0;
+        
+        
+        
+        if(nombre.isBlank() || descripcion.isBlank() || this.FieldDuracion4.getText().isBlank() || url.isBlank() ||
+           this.FieldEspMin4.getText().isBlank() || this.FieldEspMax4.getText().isBlank() || this.FieldCosto4.getText().isBlank()){
+            JOptionPane.showMessageDialog(this,"Complete todos los campos","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+        }else if(this.ListaArtista4.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this,"Seleccione un Artista","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+        }else if(this.ListaPlataforma4.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this,"Seleccione una Plataforma","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+        }else{
+            try{
+            costo =  Float.parseFloat(Scosto);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Costo debe ser un valor numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            espMin = Integer.parseInt(this.FieldEspMin4.getText());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"El Numero de espectadores minimos debe ser numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            espMax = Integer.parseInt(this.FieldEspMax4.getText());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"El numero de espectadores maximos debe ser numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try{
+            duracion = Integer.parseInt(this.FieldDuracion4.getText());
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this,"Duracion debe ser un valor numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+            if(costo <= 0){
+                JOptionPane.showMessageDialog(this,"Costo debe ser mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        
+            if(espMin >= espMax){
+                JOptionPane.showMessageDialog(this,"La cantidad de espectadores maximos debe ser mayor que el minimo de espectadores","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if(duracion <= 0){
+                JOptionPane.showMessageDialog(this,"La duracion del espectaculo debe ser mayor que 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String Plataforma = this.ListaPlataforma4.getSelectedValue();
+            
+            if(sis.verificarEspectacunoEnPlataforma(Plataforma,nombre)){
+                JOptionPane.showMessageDialog(this,"Ya existe un Espectaculo con ese Nombre en La plataforma "+Plataforma,"Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            Date fecha = new Date();
+            int dia = fecha.getDate();
+            int mes = fecha.getMonth()+1;
+            int anio = fecha.getYear() + 1900;
+            int hora = fecha.getHours();
+            int min = fecha.getMinutes();
+            int sec = fecha.getSeconds();
+            DtFecha fecha_registro = new DtFecha(dia,mes,anio,hora,min,sec);
+            
+            sis.crearEspectaculo(Plataforma, nombre ,fecha_registro,costo,url,espMin,espMax,duracion,descripcion);
+            JOptionPane.showMessageDialog(this,"Espectaculo creado correctamente","Alta Espectaculo",JOptionPane.INFORMATION_MESSAGE);
+            
+            this.FrameAltaEspectaculo.setVisible(false);
+            this.FieldNombre4.setText("");
+            this.FieldDescripcion4.setText("");
+            this.FieldDuracion4.setText("");
+            this.FieldURL4.setText("");
+            this.FieldEspMin4.setText("");
+            this.FieldEspMax4.setText("");
+            this.FieldCosto4.setText("");
+            
+        }
     }//GEN-LAST:event_ButtonConfirmar4ActionPerformed
 
     private void menuEspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEspectaculoActionPerformed
@@ -1785,6 +1861,15 @@ public class main extends javax.swing.JFrame {
                 this.FrameModificarUsuario.setVisible(false);
                 this.FrameAltaUsuario.setVisible(false);
                 this.FrameAltaEspectaculo.setVisible(false);
+    }
+    
+    public boolean isNumeric(String cadena){
+     try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe){
+            return false;
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
