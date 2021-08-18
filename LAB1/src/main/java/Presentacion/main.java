@@ -34,6 +34,7 @@ public class main extends javax.swing.JFrame {
         //Inicialización
         SistemaFactory fabrica = SistemaFactory.getInstance();
         sis = fabrica.getISistema();
+        sis.PreCargaPlataforma();
         
         this.FrameAltaUsuario.setVisible(false);
         this.FrameConsultarUsuario.setVisible(false);
@@ -150,7 +151,7 @@ public class main extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         FrameAltaEspectaculo = new javax.swing.JInternalFrame();
         jScrollPane7 = new javax.swing.JScrollPane();
-        ListaPlataforma5 = new javax.swing.JList<>();
+        ListaPlataforma4 = new javax.swing.JList<>();
         jPanel5 = new javax.swing.JPanel();
         LabelSeleccionePlataforma5 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -161,14 +162,14 @@ public class main extends javax.swing.JFrame {
         FieldEspMin4 = new javax.swing.JTextField();
         LabelEsp_Min4 = new javax.swing.JLabel();
         FieldURL4 = new javax.swing.JTextField();
-        LabelNombre6 = new javax.swing.JLabel();
-        FieldDescripcion5 = new javax.swing.JTextField();
-        LabelDuracion5 = new javax.swing.JLabel();
-        FieldNombre5 = new javax.swing.JTextField();
+        LabelDescripcion4 = new javax.swing.JLabel();
+        FieldDescripcion4 = new javax.swing.JTextField();
+        LabelDuracion4 = new javax.swing.JLabel();
+        FieldNombre4 = new javax.swing.JTextField();
         LabelURL4 = new javax.swing.JLabel();
         FieldCosto4 = new javax.swing.JTextField();
         LabelCosto4 = new javax.swing.JLabel();
-        FieldDuracion5 = new javax.swing.JTextField();
+        FieldDuracion4 = new javax.swing.JTextField();
         LabelEsp_Max4 = new javax.swing.JLabel();
         FieldEspMax4 = new javax.swing.JTextField();
         ButtonCancelar4 = new javax.swing.JButton();
@@ -827,8 +828,8 @@ public class main extends javax.swing.JFrame {
         FrameAltaEspectaculo.setVisible(true);
         FrameAltaEspectaculo.getContentPane().setLayout(null);
 
-        ListaPlataforma5.setBackground(new java.awt.Color(204, 204, 204));
-        jScrollPane7.setViewportView(ListaPlataforma5);
+        ListaPlataforma4.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane7.setViewportView(ListaPlataforma4);
 
         FrameAltaEspectaculo.getContentPane().add(jScrollPane7);
         jScrollPane7.setBounds(60, 30, 121, 140);
@@ -892,37 +893,37 @@ public class main extends javax.swing.JFrame {
         jPanel5.add(FieldURL4);
         FieldURL4.setBounds(120, 350, 160, 30);
 
-        LabelNombre6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        LabelNombre6.setForeground(new java.awt.Color(255, 255, 255));
-        LabelNombre6.setText("Descripcion");
-        jPanel5.add(LabelNombre6);
-        LabelNombre6.setBounds(20, 250, 70, 15);
+        LabelDescripcion4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelDescripcion4.setForeground(new java.awt.Color(255, 255, 255));
+        LabelDescripcion4.setText("Descripcion");
+        jPanel5.add(LabelDescripcion4);
+        LabelDescripcion4.setBounds(20, 250, 70, 15);
 
-        FieldDescripcion5.setEditable(false);
-        FieldDescripcion5.setBackground(new java.awt.Color(204, 204, 204));
-        FieldDescripcion5.addActionListener(new java.awt.event.ActionListener() {
+        FieldDescripcion4.setEditable(false);
+        FieldDescripcion4.setBackground(new java.awt.Color(204, 204, 204));
+        FieldDescripcion4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FieldDescripcion5ActionPerformed(evt);
+                FieldDescripcion4ActionPerformed(evt);
             }
         });
-        jPanel5.add(FieldDescripcion5);
-        FieldDescripcion5.setBounds(120, 250, 160, 30);
+        jPanel5.add(FieldDescripcion4);
+        FieldDescripcion4.setBounds(120, 250, 160, 30);
 
-        LabelDuracion5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        LabelDuracion5.setForeground(new java.awt.Color(255, 255, 255));
-        LabelDuracion5.setText("Duracion (min) ");
-        jPanel5.add(LabelDuracion5);
-        LabelDuracion5.setBounds(20, 300, 90, 15);
+        LabelDuracion4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelDuracion4.setForeground(new java.awt.Color(255, 255, 255));
+        LabelDuracion4.setText("Duracion (min) ");
+        jPanel5.add(LabelDuracion4);
+        LabelDuracion4.setBounds(20, 300, 90, 15);
 
-        FieldNombre5.setEditable(false);
-        FieldNombre5.setBackground(new java.awt.Color(204, 204, 204));
-        FieldNombre5.addActionListener(new java.awt.event.ActionListener() {
+        FieldNombre4.setEditable(false);
+        FieldNombre4.setBackground(new java.awt.Color(204, 204, 204));
+        FieldNombre4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FieldNombre5ActionPerformed(evt);
+                FieldNombre4ActionPerformed(evt);
             }
         });
-        jPanel5.add(FieldNombre5);
-        FieldNombre5.setBounds(120, 200, 160, 30);
+        jPanel5.add(FieldNombre4);
+        FieldNombre4.setBounds(120, 200, 160, 30);
 
         LabelURL4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelURL4.setForeground(new java.awt.Color(255, 255, 255));
@@ -946,15 +947,15 @@ public class main extends javax.swing.JFrame {
         jPanel5.add(LabelCosto4);
         LabelCosto4.setBounds(290, 300, 130, 15);
 
-        FieldDuracion5.setEditable(false);
-        FieldDuracion5.setBackground(new java.awt.Color(204, 204, 204));
-        FieldDuracion5.addActionListener(new java.awt.event.ActionListener() {
+        FieldDuracion4.setEditable(false);
+        FieldDuracion4.setBackground(new java.awt.Color(204, 204, 204));
+        FieldDuracion4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FieldDuracion5ActionPerformed(evt);
+                FieldDuracion4ActionPerformed(evt);
             }
         });
-        jPanel5.add(FieldDuracion5);
-        FieldDuracion5.setBounds(120, 300, 160, 30);
+        jPanel5.add(FieldDuracion4);
+        FieldDuracion4.setBounds(120, 300, 160, 30);
 
         LabelEsp_Max4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelEsp_Max4.setForeground(new java.awt.Color(255, 255, 255));
@@ -1039,6 +1040,11 @@ public class main extends javax.swing.JFrame {
         jMenuBar1.add(menuUsuario);
 
         menuEspectaculo.setText("Espectaculo");
+        menuEspectaculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEspectaculoActionPerformed(evt);
+            }
+        });
 
         AltaEspectaculo.setText("Alta de Espectaculo");
         AltaEspectaculo.addActionListener(new java.awt.event.ActionListener() {
@@ -1174,10 +1180,6 @@ public class main extends javax.swing.JFrame {
         this.FrameConsultarUsuario.setVisible(true);
         String lista[] = sis.ColNickname();
         this.ListaUsuarios2.setListData(lista);
-    
-        
-        
-        
     }//GEN-LAST:event_ConsultaUsuarioActionPerformed
 
     private void ModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarUsuarioActionPerformed
@@ -1194,6 +1196,14 @@ public class main extends javax.swing.JFrame {
 
     private void AltaEspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltaEspectaculoActionPerformed
         // TODO add your handling code here:
+        ocultarVentanas();
+        this.FrameAltaEspectaculo.setVisible(true);
+        String[] listaPlataforma = sis.listarPlataformas();
+        this.ListaPlataforma4.setListData(listaPlataforma);
+        String[] listaArtista = sis.listarArtistas();
+        this.ListaArtista4.setListData(listaArtista);
+        
+        
     }//GEN-LAST:event_AltaEspectaculoActionPerformed
 
     private void ConsultaEspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaEspectaculoActionPerformed
@@ -1696,21 +1706,21 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldURL4ActionPerformed
 
-    private void FieldDescripcion5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldDescripcion5ActionPerformed
+    private void FieldDescripcion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldDescripcion4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_FieldDescripcion5ActionPerformed
+    }//GEN-LAST:event_FieldDescripcion4ActionPerformed
 
-    private void FieldNombre5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldNombre5ActionPerformed
+    private void FieldNombre4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldNombre4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_FieldNombre5ActionPerformed
+    }//GEN-LAST:event_FieldNombre4ActionPerformed
 
     private void FieldCosto4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldCosto4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldCosto4ActionPerformed
 
-    private void FieldDuracion5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldDuracion5ActionPerformed
+    private void FieldDuracion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldDuracion4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_FieldDuracion5ActionPerformed
+    }//GEN-LAST:event_FieldDuracion4ActionPerformed
 
     private void FieldEspMax4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldEspMax4ActionPerformed
         // TODO add your handling code here:
@@ -1718,11 +1728,23 @@ public class main extends javax.swing.JFrame {
 
     private void ButtonCancelar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar4ActionPerformed
         // TODO add your handling code here:
+        this.FrameAltaEspectaculo.setVisible(false);
+        this.FieldNombre4.setText("");
+        this.FieldDescripcion4.setText("");
+        this.FieldDuracion4.setText("");
+        this.FieldURL4.setText("");
+        this.FieldEspMin4.setText("");
+        this.FieldEspMax4.setText("");
+        this.FieldCosto4.setText("");
     }//GEN-LAST:event_ButtonCancelar4ActionPerformed
 
     private void ButtonConfirmar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmar4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ButtonConfirmar4ActionPerformed
+
+    private void menuEspectaculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEspectaculoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuEspectaculoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1762,6 +1784,7 @@ public class main extends javax.swing.JFrame {
                 this.FrameConsultarUsuario.setVisible(false);
                 this.FrameModificarUsuario.setVisible(false);
                 this.FrameAltaUsuario.setVisible(false);
+                this.FrameAltaEspectaculo.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1801,8 +1824,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldDescripcion;
     private javax.swing.JTextField FieldDescripcion2;
     private javax.swing.JTextField FieldDescripcion3;
-    private javax.swing.JTextField FieldDescripcion5;
-    private javax.swing.JTextField FieldDuracion5;
+    private javax.swing.JTextField FieldDescripcion4;
+    private javax.swing.JTextField FieldDuracion4;
     private javax.swing.JTextField FieldEmail;
     private javax.swing.JTextField FieldEspMax4;
     private javax.swing.JTextField FieldEspMin4;
@@ -1814,7 +1837,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldNombre;
     private javax.swing.JTextField FieldNombre2;
     private javax.swing.JTextField FieldNombre3;
-    private javax.swing.JTextField FieldNombre5;
+    private javax.swing.JTextField FieldNombre4;
     private javax.swing.JTextField FieldSitioWeb;
     private javax.swing.JTextField FieldURL4;
     private javax.swing.JInternalFrame FrameAltaEspectaculo;
@@ -1835,9 +1858,10 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelDescripcion;
     private javax.swing.JLabel LabelDescripcion2;
     private javax.swing.JLabel LabelDescripcion3;
+    private javax.swing.JLabel LabelDescripcion4;
     private javax.swing.JLabel LabelDia;
     private javax.swing.JLabel LabelDia3;
-    private javax.swing.JLabel LabelDuracion5;
+    private javax.swing.JLabel LabelDuracion4;
     private javax.swing.JLabel LabelEmail;
     private javax.swing.JLabel LabelEsp_Max4;
     private javax.swing.JLabel LabelEsp_Min4;
@@ -1858,7 +1882,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelNombre2;
     private javax.swing.JLabel LabelNombre3;
     private javax.swing.JLabel LabelNombre4;
-    private javax.swing.JLabel LabelNombre6;
     private javax.swing.JLabel LabelSeleccionarUsuario3;
     private javax.swing.JLabel LabelSeleccioneArtista4;
     private javax.swing.JLabel LabelSeleccionePlataforma5;
@@ -1868,7 +1891,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JList<String> ListaArtista4;
     private javax.swing.JList<String> ListaOrganizo2;
     private javax.swing.JList<String> ListaOrganizo3;
-    private javax.swing.JList<String> ListaPlataforma5;
+    private javax.swing.JList<String> ListaPlataforma4;
     private javax.swing.JList<String> ListaRegistro2;
     private javax.swing.JList<String> ListaUsuarios2;
     private javax.swing.JList<String> ListaUsuarios3;
