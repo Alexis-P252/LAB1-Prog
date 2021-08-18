@@ -24,4 +24,5 @@ public interface ISistema {
     public abstract void crearEspectaculo(String Plataforma,String nombre,DtFecha fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion);
     public abstract boolean verificarEspectacunoEnPlataforma(String plataforma,String espectaculo);
     public abstract void PreCargaPlataforma();
+    public abstract String[] listarEspectaculos(String n);
 }
