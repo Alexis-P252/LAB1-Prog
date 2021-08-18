@@ -49,6 +49,8 @@ public class main extends javax.swing.JFrame {
         } catch(Exception e){
             System.out.println(e);
         }
+        
+        
     }
 
     /**
@@ -910,9 +912,9 @@ public class main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(48, 48, 48)
                 .addComponent(FrameAltaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(49, 49, 49)
                 .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -933,20 +935,24 @@ public class main extends javax.swing.JFrame {
         } catch (java.beans.PropertyVetoException e1) {
             e1.printStackTrace();
         }
+        FrameAltaUsuario.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void AltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltaUsuarioActionPerformed
         // TODO add your handling code here:
+        ocultarVentanas();
         this.FrameAltaUsuario.setSize(673, 500);   
         this.FrameAltaUsuario.setVisible(true);
         this.EspectadorButton.doClick();
+        
         
     }//GEN-LAST:event_AltaUsuarioActionPerformed
 
     private void ConsultaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaUsuarioActionPerformed
         // TODO add your handling code here:
+        ocultarVentanas();
         this.FrameConsultarUsuario.setVisible(true);
         String lista[] = sis.ColNickname();
         this.ListaUsuarios2.setListData(lista);
@@ -958,6 +964,7 @@ public class main extends javax.swing.JFrame {
 
     private void ModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarUsuarioActionPerformed
         // TODO add your handling code here:
+        ocultarVentanas();
         this.FrameModificarUsuario.setVisible(true);
         String lista[] = sis.ColNickname();
         this.ListaUsuarios3.setListData(lista);
@@ -1228,33 +1235,39 @@ public class main extends javax.swing.JFrame {
         this.FieldFechaNac2.setText("");
         
         String nickname = this.ListaUsuarios2.getSelectedValue();
-        nickname = nickname.replace(" (E)", "");
-        nickname = nickname.replace(" (A)", "");
-        
-        DtUsuario dtU = sis.GetDtUsuario(nickname);
-        
-        String nombre = dtU.GetNombre();
-        String apellido = dtU.GetApellido();
-        String correo = dtU.GetEmail();
-        DtFecha f = dtU.GetFecha_Nac();
-        this.FieldNombre2.setText(nombre);
-        this.FieldApellido2.setText(apellido);
-        this.FieldCorreo2.setText(correo);
-        this.FieldNickname2.setText(nickname);
-        this.FieldFechaNac2.setText(f.GetFecha());
-        
-        if(dtU instanceof DtArtista){
-            DtArtista dtArt = (DtArtista) dtU;
             
-            String biografia = dtArt.GetBiografia();
-            String descripcion = dtArt.GetDescripcion();
-            String link = dtArt.GetLink();
+        try {
+            nickname = nickname.replace(" (E)", "");
+            nickname = nickname.replace(" (A)", "");
             
-            this.FieldBiografia2.setText(biografia);
-            this.FieldDescripcion2.setText(descripcion);
-            this.FieldLink2.setText(link);
-            
+            DtUsuario dtU = sis.GetDtUsuario(nickname);
+            String nombre = dtU.GetNombre();
+            String apellido = dtU.GetApellido();
+            String correo = dtU.GetEmail();
+            DtFecha f = dtU.GetFecha_Nac();
+            this.FieldNombre2.setText(nombre);
+            this.FieldApellido2.setText(apellido);
+            this.FieldCorreo2.setText(correo);
+            this.FieldNickname2.setText(nickname);
+            this.FieldFechaNac2.setText(f.GetFecha());
+
+            if(dtU instanceof DtArtista){
+                DtArtista dtArt = (DtArtista) dtU;
+
+                String biografia = dtArt.GetBiografia();
+                String descripcion = dtArt.GetDescripcion();
+                String link = dtArt.GetLink();
+
+                this.FieldBiografia2.setText(biografia);
+                this.FieldDescripcion2.setText(descripcion);
+                this.FieldLink2.setText(link);
+
+            }
         }
+        catch(Exception e) {}
+        
+        
+        
         
         
     }//GEN-LAST:event_ListaUsuarios2ValueChanged
@@ -1268,52 +1281,55 @@ public class main extends javax.swing.JFrame {
         this.FieldLink3.setText("");
         
         String nickname = this.ListaUsuarios3.getSelectedValue();
-        nickname = nickname.replace(" (E)", "");
-        nickname = nickname.replace(" (A)", "");
         
-        DtUsuario dtU = sis.GetDtUsuario(nickname);
+        try{
+            nickname = nickname.replace(" (E)", "");
+            nickname = nickname.replace(" (A)", "");
+
+            DtUsuario dtU = sis.GetDtUsuario(nickname);
+
+            String nombre = dtU.GetNombre();
+            String apellido = dtU.GetApellido();
+            DtFecha f = dtU.GetFecha_Nac();
+
+            this.FieldNombre3.setText(nombre);
+            this.FieldApellido3.setText(apellido);
+            this.ComboBoxDia3.setSelectedIndex(f.GetDia() - 1);
+            this.ComboBoxMes3.setSelectedIndex(f.GetMes() - 1);
+            this.ComboBoxAnio3.setSelectedIndex(f.GetAnio() - 1960);
+
+
+
+            if(dtU instanceof DtArtista){
+                DtArtista dtArt = (DtArtista) dtU;
+
+                String biografia = dtArt.GetBiografia();
+                String descripcion = dtArt.GetDescripcion();
+                String link = dtArt.GetLink();
+
+                this.FieldBiografia3.setText(biografia);
+                this.FieldDescripcion3.setText(descripcion);
+                this.FieldLink3.setText(link);
+                this.LabelLink3.setVisible(true);
+                this.LabelBiografia3.setVisible(true);
+                this.LabelDescripcion3.setVisible(true);
+                this.FieldBiografia3.setVisible(true);
+                this.FieldLink3.setVisible(true);
+                this.FieldDescripcion3.setVisible(true);
+
+
+            }
+            else if(dtU instanceof DtEspectador){
+                this.LabelLink3.setVisible(false);
+                this.LabelBiografia3.setVisible(false);
+                this.LabelDescripcion3.setVisible(false);
+                this.FieldBiografia3.setVisible(false);
+                this.FieldLink3.setVisible(false);
+                this.FieldDescripcion3.setVisible(false);
+            }
         
-        String nombre = dtU.GetNombre();
-        String apellido = dtU.GetApellido();
-        DtFecha f = dtU.GetFecha_Nac();
-        
-        this.FieldNombre3.setText(nombre);
-        this.FieldApellido3.setText(apellido);
-        this.ComboBoxDia3.setSelectedIndex(f.GetDia() - 1);
-        this.ComboBoxMes3.setSelectedIndex(f.GetMes() - 1);
-        this.ComboBoxAnio3.setSelectedIndex(f.GetAnio() - 1960);
-        
-        
-        
-        if(dtU instanceof DtArtista){
-            DtArtista dtArt = (DtArtista) dtU;
-            
-            String biografia = dtArt.GetBiografia();
-            String descripcion = dtArt.GetDescripcion();
-            String link = dtArt.GetLink();
-            
-            this.FieldBiografia3.setText(biografia);
-            this.FieldDescripcion3.setText(descripcion);
-            this.FieldLink3.setText(link);
-            this.LabelLink3.setVisible(true);
-            this.LabelBiografia3.setVisible(true);
-            this.LabelDescripcion3.setVisible(true);
-            this.FieldBiografia3.setVisible(true);
-            this.FieldLink3.setVisible(true);
-            this.FieldDescripcion3.setVisible(true);
-            
-            
         }
-        else if(dtU instanceof DtEspectador){
-            this.LabelLink3.setVisible(false);
-            this.LabelBiografia3.setVisible(false);
-            this.LabelDescripcion3.setVisible(false);
-            this.FieldBiografia3.setVisible(false);
-            this.FieldLink3.setVisible(false);
-            this.FieldDescripcion3.setVisible(false);
-        }
-        
-        
+        catch(Exception e ){}
     }//GEN-LAST:event_ListaUsuarios3ValueChanged
 
     private void FieldNombre3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldNombre3ActionPerformed
@@ -1487,6 +1503,11 @@ public class main extends javax.swing.JFrame {
                 new main().setVisible(true);
             }
         });
+    }
+    public void ocultarVentanas(){
+                this.FrameConsultarUsuario.setVisible(false);
+                this.FrameModificarUsuario.setVisible(false);
+                this.FrameAltaUsuario.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
