@@ -25,4 +25,5 @@ public interface ISistema {
     public abstract boolean verificarEspectacunoEnPlataforma(String plataforma,String espectaculo);
     public abstract void PreCargaPlataforma();
     public abstract String[] listarEspectaculos(String n);
+    public abstract DtEspectaculo mostrarEspectaculo (String plataforma, String espectaculo);
 }

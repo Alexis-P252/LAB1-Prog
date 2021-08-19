@@ -56,14 +56,13 @@ public class Plataforma {
         int i = 0;
         while (it.hasNext()){
             Espectaculo e = (Espectaculo) it.next();
-            if(e instanceof Espectaculo){
-                res[i] = e.getNombre();
-                i++;
-            }
-            else{
-               
-            }
+            res[i] = e.getNombre();
+            i++;  
         }
         return res;
      }
+     public DtEspectaculo retDtEspectaculo (String espectaculo){
+         Espectaculo e =  (Espectaculo) this.Espectaculos.get(espectaculo);
+         return e.crearDtEspectaculo();
+    }
 }

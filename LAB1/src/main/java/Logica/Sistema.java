@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 import Logica.Usuario;
-import Logica.Plataforma;
+import Logica.DtEspectaculo;
 import Logica.DtUsuario;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -51,6 +51,8 @@ public class Sistema implements ISistema {
     
     
     }
+    
+    
     public String[] listarArtistas(){
         String res[] = new String[this.Usuarios.size()];
         
@@ -192,11 +194,17 @@ public class Sistema implements ISistema {
     }
     
     public String[] listarEspectaculos(String n){
-                      
+              
         Plataforma p =  (Plataforma) this.Plataformas.get(n);
         return p.listarEspectaculoxPlataforma();
         
     }
+    
+    public DtEspectaculo mostrarEspectaculo (String plataforma, String espectaculo){
+        Plataforma p =  (Plataforma) this.Plataformas.get(plataforma);
+        return p.retDtEspectaculo(espectaculo);
+    }
+            
 
 }
 
