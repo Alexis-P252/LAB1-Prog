@@ -22,13 +22,14 @@ public class Espectaculo {
     private int cant_max_espec;
     private int cant_min_espec;
     private int duracion; 
+    private String plataforma;
     private String descripcion;
     private Map Funciones;
  
     public Espectaculo (){
     }
 
-    public Espectaculo(String nombre, DtFecha fecha_registro, float costo, String url, int cant_max_espec, int cant_min_espec, int duracion, String descripcion) {
+    public Espectaculo(String nombre, DtFecha fecha_registro, float costo, String url, int cant_max_espec, int cant_min_espec, int duracion, String descripcion, String Plataforma) {
         this.nombre = nombre;
         this.fecha_registro = fecha_registro;
         this.costo = costo;
@@ -37,6 +38,7 @@ public class Espectaculo {
         this.cant_min_espec = cant_min_espec;
         this.duracion = duracion;
         this.descripcion = descripcion;
+        this.plataforma = Plataforma;
         this.Funciones = new HashMap();
     }
 
@@ -88,6 +90,10 @@ public class Espectaculo {
         return url;
     }
 
+    public String getPlataforma(){
+        return plataforma;
+    }
+    
     public int getCant_max_espec() {
         return cant_max_espec;
     }
@@ -105,6 +111,6 @@ public class Espectaculo {
     }
     public DtEspectaculo crearDtEspectaculo (){
         DtEspectaculo dt = new DtEspectaculo(this.nombre,this.fecha_registro,this.costo,this.url, this.cant_max_espec, this.cant_min_espec, this.duracion, this.descripcion);
-         return dt;   
+        return dt;   
     }
 }
