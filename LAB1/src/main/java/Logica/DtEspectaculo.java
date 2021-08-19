@@ -54,7 +54,7 @@ public class DtEspectaculo {
         return this.cant_max_espec;
     }
     
-    public int GetCant_mix_espec(){
+    public int GetCant_min_espec(){
         return this.cant_min_espec;
     }
     

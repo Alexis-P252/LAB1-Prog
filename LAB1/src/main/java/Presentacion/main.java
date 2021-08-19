@@ -12,11 +12,13 @@ import Logica.Sistema;
 import Logica.DtUsuario;
 import Logica.DtEspectador;
 import Logica.DtArtista;
+import Logica.DtEspectaculo;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
  
 /**
  *
@@ -35,7 +37,7 @@ public class main extends javax.swing.JFrame {
         //Inicialización
         SistemaFactory fabrica = SistemaFactory.getInstance();
         sis = fabrica.getISistema();
-        sis.PreCargaPlataforma();
+        sis.PreCarga();
         
         this.FrameAltaUsuario.setVisible(false);
         this.FrameConsultarUsuario.setVisible(false);
@@ -1163,7 +1165,7 @@ public class main extends javax.swing.JFrame {
         FieldEspMax5.setBounds(440, 250, 160, 30);
 
         ButtonCancelar5.setBackground(new java.awt.Color(204, 204, 204));
-        ButtonCancelar5.setText("Cancelar");
+        ButtonCancelar5.setText("Cerrar");
         ButtonCancelar5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonCancelar5ActionPerformed(evt);
@@ -1184,6 +1186,11 @@ public class main extends javax.swing.JFrame {
         jScrollPane8.setBounds(30, 30, 121, 140);
 
         ListaEspectaculos5.setBackground(new java.awt.Color(204, 204, 204));
+        ListaEspectaculos5.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaEspectaculos5ValueChanged(evt);
+            }
+        });
         jScrollPane10.setViewportView(ListaEspectaculos5);
 
         jPanel6.add(jScrollPane10);
@@ -1712,7 +1719,10 @@ public class main extends javax.swing.JFrame {
                 this.FieldBiografia2.setText(biografia);
                 this.FieldDescripcion2.setText(descripcion);
                 this.FieldLink2.setText(link);
-
+                
+                String[] listaespectaculos  = sis.listarespectaculosXArtista(nickname);
+                this.ListaOrganizo2.setListData(listaespectaculos);
+                
             }
         }
         catch(Exception e) {}
@@ -1806,6 +1816,8 @@ public class main extends javax.swing.JFrame {
     private void BotonSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalir2ActionPerformed
         // TODO add your handling code here:
         this.FrameConsultarUsuario.setVisible(false);
+        this.ListaOrganizo2.clearSelection();
+        
     }//GEN-LAST:event_BotonSalir2ActionPerformed
 
     private void ComboBoxDia3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxDia3ActionPerformed
@@ -1950,7 +1962,7 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldEspMax4ActionPerformed
 
     private void ButtonCancelar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar4ActionPerformed
-        // TODO add your handling code here:
+     
         this.FrameAltaEspectaculo.setVisible(false);
         this.FieldNombre4.setText("");
         this.FieldDescripcion4.setText("");
@@ -1962,7 +1974,8 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonCancelar4ActionPerformed
 
     private void ButtonConfirmar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmar4ActionPerformed
-        // TODO add your handling code here:
+        
+        // OBTENEMOS LOS VALORES DE LOS JTextField y preparamos variables intermedias para obtener los resultados
         String Scosto = this.FieldCosto4.getText();
         String nombre = this.FieldNombre4.getText();
         String url = this.FieldURL4.getText();
@@ -1972,58 +1985,80 @@ public class main extends javax.swing.JFrame {
         float costo = 0;
         
         
-        
+        // VERIFICAMOS QUE EN NINGUN CAMPO NO SE HAYA INTRODUCIDO NINGUN CARACTER, EN CASO DE QUE ASI SEA, SE DA UN MENSAJE DE ERROR.
         if(nombre.isBlank() || descripcion.isBlank() || this.FieldDuracion4.getText().isBlank() || url.isBlank() ||
            this.FieldEspMin4.getText().isBlank() || this.FieldEspMax4.getText().isBlank() || this.FieldCosto4.getText().isBlank()){
-            JOptionPane.showMessageDialog(this,"Complete todos los campos","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
-        }else if(this.ListaArtista4.getSelectedIndex() == -1){
+                JOptionPane.showMessageDialog(this,"Complete todos los campos","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);       
+        }
+        
+        // VERIFICAMOS QUE TANTO EN LA LISTA DE PLATAFORMAS COMO EN LA DE ARTISTAS HAYA UN VALOR SELECCIONADO.
+        else if(this.ListaArtista4.getSelectedIndex() == -1){
             JOptionPane.showMessageDialog(this,"Seleccione un Artista","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
-        }else if(this.ListaPlataforma4.getSelectedIndex() == -1){
+        }
+        else if(this.ListaPlataforma4.getSelectedIndex() == -1){
             JOptionPane.showMessageDialog(this,"Seleccione una Plataforma","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
-        }else{
+        }
+        
+        // AHORA VERIFICAMOS QUE LOS VALORES INTRODUCIDOS EN LOS CAMPOS SEAN CORRECTOS Y COHERENTES.
+        else{
+            // VERIFICAMOS QUE EL VALOR INTRODUCIDO EN EL CAMPO COSTO SEA UN NUMERO
             try{
-            costo =  Float.parseFloat(Scosto);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this,"Costo debe ser un valor numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        try{
-            espMin = Integer.parseInt(this.FieldEspMin4.getText());
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this,"El Numero de espectadores minimos debe ser numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        try{
-            espMax = Integer.parseInt(this.FieldEspMax4.getText());
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this,"El numero de espectadores maximos debe ser numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        try{
-            duracion = Integer.parseInt(this.FieldDuracion4.getText());
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(this,"Duracion debe ser un valor numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+                costo =  Float.parseFloat(Scosto);
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(this,"Costo debe ser un valor numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // VERIFICAMOS QUE EL VALOR INTRODUCIDO EN EL CAMPO ESPECTADORES MINIMOS SEA UN NUMERO
+            try{
+                espMin = Integer.parseInt(this.FieldEspMin4.getText());
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(this,"El Numero de espectadores minimos debe ser numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // VERIFICAMOS QUE EL VALOR INTRODUCIDO EN EL CAMPO ESPECTADORES MAXIMOS SEA UN NUMERO
+            try{
+                espMax = Integer.parseInt(this.FieldEspMax4.getText());
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(this,"El numero de espectadores maximos debe ser numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            // VERIFICAMOS QUE EL VALOR INTRODUCIDO EN EL CAMPO DURACION MAXIMOS SEA UN NUMERO
+            try{
+                duracion = Integer.parseInt(this.FieldDuracion4.getText());
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(this,"Duracion debe ser un valor numerico mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // VERIFICAMOS QUE EL NUMERO INTRODUCIDO EN COSTO SEA MAYOR A 0
             if(costo <= 0){
                 JOptionPane.showMessageDialog(this,"Costo debe ser mayor a 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-        
+            // VERIFICAMOS QUE LA CANT DE ESPECTADORES MINIMOS SEA MENOR A LA CANT ESPECTADORES MAXIMOS
             if(espMin >= espMax){
                 JOptionPane.showMessageDialog(this,"La cantidad de espectadores maximos debe ser mayor que el minimo de espectadores","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            // VERIFICAMOS QUE LA DURACION SEA MAYOR A 0 MINUTOS 
             if(duracion <= 0){
                 JOptionPane.showMessageDialog(this,"La duracion del espectaculo debe ser mayor que 0","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            String Plataforma = this.ListaPlataforma4.getSelectedValue();
             
+            
+            // AHORA VERIFICAMOS QUE EN LA PLATAFORMA SELECIONADA NO EXISTA YA UN ESPECTACULO CON EL NOMBRE ELEGIDO
+            String Plataforma = this.ListaPlataforma4.getSelectedValue();
             if(sis.verificarEspectacunoEnPlataforma(Plataforma,nombre)){
                 JOptionPane.showMessageDialog(this,"Ya existe un Espectaculo con ese Nombre en La plataforma "+Plataforma,"Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            
+            // CREAMOS EL DtFecha CON LA FECHA DEL SISTEMA.
             Date fecha = new Date();
             int dia = fecha.getDate();
             int mes = fecha.getMonth()+1;
@@ -2032,8 +2067,11 @@ public class main extends javax.swing.JFrame {
             int min = fecha.getMinutes();
             int sec = fecha.getSeconds();
             DtFecha fecha_registro = new DtFecha(dia,mes,anio,hora,min,sec);
+            String artista = this.ListaArtista4.getSelectedValue();
             
-            sis.crearEspectaculo(Plataforma, nombre ,fecha_registro,costo,url,espMin,espMax,duracion,descripcion);
+            
+            // FINALMENTE TRAS COMPROBAR QUE NO HAY ERRORES, CREAMOS EL ESPECTACULO
+            sis.crearEspectaculo(Plataforma, nombre ,fecha_registro,costo,url,espMax,espMin,duracion,descripcion, artista);
             JOptionPane.showMessageDialog(this,"Espectaculo creado correctamente","Alta Espectaculo",JOptionPane.INFORMATION_MESSAGE);
             
             this.FrameAltaEspectaculo.setVisible(false);
@@ -2083,6 +2121,7 @@ public class main extends javax.swing.JFrame {
     private void ButtonCancelar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar5ActionPerformed
         // TODO add your handling code here:
         this.FrameConsultaEspectaculo.setVisible(false);
+        //this.ListaEspectaculos5.clearSelection();
         this.FieldNombre5.setText("");
         this.FieldDescripcion5.setText("");
         this.FieldDuracion5.setText("");
@@ -2090,17 +2129,50 @@ public class main extends javax.swing.JFrame {
         this.FieldEspMin5.setText("");
         this.FieldEspMax5.setText("");
         this.FieldCosto5.setText("");
+        this.ListaEspectaculos5.setSelectedIndex(-1);
+        this.ListaPlataforma5.setSelectedIndex(-1);
+        
+        
     }//GEN-LAST:event_ButtonCancelar5ActionPerformed
 
     private void ListaPlataforma5ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma5ValueChanged
         String plataforma = this.ListaPlataforma5.getSelectedValue();
         String espectaculos[] = sis.listarEspectaculos(plataforma); 
-        this.ListaEspectaculos5.setListData(espectaculos);
+        this.ListaEspectaculos5.setListData(espectaculos);   
     }//GEN-LAST:event_ListaPlataforma5ValueChanged
 
     private void ListaPlataforma4ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma4ValueChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_ListaPlataforma4ValueChanged
+
+
+    private void ListaEspectaculos5ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos5ValueChanged
+
+            
+      String plataforma = this.ListaPlataforma5.getSelectedValue();
+      String espectaculo = this.ListaEspectaculos5.getSelectedValue();
+      if (plataforma ==null || espectaculo ==null){
+          return;
+      }
+      else{
+        DtEspectaculo Dt = sis.mostrarEspectaculo(plataforma, espectaculo);
+        String nombre = Dt.GetNombre();
+        String cant_mint = ""+Dt.GetCant_min_espec();;  
+        String cant_maxt =""+Dt.GetCant_max_espec();
+        String descripcion = Dt.GetDescripcion();
+        String URL = Dt.GetUrl();
+        String duracion = ""+Dt.GetDuracion();
+        String costo = ""+Dt.GetCosto();
+
+        this.FieldNombre5.setText(nombre);
+        this.FieldEspMin5.setText(cant_mint);
+        this.FieldEspMax5.setText(cant_maxt);
+        this.FieldDescripcion5.setText (descripcion);
+        this.FieldURL5.setText(URL);
+        this.FieldDuracion5.setText(duracion);
+        this.FieldCosto5.setText(costo);
+      }
+    }//GEN-LAST:event_ListaEspectaculos5ValueChanged
 
     /**
      * @param args the command line arguments
@@ -2137,10 +2209,28 @@ public class main extends javax.swing.JFrame {
         });
     }
     public void ocultarVentanas(){
-                this.FrameConsultarUsuario.setVisible(false);
-                this.FrameModificarUsuario.setVisible(false);
-                this.FrameAltaUsuario.setVisible(false);
-                this.FrameAltaEspectaculo.setVisible(false);
+        
+        DefaultListModel listmodel = new DefaultListModel();
+        String x[] = new String[1];
+        this.FrameConsultarUsuario.setVisible(false); 
+        this.FrameModificarUsuario.setVisible(false);
+        this.FrameAltaUsuario.setVisible(false);
+        this.FrameAltaEspectaculo.setVisible(false);
+        this.FrameConsultaEspectaculo.setVisible(false);
+        
+        this.ListaUsuarios2.setModel(listmodel);
+        this.ListaOrganizo2.setModel(listmodel);
+        this.ListaRegistro2.setModel(listmodel);    
+        this.ListaOrganizo3.setModel(listmodel);
+        this.ListaUsuarios3.setModel(listmodel);
+        this.ListaArtista4.setModel(listmodel);
+        this.ListaPlataforma4.setModel(listmodel);
+        this.ListaEspectaculos5.setModel(listmodel);
+        this.ListaFunciones5.setModel(listmodel);
+        this.ListaPaquetes5.setModel(listmodel);
+        this.ListaPlataforma5.setModel(listmodel);
+        this.ListaEspectaculos5.setModel(listmodel);
+      
     }
     
     public boolean isNumeric(String cadena){
