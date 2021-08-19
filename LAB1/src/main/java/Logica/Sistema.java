@@ -24,10 +24,12 @@ public class Sistema implements ISistema {
     
     private Map Usuarios;
     private Map Plataformas;
+    private Map Paquetes;
     
     public Sistema(){
         this.Usuarios = new HashMap();
         this.Plataformas = new HashMap();
+        this.Paquetes = new HashMap();
     }
     
     public void crearEspectaculo(String Plataforma,String nombre,DtFecha fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion, String artista){
@@ -265,6 +267,19 @@ public class Sistema implements ISistema {
     public String[] listarespectaculosXArtista(String artista){
         Artista a = (Artista) this.Usuarios.get(artista);
         return a.listarEspectaculosOrganizo();
+    }
+    
+    public boolean ExistePaquete(String paquete){
+        if(this.Paquetes.get(paquete) == null)
+            return false;
+        else
+            return true;
+
+    }
+    
+    public void AgregarPaquete(String nombre, String descripcion, float descuento, DtFecha fecha_alta, DtFecha fecha_fin, DtFecha fecha_ini){
+        Paquete p = new Paquete(nombre, descripcion, descuento, fecha_alta, fecha_fin, fecha_ini);
+        this.Paquetes.put(nombre,p);
     }
 
 }
