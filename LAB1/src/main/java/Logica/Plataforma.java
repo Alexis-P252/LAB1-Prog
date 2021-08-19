@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Logica;
+import Logica.DtEspectaculo;
+import Logica.Espectaculo;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -61,4 +63,11 @@ public class Plataforma {
         }
         return res;
      }
+     
+     public DtEspectaculo retDtEspectaculo (String espectaculo){
+         Espectaculo e =  (Espectaculo) this.Espectaculos.get(espectaculo);
+         DtEspectaculo Dte = e.crearDtEspectaculo();
+         return Dte;
+    }
 }
+ 
