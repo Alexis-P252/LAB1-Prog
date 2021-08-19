@@ -190,11 +190,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="FrameConsultaEspectaculo" min="-2" pref="755" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="FrameAltaPaquete" min="-2" pref="557" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -209,15 +209,14 @@
                       <Component id="FrameAltaEspectaculo" min="-2" pref="563" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="FrameModificarUsuario" alignment="0" min="-2" pref="517" max="-2" attributes="0"/>
-                          <Component id="FrameConsultarUsuario" alignment="0" min="-2" pref="601" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="FrameConsultarUsuario" min="-2" pref="601" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="FrameConsultaEspectaculo" min="-2" pref="507" max="-2" attributes="0"/>
-                          <Component id="FrameAltaPaquete" min="-2" pref="413" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="FrameConsultaEspectaculo" min="-2" pref="507" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="FrameModificarUsuario" min="-2" pref="517" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="FrameAltaPaquete" min="-2" pref="413" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="67" max="32767" attributes="0"/>
@@ -1187,6 +1186,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="ListaOrganizo2ValueChanged"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>

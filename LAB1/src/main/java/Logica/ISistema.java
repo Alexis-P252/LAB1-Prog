@@ -27,4 +27,6 @@ public interface ISistema {
     public abstract String[] listarEspectaculos(String n);
     public abstract DtEspectaculo mostrarEspectaculo (String plataforma, String espectaculo);
     public abstract String[] listarespectaculosXArtista(String artista);
+    public abstract boolean ExistePaquete(String paquete);
+    public abstract void AgregarPaquete(String nombre, String descripcion, float descuento, DtFecha fecha_alta, DtFecha fecha_fin, DtFecha fecha_ini);
 }

@@ -658,6 +658,11 @@ public class main extends javax.swing.JFrame {
         LabelEspectaculosRegistro2.setBounds(230, 350, 270, 20);
 
         ListaOrganizo2.setBackground(new java.awt.Color(204, 204, 204));
+        ListaOrganizo2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaOrganizo2ValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(ListaOrganizo2);
 
         FrameConsultarUsuario.getContentPane().add(jScrollPane3);
@@ -1840,9 +1845,9 @@ public class main extends javax.swing.JFrame {
                         .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1854,13 +1859,13 @@ public class main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
 
@@ -2834,12 +2839,125 @@ public class main extends javax.swing.JFrame {
         this.FieldDescripcion8.setText("");
         this.FieldNombre8.setText("");
         this.FieldDescuento8.setText("");
+        this.ComboBoxAnio8.setSelectedIndex(0);
+        this.ComboBoxMes8.setSelectedIndex(0);
+        this.ComboBoxDia8.setSelectedIndex(0);
+        this.ComboBoxAnio_fin8.setSelectedIndex(0);
+        this.ComboBoxMes_fin8.setSelectedIndex(0);
+        this.ComboBoxDia_fin8.setSelectedIndex(0);
         
     }//GEN-LAST:event_BotonCancelar8ActionPerformed
 
     private void BotonConfirmar9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmar9ActionPerformed
         // TODO add your handling code here:
+        if(this.FieldNombre8.getText().isBlank() || this.FieldDescripcion8.getText().isBlank() || this.FieldDescuento8.getText().isBlank()){
+            JOptionPane.showMessageDialog(this,"Rellene todos los campos","Alta Paquete",JOptionPane.ERROR_MESSAGE);
+            return;
+        } 
+        if(sis.ExistePaquete(this.FieldNombre8.getText()) == true){
+            JOptionPane.showMessageDialog(this,"Ya existe un paquete con ese nombre","Alta Paquete",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int descuento;
+        try{
+            descuento = Integer.parseInt(this.FieldDescuento8.getText());
+            }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(this,"El descuento debe ser un valor numerico entre 1 y 100","Alta Paquete",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(descuento < 1 || descuento > 100){
+            JOptionPane.showMessageDialog(this,"El descuento debe ser un valor entre 1 y 100","Alta Paquete",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        String nombre = this.FieldNombre8.getText();
+        String descripcion = this.FieldDescripcion8.getText();
+  
+        int d_ini = this.ComboBoxDia8.getSelectedIndex()+1;
+        int m_ini = this.ComboBoxMes8.getSelectedIndex()+1;
+        int a_ini = this.ComboBoxAnio8.getSelectedIndex()+1960;
+        DtFecha f_ini = new DtFecha(d_ini, m_ini, a_ini,0,0,0);
+        
+        int d_fin = this.ComboBoxDia_fin8.getSelectedIndex()+1;
+        int m_fin = this.ComboBoxMes_fin8.getSelectedIndex()+1;
+        int a_fin = this.ComboBoxAnio_fin8.getSelectedIndex()+1960;
+        DtFecha f_fin = new DtFecha(d_fin, m_fin, a_fin,0,0,0);
+        
+        Date fecha = new Date();
+        int dia = fecha.getDate();
+        int mes = fecha.getMonth()+1;
+        int anio = fecha.getYear() + 1900;
+        int hora = fecha.getHours();
+        int min = fecha.getMinutes();
+        int sec = fecha.getSeconds();
+        DtFecha fecha_alta = new DtFecha(dia,mes,anio,hora,min,sec);
+        
+        sis.AgregarPaquete(nombre, descripcion, descuento, fecha_alta, f_fin, f_ini);
+        JOptionPane.showMessageDialog(this,"Paquete ingresado correctamente","Alta Paquete",JOptionPane.INFORMATION_MESSAGE);
+        this.FieldNombre8.setText("");
+        this.FieldDescripcion8.setText("");
+        this.FieldDescuento8.setText("");
+        this.ComboBoxAnio8.setSelectedIndex(0);
+        this.ComboBoxMes8.setSelectedIndex(0);
+        this.ComboBoxDia8.setSelectedIndex(0);
+        this.ComboBoxAnio_fin8.setSelectedIndex(0);
+        this.ComboBoxMes_fin8.setSelectedIndex(0);
+        this.ComboBoxDia_fin8.setSelectedIndex(0);
+        this.FrameAltaPaquete.setVisible(false);
+         
     }//GEN-LAST:event_BotonConfirmar9ActionPerformed
+
+    private void ListaOrganizo2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaOrganizo2ValueChanged
+        // TODO add your handling code here:
+        String nomEspec = this.ListaOrganizo2.getSelectedValue();
+        if(nomEspec !=null){
+            String plataforma="";
+            String espectaculo="";
+            int f =0;
+            for(int i = 0; i< nomEspec.length();i++){
+                if(nomEspec.charAt(i)== ' ' && nomEspec.charAt(i+1)== '('){
+                    f= i+2 ;
+                    break; 
+                }
+                else{
+                    espectaculo = espectaculo + nomEspec.charAt(i);
+                }
+            }
+            for(int a = f; a< nomEspec.length();a++){
+                if(nomEspec.charAt(a)!= ')'){
+                    plataforma  = plataforma  + nomEspec.charAt(a);
+                }
+                else{
+                    break;
+                }
+            }
+            if (plataforma ==null || espectaculo ==null){
+              return;
+            }
+            else{
+                DtEspectaculo Dt = sis.mostrarEspectaculo(plataforma, espectaculo);
+                String nombre = Dt.GetNombre();
+                String cant_mint = ""+Dt.GetCant_min_espec();
+                String cant_maxt =""+Dt.GetCant_max_espec();
+                String descripcion = Dt.GetDescripcion();
+                String URL = Dt.GetUrl();
+                String duracion = ""+Dt.GetDuracion();
+                String costo = ""+Dt.GetCosto();
+
+                this.FieldNombre5.setText(nombre);
+                this.FieldEspMin5.setText(cant_mint);
+                this.FieldEspMax5.setText(cant_maxt);
+                this.FieldDescripcion5.setText (descripcion);
+                this.FieldURL5.setText(URL);
+                this.FieldDuracion5.setText(duracion);
+                this.FieldCosto5.setText(costo);
+                this.FrameConsultaEspectaculo.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_ListaOrganizo2ValueChanged
 
     /**
      * @param args the command line arguments
