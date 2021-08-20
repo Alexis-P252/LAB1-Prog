@@ -45,6 +45,7 @@ public class main extends javax.swing.JFrame {
         this.FrameAltaEspectaculo.setVisible(false);
         this.FrameConsultaEspectaculo.setVisible(false);
         this.FrameAltaPaquete.setVisible(false);
+        this.FrameConsultaPaquete.setVisible(false);
        
         //
         GroupTipoUsuario.add(EspectadorButton);
@@ -264,6 +265,28 @@ public class main extends javax.swing.JFrame {
         ButtonCancelar7 = new javax.swing.JButton();
         BotonCancelar8 = new javax.swing.JButton();
         BotonConfirmar9 = new javax.swing.JButton();
+        FrameConsultaPaquete = new javax.swing.JInternalFrame();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        LabelNombre7 = new javax.swing.JLabel();
+        FieldFechaAlta11 = new javax.swing.JTextField();
+        LabelDescripcion7 = new javax.swing.JLabel();
+        FieldDescripcion11 = new javax.swing.JTextField();
+        LabelDuracion8 = new javax.swing.JLabel();
+        FieldNombre11 = new javax.swing.JTextField();
+        LabelURL8 = new javax.swing.JLabel();
+        FieldFechaIni11 = new javax.swing.JTextField();
+        FieldDescuento11 = new javax.swing.JTextField();
+        FieldFechaFin11 = new javax.swing.JTextField();
+        ButtonCancelar11 = new javax.swing.JButton();
+        jScrollPane21 = new javax.swing.JScrollPane();
+        ListaPlaquetes11 = new javax.swing.JList<>();
+        jScrollPane22 = new javax.swing.JScrollPane();
+        ListaEspectaculos11 = new javax.swing.JList<>();
+        LabelSeleccioneEspectaculo15 = new javax.swing.JLabel();
+        LabelSeleccionePlataforma9 = new javax.swing.JLabel();
+        LabelURL9 = new javax.swing.JLabel();
+        LabelURL10 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuUsuario = new javax.swing.JMenu();
         AltaUsuario = new javax.swing.JMenuItem();
@@ -1698,6 +1721,162 @@ public class main extends javax.swing.JFrame {
         FrameAltaPaquete.getContentPane().add(jPanel7);
         jPanel7.setBounds(0, 0, 570, 390);
 
+        FrameConsultaPaquete.setTitle("Consulta de Paquete");
+        FrameConsultaPaquete.setVisible(true);
+        FrameConsultaPaquete.getContentPane().setLayout(null);
+
+        jPanel9.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel9.setLayout(null);
+
+        jPanel10.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel10.setLayout(null);
+
+        LabelNombre7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelNombre7.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNombre7.setText("Nombre");
+        jPanel10.add(LabelNombre7);
+        LabelNombre7.setBounds(80, 250, 70, 15);
+
+        FieldFechaAlta11.setEditable(false);
+        FieldFechaAlta11.setBackground(new java.awt.Color(204, 204, 204));
+        FieldFechaAlta11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldFechaAlta11ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(FieldFechaAlta11);
+        FieldFechaAlta11.setBounds(500, 250, 160, 30);
+
+        LabelDescripcion7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelDescripcion7.setForeground(new java.awt.Color(255, 255, 255));
+        LabelDescripcion7.setText("Descripcion");
+        jPanel10.add(LabelDescripcion7);
+        LabelDescripcion7.setBounds(80, 300, 70, 15);
+
+        FieldDescripcion11.setEditable(false);
+        FieldDescripcion11.setBackground(new java.awt.Color(204, 204, 204));
+        FieldDescripcion11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldDescripcion11ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(FieldDescripcion11);
+        FieldDescripcion11.setBounds(180, 300, 160, 30);
+
+        LabelDuracion8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelDuracion8.setForeground(new java.awt.Color(255, 255, 255));
+        LabelDuracion8.setText("Descuento");
+        jPanel10.add(LabelDuracion8);
+        LabelDuracion8.setBounds(80, 350, 90, 15);
+
+        FieldNombre11.setEditable(false);
+        FieldNombre11.setBackground(new java.awt.Color(204, 204, 204));
+        FieldNombre11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldNombre11ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(FieldNombre11);
+        FieldNombre11.setBounds(180, 250, 160, 30);
+
+        LabelURL8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelURL8.setForeground(new java.awt.Color(255, 255, 255));
+        LabelURL8.setText("Fecha de inicio");
+        jPanel10.add(LabelURL8);
+        LabelURL8.setBounds(370, 360, 110, 15);
+
+        FieldFechaIni11.setEditable(false);
+        FieldFechaIni11.setBackground(new java.awt.Color(204, 204, 204));
+        FieldFechaIni11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldFechaIni11ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(FieldFechaIni11);
+        FieldFechaIni11.setBounds(500, 350, 160, 30);
+
+        FieldDescuento11.setEditable(false);
+        FieldDescuento11.setBackground(new java.awt.Color(204, 204, 204));
+        FieldDescuento11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldDescuento11ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(FieldDescuento11);
+        FieldDescuento11.setBounds(180, 350, 160, 30);
+
+        FieldFechaFin11.setEditable(false);
+        FieldFechaFin11.setBackground(new java.awt.Color(204, 204, 204));
+        FieldFechaFin11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldFechaFin11ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(FieldFechaFin11);
+        FieldFechaFin11.setBounds(500, 300, 160, 30);
+
+        ButtonCancelar11.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonCancelar11.setText("Cerrar");
+        ButtonCancelar11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelar11ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(ButtonCancelar11);
+        ButtonCancelar11.setBounds(520, 430, 90, 30);
+
+        ListaPlaquetes11.setBackground(new java.awt.Color(204, 204, 204));
+        ListaPlaquetes11.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaPlaquetes11ValueChanged(evt);
+            }
+        });
+        jScrollPane21.setViewportView(ListaPlaquetes11);
+
+        jPanel10.add(jScrollPane21);
+        jScrollPane21.setBounds(110, 40, 121, 140);
+
+        ListaEspectaculos11.setBackground(new java.awt.Color(204, 204, 204));
+        ListaEspectaculos11.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaEspectaculos11ValueChanged(evt);
+            }
+        });
+        jScrollPane22.setViewportView(ListaEspectaculos11);
+
+        jPanel10.add(jScrollPane22);
+        jScrollPane22.setBounds(470, 40, 121, 140);
+
+        LabelSeleccioneEspectaculo15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccioneEspectaculo15.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccioneEspectaculo15.setText("Espectaculos en el paquete");
+        jPanel10.add(LabelSeleccioneEspectaculo15);
+        LabelSeleccioneEspectaculo15.setBounds(450, 20, 190, 17);
+
+        LabelSeleccionePlataforma9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccionePlataforma9.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccionePlataforma9.setText("Seleccione un paquete");
+        jPanel10.add(LabelSeleccionePlataforma9);
+        LabelSeleccionePlataforma9.setBounds(90, 20, 190, 17);
+
+        LabelURL9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelURL9.setForeground(new java.awt.Color(255, 255, 255));
+        LabelURL9.setText("Fecha de alta");
+        jPanel10.add(LabelURL9);
+        LabelURL9.setBounds(390, 250, 90, 15);
+
+        LabelURL10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelURL10.setForeground(new java.awt.Color(255, 255, 255));
+        LabelURL10.setText("Fecha de finalizacion");
+        jPanel10.add(LabelURL10);
+        LabelURL10.setBounds(370, 310, 110, 15);
+
+        jPanel9.add(jPanel10);
+        jPanel10.setBounds(0, 0, 760, 540);
+
+        FrameConsultaPaquete.getContentPane().add(jPanel9);
+        jPanel9.setBounds(0, 0, 760, 540);
+
         jMenuBar1.setName("CoronaTickets"); // NOI18N
 
         menuUsuario.setText("Usuario");
@@ -1844,10 +2023,15 @@ public class main extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
                         .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1302, 1302, 1302))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1859,14 +2043,16 @@ public class main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(346, Short.MAX_VALUE))
         );
 
         try {
@@ -1946,7 +2132,8 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarEspaPaqActionPerformed
 
     private void ConsultaPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaPaqueteActionPerformed
-        // TODO add your handling code here:
+        ocultarVentanas();
+        this.FrameConsultaPaquete.setVisible(true);
     }//GEN-LAST:event_ConsultaPaqueteActionPerformed
 
     private void AltaPlataformaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltaPlataformaActionPerformed
@@ -2959,6 +3146,42 @@ public class main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ListaOrganizo2ValueChanged
 
+    private void FieldFechaAlta11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldFechaAlta11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldFechaAlta11ActionPerformed
+
+    private void FieldDescripcion11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldDescripcion11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldDescripcion11ActionPerformed
+
+    private void FieldNombre11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldNombre11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldNombre11ActionPerformed
+
+    private void FieldFechaIni11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldFechaIni11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldFechaIni11ActionPerformed
+
+    private void FieldDescuento11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldDescuento11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldDescuento11ActionPerformed
+
+    private void FieldFechaFin11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldFechaFin11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldFechaFin11ActionPerformed
+
+    private void ButtonCancelar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar11ActionPerformed
+        this.FrameConsultaPaquete.setVisible(false);
+    }//GEN-LAST:event_ButtonCancelar11ActionPerformed
+
+    private void ListaPlaquetes11ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlaquetes11ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaPlaquetes11ValueChanged
+
+    private void ListaEspectaculos11ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos11ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaEspectaculos11ValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -3045,6 +3268,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton BotonConfirmar9;
     private javax.swing.JButton BotonSalir2;
     private javax.swing.JButton ButtonCancelar;
+    private javax.swing.JButton ButtonCancelar11;
     private javax.swing.JButton ButtonCancelar4;
     private javax.swing.JButton ButtonCancelar5;
     private javax.swing.JButton ButtonCancelar6;
@@ -3080,12 +3304,14 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldCosto5;
     private javax.swing.JTextField FieldCosto6;
     private javax.swing.JTextField FieldDescripcion;
+    private javax.swing.JTextField FieldDescripcion11;
     private javax.swing.JTextField FieldDescripcion2;
     private javax.swing.JTextField FieldDescripcion3;
     private javax.swing.JTextField FieldDescripcion4;
     private javax.swing.JTextField FieldDescripcion5;
     private javax.swing.JTextField FieldDescripcion7;
     private javax.swing.JTextField FieldDescripcion8;
+    private javax.swing.JTextField FieldDescuento11;
     private javax.swing.JTextField FieldDescuento8;
     private javax.swing.JTextField FieldDuracion4;
     private javax.swing.JTextField FieldDuracion5;
@@ -3097,12 +3323,16 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldEspMin4;
     private javax.swing.JTextField FieldEspMin5;
     private javax.swing.JTextField FieldEspMin6;
+    private javax.swing.JTextField FieldFechaAlta11;
+    private javax.swing.JTextField FieldFechaFin11;
+    private javax.swing.JTextField FieldFechaIni11;
     private javax.swing.JTextField FieldFechaNac2;
     private javax.swing.JTextField FieldLink2;
     private javax.swing.JTextField FieldLink3;
     private javax.swing.JTextField FieldNickname;
     private javax.swing.JTextField FieldNickname2;
     private javax.swing.JTextField FieldNombre;
+    private javax.swing.JTextField FieldNombre11;
     private javax.swing.JTextField FieldNombre2;
     private javax.swing.JTextField FieldNombre3;
     private javax.swing.JTextField FieldNombre4;
@@ -3117,6 +3347,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JInternalFrame FrameAltaPaquete;
     private javax.swing.JInternalFrame FrameAltaUsuario;
     private javax.swing.JInternalFrame FrameConsultaEspectaculo;
+    private javax.swing.JInternalFrame FrameConsultaPaquete;
     private javax.swing.JInternalFrame FrameConsultarUsuario;
     private javax.swing.JInternalFrame FrameModificarUsuario;
     private javax.swing.ButtonGroup GroupTipoUsuario;
@@ -3139,6 +3370,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelDescripcion3;
     private javax.swing.JLabel LabelDescripcion4;
     private javax.swing.JLabel LabelDescripcion6;
+    private javax.swing.JLabel LabelDescripcion7;
     private javax.swing.JLabel LabelDescripcion8;
     private javax.swing.JLabel LabelDescuento8;
     private javax.swing.JLabel LabelDia;
@@ -3148,6 +3380,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelDuracion4;
     private javax.swing.JLabel LabelDuracion5;
     private javax.swing.JLabel LabelDuracion6;
+    private javax.swing.JLabel LabelDuracion8;
     private javax.swing.JLabel LabelEmail;
     private javax.swing.JLabel LabelEsp_Max4;
     private javax.swing.JLabel LabelEsp_Max5;
@@ -3178,10 +3411,12 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelNombre3;
     private javax.swing.JLabel LabelNombre4;
     private javax.swing.JLabel LabelNombre6;
+    private javax.swing.JLabel LabelNombre7;
     private javax.swing.JLabel LabelNombre8;
     private javax.swing.JLabel LabelSeleccionarUsuario3;
     private javax.swing.JLabel LabelSeleccioneArtista4;
     private javax.swing.JLabel LabelSeleccioneEspectaculo10;
+    private javax.swing.JLabel LabelSeleccioneEspectaculo15;
     private javax.swing.JLabel LabelSeleccioneEspectaculo5;
     private javax.swing.JLabel LabelSeleccioneEspectaculo6;
     private javax.swing.JLabel LabelSeleccioneEspectaculo7;
@@ -3191,11 +3426,16 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelSeleccionePlataforma6;
     private javax.swing.JLabel LabelSeleccionePlataforma7;
     private javax.swing.JLabel LabelSeleccionePlataforma8;
+    private javax.swing.JLabel LabelSeleccionePlataforma9;
     private javax.swing.JLabel LabelSitioWeb;
+    private javax.swing.JLabel LabelURL10;
     private javax.swing.JLabel LabelURL4;
     private javax.swing.JLabel LabelURL5;
     private javax.swing.JLabel LabelURL6;
+    private javax.swing.JLabel LabelURL8;
+    private javax.swing.JLabel LabelURL9;
     private javax.swing.JList<String> ListaArtista4;
+    private javax.swing.JList<String> ListaEspectaculos11;
     private javax.swing.JList<String> ListaEspectaculos5;
     private javax.swing.JList<String> ListaEspectaculos6;
     private javax.swing.JList<String> ListaFunciones5;
@@ -3204,6 +3444,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JList<String> ListaOrganizo3;
     private javax.swing.JList<String> ListaPaquetes5;
     private javax.swing.JList<String> ListaPaquetes6;
+    private javax.swing.JList<String> ListaPlaquetes11;
     private javax.swing.JList<String> ListaPlataforma4;
     private javax.swing.JList<String> ListaPlataforma5;
     private javax.swing.JList<String> ListaPlataforma6;
@@ -3215,6 +3456,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3222,6 +3464,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -3230,6 +3473,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane21;
+    private javax.swing.JScrollPane jScrollPane22;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
