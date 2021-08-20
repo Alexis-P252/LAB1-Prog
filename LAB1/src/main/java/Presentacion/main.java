@@ -1735,7 +1735,7 @@ public class main extends javax.swing.JFrame {
         LabelNombre7.setForeground(new java.awt.Color(255, 255, 255));
         LabelNombre7.setText("Nombre");
         jPanel10.add(LabelNombre7);
-        LabelNombre7.setBounds(80, 250, 70, 15);
+        LabelNombre7.setBounds(80, 260, 70, 15);
 
         FieldFechaAlta11.setEditable(false);
         FieldFechaAlta11.setBackground(new java.awt.Color(204, 204, 204));
@@ -1751,7 +1751,7 @@ public class main extends javax.swing.JFrame {
         LabelDescripcion7.setForeground(new java.awt.Color(255, 255, 255));
         LabelDescripcion7.setText("Descripcion");
         jPanel10.add(LabelDescripcion7);
-        LabelDescripcion7.setBounds(80, 300, 70, 15);
+        LabelDescripcion7.setBounds(80, 310, 70, 15);
 
         FieldDescripcion11.setEditable(false);
         FieldDescripcion11.setBackground(new java.awt.Color(204, 204, 204));
@@ -1767,7 +1767,7 @@ public class main extends javax.swing.JFrame {
         LabelDuracion8.setForeground(new java.awt.Color(255, 255, 255));
         LabelDuracion8.setText("Descuento");
         jPanel10.add(LabelDuracion8);
-        LabelDuracion8.setBounds(80, 350, 90, 15);
+        LabelDuracion8.setBounds(80, 360, 90, 15);
 
         FieldNombre11.setEditable(false);
         FieldNombre11.setBackground(new java.awt.Color(204, 204, 204));
@@ -1857,13 +1857,13 @@ public class main extends javax.swing.JFrame {
         LabelSeleccionePlataforma9.setForeground(new java.awt.Color(255, 255, 255));
         LabelSeleccionePlataforma9.setText("Seleccione un paquete");
         jPanel10.add(LabelSeleccionePlataforma9);
-        LabelSeleccionePlataforma9.setBounds(90, 20, 190, 17);
+        LabelSeleccionePlataforma9.setBounds(100, 20, 190, 17);
 
         LabelURL9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelURL9.setForeground(new java.awt.Color(255, 255, 255));
         LabelURL9.setText("Fecha de alta");
         jPanel10.add(LabelURL9);
-        LabelURL9.setBounds(390, 250, 90, 15);
+        LabelURL9.setBounds(390, 260, 90, 15);
 
         LabelURL10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelURL10.setForeground(new java.awt.Color(255, 255, 255));
