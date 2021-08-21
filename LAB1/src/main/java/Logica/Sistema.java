@@ -281,6 +281,27 @@ public class Sistema implements ISistema {
         Paquete p = new Paquete(nombre, descripcion, descuento, fecha_alta, fecha_fin, fecha_ini);
         this.Paquetes.put(nombre,p);
     }
+    
+     public String[] listarPaquetes(){
+        Iterator it = this.Paquetes.values().iterator();
+        
+        String res[] = new String[this.Paquetes.size()];
+        
+        int i = 0;
+        while (it.hasNext()){
+            Paquete p = (Paquete) it.next();
+            res[i] = p.getNombre();
+            i++;
+        }
+        return res;
+    }
+     
+    public DtPaquete mostrarPaquete(String paquete){
+        Paquete p = (Paquete) this.Paquetes.get(paquete);
+        DtPaquete dtP = p.ArmarDT();
+       
+        return dtP;
+    }
 
 }
 

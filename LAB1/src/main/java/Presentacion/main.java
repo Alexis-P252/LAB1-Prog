@@ -13,6 +13,7 @@ import Logica.DtUsuario;
 import Logica.DtEspectador;
 import Logica.DtArtista;
 import Logica.DtEspectaculo;
+import Logica.DtPaquete;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -280,7 +281,7 @@ public class main extends javax.swing.JFrame {
         FieldFechaFin11 = new javax.swing.JTextField();
         ButtonCancelar11 = new javax.swing.JButton();
         jScrollPane21 = new javax.swing.JScrollPane();
-        ListaPlaquetes11 = new javax.swing.JList<>();
+        ListaPaquetes11 = new javax.swing.JList<>();
         jScrollPane22 = new javax.swing.JScrollPane();
         ListaEspectaculos11 = new javax.swing.JList<>();
         LabelSeleccioneEspectaculo15 = new javax.swing.JLabel();
@@ -1765,7 +1766,7 @@ public class main extends javax.swing.JFrame {
 
         LabelDuracion8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelDuracion8.setForeground(new java.awt.Color(255, 255, 255));
-        LabelDuracion8.setText("Descuento");
+        LabelDuracion8.setText("Descuento (%)");
         jPanel10.add(LabelDuracion8);
         LabelDuracion8.setBounds(80, 350, 90, 15);
 
@@ -1783,7 +1784,7 @@ public class main extends javax.swing.JFrame {
         LabelURL8.setForeground(new java.awt.Color(255, 255, 255));
         LabelURL8.setText("Fecha de inicio");
         jPanel10.add(LabelURL8);
-        LabelURL8.setBounds(370, 360, 110, 15);
+        LabelURL8.setBounds(370, 350, 110, 15);
 
         FieldFechaIni11.setEditable(false);
         FieldFechaIni11.setBackground(new java.awt.Color(204, 204, 204));
@@ -1825,13 +1826,13 @@ public class main extends javax.swing.JFrame {
         jPanel10.add(ButtonCancelar11);
         ButtonCancelar11.setBounds(520, 430, 90, 30);
 
-        ListaPlaquetes11.setBackground(new java.awt.Color(204, 204, 204));
-        ListaPlaquetes11.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        ListaPaquetes11.setBackground(new java.awt.Color(204, 204, 204));
+        ListaPaquetes11.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                ListaPlaquetes11ValueChanged(evt);
+                ListaPaquetes11ValueChanged(evt);
             }
         });
-        jScrollPane21.setViewportView(ListaPlaquetes11);
+        jScrollPane21.setViewportView(ListaPaquetes11);
 
         jPanel10.add(jScrollPane21);
         jScrollPane21.setBounds(110, 40, 121, 140);
@@ -1863,13 +1864,13 @@ public class main extends javax.swing.JFrame {
         LabelURL9.setForeground(new java.awt.Color(255, 255, 255));
         LabelURL9.setText("Fecha de alta");
         jPanel10.add(LabelURL9);
-        LabelURL9.setBounds(390, 250, 90, 15);
+        LabelURL9.setBounds(370, 250, 90, 15);
 
         LabelURL10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelURL10.setForeground(new java.awt.Color(255, 255, 255));
         LabelURL10.setText("Fecha de finalizacion");
         jPanel10.add(LabelURL10);
-        LabelURL10.setBounds(370, 310, 110, 15);
+        LabelURL10.setBounds(370, 300, 110, 15);
 
         jPanel9.add(jPanel10);
         jPanel10.setBounds(0, 0, 760, 540);
@@ -2134,6 +2135,8 @@ public class main extends javax.swing.JFrame {
     private void ConsultaPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaPaqueteActionPerformed
         ocultarVentanas();
         this.FrameConsultaPaquete.setVisible(true);
+        String[] listaPaquetes = sis.listarPaquetes();
+        this.ListaPaquetes11.setListData(listaPaquetes);
     }//GEN-LAST:event_ConsultaPaqueteActionPerformed
 
     private void AltaPlataformaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltaPlataformaActionPerformed
@@ -3172,11 +3175,34 @@ public class main extends javax.swing.JFrame {
 
     private void ButtonCancelar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar11ActionPerformed
         this.FrameConsultaPaquete.setVisible(false);
+        
+        this.FieldNombre11.setText("");
+        this.FieldDescripcion11.setText("");
+        this.FieldDescuento11.setText("");
+        this.FieldFechaAlta11.setText("");
+        this.FieldFechaIni11.setText("");
+        this.FieldFechaFin11.setText("");
     }//GEN-LAST:event_ButtonCancelar11ActionPerformed
 
-    private void ListaPlaquetes11ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlaquetes11ValueChanged
+    private void ListaPaquetes11ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPaquetes11ValueChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_ListaPlaquetes11ValueChanged
+        String paquete = this.ListaPaquetes11.getSelectedValue();
+      
+        if (paquete ==null){
+            return;
+        }
+        else{
+            DtPaquete dt = sis.mostrarPaquete(paquete);
+            this.FieldNombre11.setText(dt.getNombre());
+            this.FieldDescripcion11.setText(dt.getDescripcion());
+            String descuento = ""+dt.getDescuento() + "%";
+            this.FieldDescuento11.setText(descuento);
+            this.FieldFechaAlta11.setText(dt.getFecha_alta().GetFecha());
+            this.FieldFechaIni11.setText(dt.getFecha_ini().GetFecha());
+            this.FieldFechaFin11.setText(dt.getFecha_fin().GetFecha());
+            
+        }
+    }//GEN-LAST:event_ListaPaquetes11ValueChanged
 
     private void ListaEspectaculos11ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos11ValueChanged
         // TODO add your handling code here:
@@ -3226,6 +3252,7 @@ public class main extends javax.swing.JFrame {
         this.FrameAltaEspectaculo.setVisible(false);
         this.FrameConsultaEspectaculo.setVisible(false);
         this.FrameAltaPaquete.setVisible(false);
+        this.FrameConsultaPaquete.setVisible(false);
         
         this.ListaUsuarios2.setModel(listmodel);
         this.ListaOrganizo2.setModel(listmodel);
@@ -3239,6 +3266,8 @@ public class main extends javax.swing.JFrame {
         this.ListaPaquetes5.setModel(listmodel);
         this.ListaPlataforma5.setModel(listmodel);
         this.ListaEspectaculos5.setModel(listmodel);
+        this.ListaEspectaculos11.setModel(listmodel);
+        this.ListaPaquetes11.setModel(listmodel);
       
     }
     
@@ -3442,9 +3471,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JList<String> ListaFunciones6;
     private javax.swing.JList<String> ListaOrganizo2;
     private javax.swing.JList<String> ListaOrganizo3;
+    private javax.swing.JList<String> ListaPaquetes11;
     private javax.swing.JList<String> ListaPaquetes5;
     private javax.swing.JList<String> ListaPaquetes6;
-    private javax.swing.JList<String> ListaPlaquetes11;
     private javax.swing.JList<String> ListaPlataforma4;
     private javax.swing.JList<String> ListaPlataforma5;
     private javax.swing.JList<String> ListaPlataforma6;
