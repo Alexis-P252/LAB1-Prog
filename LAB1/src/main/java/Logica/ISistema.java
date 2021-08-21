@@ -31,4 +31,16 @@ public interface ISistema {
     public abstract void AgregarPaquete(String nombre, String descripcion, float descuento, DtFecha fecha_alta, DtFecha fecha_fin, DtFecha fecha_ini);
     public abstract String[] listarPaquetes();
     public abstract DtPaquete mostrarPaquete(String paquete);
+    public abstract String[] listarEspectaculosPaq (String plataforma, String paquete);
 }
+
+
+
+/* COSAS PARA HACER
+
+    - CONTROLAR FECHAS EN ALTA DE PAQUETE DE ESPECTACULO
+    - DECIDIR SI LOS ESPECTACULOS GUARDARAN ALGUN TIPO DE REFERENCIA A LOS PAQUETES QUE LO CONTIENEN (PENSANDO EN EL CASO DE USO: CONSULTA DE ESPECTACULO, 
+        YA QUE SE DEBEN MOSTRAR PARA CADA ESPECTACULO LOS PAQUETES EN LOS QUE FORMA PARTE)
+    -
+*/
+  

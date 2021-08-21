@@ -302,6 +302,16 @@ public class Sistema implements ISistema {
        
         return dtP;
     }
+    
+    // LISTA LOS ESPECTACULOS QUE PERTENECEN A LA PLATAFORMA PERO QUE NO FORMAN PARTE DEL PAQUETE
+    public String[] listarEspectaculosPaq (String plataforma, String paquete){
+        
+        Paquete paq = (Paquete) this.Paquetes.get(paquete);
+        Plataforma pla = (Plataforma) this.Plataformas.get(plataforma);
+        
+        String[] res = pla.listaEspectaculosxPaq(paq);
+        return res;
+    }
 
 }
 

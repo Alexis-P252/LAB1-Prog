@@ -6,6 +6,7 @@
 package Logica;
 import Logica.DtEspectaculo;
 import Logica.Espectaculo;
+import Logica.Paquete;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -69,5 +70,23 @@ public class Plataforma {
          DtEspectaculo Dte = e.crearDtEspectaculo();
          return Dte;
     }
+     
+     public String[] listaEspectaculosxPaq(Paquete paq){
+         
+         String[] res = new String[this.Espectaculos.size()];
+         Iterator it = this.Espectaculos.values().iterator();
+         int i = 0;
+         
+         while(it.hasNext()){
+            Espectaculo e = (Espectaculo) it.next();
+            String s = e.getNombre() + " (" + this.nombre + ")";
+            if(paq.espectaculoPertenece(s) == false){
+                res[i] = s;
+                i++;
+            }         
+         }
+         
+         return res;
+     }
 }
  

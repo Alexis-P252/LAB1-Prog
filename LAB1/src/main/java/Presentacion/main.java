@@ -47,6 +47,7 @@ public class main extends javax.swing.JFrame {
         this.FrameConsultaEspectaculo.setVisible(false);
         this.FrameAltaPaquete.setVisible(false);
         this.FrameConsultaPaquete.setVisible(false);
+        this.FrameAddEspectaculo.setVisible(false);
        
         //
         GroupTipoUsuario.add(EspectadorButton);
@@ -279,7 +280,6 @@ public class main extends javax.swing.JFrame {
         FieldFechaIni11 = new javax.swing.JTextField();
         FieldDescuento11 = new javax.swing.JTextField();
         FieldFechaFin11 = new javax.swing.JTextField();
-        ButtonCancelar11 = new javax.swing.JButton();
         jScrollPane21 = new javax.swing.JScrollPane();
         ListaPaquetes11 = new javax.swing.JList<>();
         jScrollPane22 = new javax.swing.JScrollPane();
@@ -288,6 +288,20 @@ public class main extends javax.swing.JFrame {
         LabelSeleccionePlataforma9 = new javax.swing.JLabel();
         LabelURL9 = new javax.swing.JLabel();
         LabelURL10 = new javax.swing.JLabel();
+        ButtonCancelar11 = new javax.swing.JButton();
+        FrameAddEspectaculo = new javax.swing.JInternalFrame();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane23 = new javax.swing.JScrollPane();
+        ListaEspectaculos10 = new javax.swing.JList<>();
+        LabelSeleccionePlataforma10 = new javax.swing.JLabel();
+        jScrollPane24 = new javax.swing.JScrollPane();
+        ListaPaquetes12 = new javax.swing.JList<>();
+        jScrollPane25 = new javax.swing.JScrollPane();
+        ListaPlataforma10 = new javax.swing.JList<>();
+        LabelSeleccionePlataforma11 = new javax.swing.JLabel();
+        LabelSeleccionePlataforma12 = new javax.swing.JLabel();
+        ButtonConfirmar10 = new javax.swing.JButton();
+        ButtonCancelar10 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuUsuario = new javax.swing.JMenu();
         AltaUsuario = new javax.swing.JMenuItem();
@@ -1816,16 +1830,6 @@ public class main extends javax.swing.JFrame {
         jPanel10.add(FieldFechaFin11);
         FieldFechaFin11.setBounds(500, 300, 160, 30);
 
-        ButtonCancelar11.setBackground(new java.awt.Color(204, 204, 204));
-        ButtonCancelar11.setText("Cerrar");
-        ButtonCancelar11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCancelar11ActionPerformed(evt);
-            }
-        });
-        jPanel10.add(ButtonCancelar11);
-        ButtonCancelar11.setBounds(520, 430, 90, 30);
-
         ListaPaquetes11.setBackground(new java.awt.Color(204, 204, 204));
         ListaPaquetes11.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -1872,11 +1876,102 @@ public class main extends javax.swing.JFrame {
         jPanel10.add(LabelURL10);
         LabelURL10.setBounds(370, 300, 110, 15);
 
+        ButtonCancelar11.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonCancelar11.setText("Cerrar");
+        ButtonCancelar11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelar11ActionPerformed(evt);
+            }
+        });
+        jPanel10.add(ButtonCancelar11);
+        ButtonCancelar11.setBounds(520, 430, 90, 30);
+
         jPanel9.add(jPanel10);
         jPanel10.setBounds(0, 0, 760, 540);
 
         FrameConsultaPaquete.getContentPane().add(jPanel9);
         jPanel9.setBounds(0, 0, 760, 540);
+
+        FrameAddEspectaculo.setTitle("Agregar Espectaculo a Paquete");
+        FrameAddEspectaculo.setVisible(true);
+        FrameAddEspectaculo.getContentPane().setLayout(null);
+
+        jPanel11.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel11.setLayout(null);
+
+        ListaEspectaculos10.setBackground(new java.awt.Color(204, 204, 204));
+        ListaEspectaculos10.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaEspectaculos10ValueChanged(evt);
+            }
+        });
+        jScrollPane23.setViewportView(ListaEspectaculos10);
+
+        jPanel11.add(jScrollPane23);
+        jScrollPane23.setBounds(160, 270, 140, 160);
+
+        LabelSeleccionePlataforma10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccionePlataforma10.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccionePlataforma10.setText("Seleccione un espectaculo");
+        jPanel11.add(LabelSeleccionePlataforma10);
+        LabelSeleccionePlataforma10.setBounds(160, 250, 190, 17);
+
+        ListaPaquetes12.setBackground(new java.awt.Color(204, 204, 204));
+        ListaPaquetes12.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaPaquetes12ValueChanged(evt);
+            }
+        });
+        jScrollPane24.setViewportView(ListaPaquetes12);
+
+        jPanel11.add(jScrollPane24);
+        jScrollPane24.setBounds(50, 60, 140, 160);
+
+        ListaPlataforma10.setBackground(new java.awt.Color(204, 204, 204));
+        ListaPlataforma10.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaPlataforma10ValueChanged(evt);
+            }
+        });
+        jScrollPane25.setViewportView(ListaPlataforma10);
+
+        jPanel11.add(jScrollPane25);
+        jScrollPane25.setBounds(260, 60, 140, 160);
+
+        LabelSeleccionePlataforma11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccionePlataforma11.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccionePlataforma11.setText("Seleccione un paquete");
+        jPanel11.add(LabelSeleccionePlataforma11);
+        LabelSeleccionePlataforma11.setBounds(50, 20, 190, 17);
+
+        LabelSeleccionePlataforma12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccionePlataforma12.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccionePlataforma12.setText("Seleccione una plataforma");
+        jPanel11.add(LabelSeleccionePlataforma12);
+        LabelSeleccionePlataforma12.setBounds(260, 20, 190, 17);
+
+        ButtonConfirmar10.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonConfirmar10.setText("Confirmar");
+        ButtonConfirmar10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonConfirmar10ActionPerformed(evt);
+            }
+        });
+        jPanel11.add(ButtonConfirmar10);
+        ButtonConfirmar10.setBounds(340, 460, 90, 30);
+
+        ButtonCancelar10.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonCancelar10.setText("Cancelar");
+        ButtonCancelar10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelar10ActionPerformed(evt);
+            }
+        });
+        jPanel11.add(ButtonCancelar10);
+        ButtonCancelar10.setBounds(220, 460, 90, 30);
+
+        FrameAddEspectaculo.getContentPane().add(jPanel11);
+        jPanel11.setBounds(0, 0, 460, 520);
 
         jMenuBar1.setName("CoronaTickets"); // NOI18N
 
@@ -2013,26 +2108,29 @@ public class main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FrameAltaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FrameAltaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(FrameAddEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1302, 1302, 1302))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2049,11 +2147,13 @@ public class main extends javax.swing.JFrame {
                         .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(346, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FrameAddEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         try {
@@ -3173,7 +3273,7 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldFechaFin11ActionPerformed
 
-    private void ButtonCancelar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar11ActionPerformed
+    private void ButtonConfirmar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmar10ActionPerformed
         this.FrameConsultaPaquete.setVisible(false);
         
         this.FieldNombre11.setText("");
@@ -3182,7 +3282,7 @@ public class main extends javax.swing.JFrame {
         this.FieldFechaAlta11.setText("");
         this.FieldFechaIni11.setText("");
         this.FieldFechaFin11.setText("");
-    }//GEN-LAST:event_ButtonCancelar11ActionPerformed
+    }//GEN-LAST:event_ButtonConfirmar10ActionPerformed
 
     private void ListaPaquetes11ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPaquetes11ValueChanged
         // TODO add your handling code here:
@@ -3207,6 +3307,33 @@ public class main extends javax.swing.JFrame {
     private void ListaEspectaculos11ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos11ValueChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_ListaEspectaculos11ValueChanged
+
+    private void ListaEspectaculos10ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos10ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaEspectaculos10ValueChanged
+
+    private void ListaPaquetes12ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPaquetes12ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaPaquetes12ValueChanged
+
+    private void ListaPlataforma10ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma10ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaPlataforma10ValueChanged
+
+    private void ButtonCancelar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonCancelar10ActionPerformed
+
+    private void ButtonCancelar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar11ActionPerformed
+        // TODO add your handling code here:
+        this.FrameConsultaPaquete.setVisible(false);
+        this.FieldNombre11.setText("");
+        this.FieldDescripcion11.setText("");
+        this.FieldDescuento11.setText("");
+        this.FieldFechaAlta11.setText("");
+        this.FieldFechaIni11.setText("");
+        this.FieldFechaFin11.setText("");
+    }//GEN-LAST:event_ButtonCancelar11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3297,12 +3424,14 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton BotonConfirmar9;
     private javax.swing.JButton BotonSalir2;
     private javax.swing.JButton ButtonCancelar;
+    private javax.swing.JButton ButtonCancelar10;
     private javax.swing.JButton ButtonCancelar11;
     private javax.swing.JButton ButtonCancelar4;
     private javax.swing.JButton ButtonCancelar5;
     private javax.swing.JButton ButtonCancelar6;
     private javax.swing.JButton ButtonCancelar7;
     private javax.swing.JButton ButtonConfirmar;
+    private javax.swing.JButton ButtonConfirmar10;
     private javax.swing.JButton ButtonConfirmar4;
     private javax.swing.JComboBox<String> ComboBoxAnio;
     private javax.swing.JComboBox<String> ComboBoxAnio3;
@@ -3372,6 +3501,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldURL4;
     private javax.swing.JTextField FieldURL5;
     private javax.swing.JTextField FieldURL6;
+    private javax.swing.JInternalFrame FrameAddEspectaculo;
     private javax.swing.JInternalFrame FrameAltaEspectaculo;
     private javax.swing.JInternalFrame FrameAltaPaquete;
     private javax.swing.JInternalFrame FrameAltaUsuario;
@@ -3451,6 +3581,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelSeleccioneEspectaculo7;
     private javax.swing.JLabel LabelSeleccioneEspectaculo8;
     private javax.swing.JLabel LabelSeleccioneEspectaculo9;
+    private javax.swing.JLabel LabelSeleccionePlataforma10;
+    private javax.swing.JLabel LabelSeleccionePlataforma11;
+    private javax.swing.JLabel LabelSeleccionePlataforma12;
     private javax.swing.JLabel LabelSeleccionePlataforma5;
     private javax.swing.JLabel LabelSeleccionePlataforma6;
     private javax.swing.JLabel LabelSeleccionePlataforma7;
@@ -3464,6 +3597,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelURL8;
     private javax.swing.JLabel LabelURL9;
     private javax.swing.JList<String> ListaArtista4;
+    private javax.swing.JList<String> ListaEspectaculos10;
     private javax.swing.JList<String> ListaEspectaculos11;
     private javax.swing.JList<String> ListaEspectaculos5;
     private javax.swing.JList<String> ListaEspectaculos6;
@@ -3472,8 +3606,10 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JList<String> ListaOrganizo2;
     private javax.swing.JList<String> ListaOrganizo3;
     private javax.swing.JList<String> ListaPaquetes11;
+    private javax.swing.JList<String> ListaPaquetes12;
     private javax.swing.JList<String> ListaPaquetes5;
     private javax.swing.JList<String> ListaPaquetes6;
+    private javax.swing.JList<String> ListaPlataforma10;
     private javax.swing.JList<String> ListaPlataforma4;
     private javax.swing.JList<String> ListaPlataforma5;
     private javax.swing.JList<String> ListaPlataforma6;
@@ -3486,6 +3622,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3504,6 +3641,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane22;
+    private javax.swing.JScrollPane jScrollPane23;
+    private javax.swing.JScrollPane jScrollPane24;
+    private javax.swing.JScrollPane jScrollPane25;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;

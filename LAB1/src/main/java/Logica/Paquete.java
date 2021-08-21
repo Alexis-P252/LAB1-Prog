@@ -28,7 +28,7 @@ public class Paquete {
         this.fecha_alta = fecha_alta;
         this.fecha_fin = fecha_fin;
         this.fecha_ini = fecha_ini;
-        this.espectaculos = new HashMap();
+        this.espectaculos = new HashMap(); 
     }
     
     public DtPaquete ArmarDT(){
@@ -85,6 +85,15 @@ public class Paquete {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public boolean espectaculoPertenece(String s){
+        if(this.espectaculos.get(s) == null){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
     
     
