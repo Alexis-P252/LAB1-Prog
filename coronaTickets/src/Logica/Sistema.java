@@ -15,9 +15,11 @@ import Logica.DtEspectaculo;
 import Logica.DtUsuario;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
 /**
@@ -78,40 +80,35 @@ public class Sistema implements ISistema {
     
     
     public String[] listarArtistas(){
-        String res[] = new String[this.Usuarios.size()];
         
-        Iterator it = this.Usuarios.values().iterator();
-
+        Query q = em.createQuery("SELECT a.nickname FROM Artista a");
+        List lista = q.getResultList();
+        
+        String res[] = new String[lista.size()];
         int i = 0;
-        while (it.hasNext()){
-            Usuario u = (Usuario) it.next();
-            if(u instanceof Artista){
-                res[i] = u.GetNickname();
-                i++;
-            }
-            else{
-               
-            }
+        for(Object object: lista){
+            res[i] = (String) object;
+            i++;
+        
         }
         return res;
     }
     
     public DtArtista[] listarDtArtistas(){
-        DtArtista res[] = new DtArtista[this.Usuarios.size()];
         
-        Iterator it = this.Usuarios.values().iterator();
-
+        Query q = em.createQuery("SELECT a FROM Artista a");
+        List lista = q.getResultList();
+        
+        DtArtista res[] = new DtArtista[lista.size()];
         int i = 0;
-        while (it.hasNext()){
-            Usuario u = (Usuario) it.next();
-            if(u instanceof Artista){
-                res[i] = (DtArtista)u.ArmarDT();
-                i++;
-            }
-            else{
-               
-            }
+        
+        for(Object object: lista){
+            Artista art = (Artista) object;
+            DtArtista dtArt = art.ArmarDT();
+            res[i] = dtArt;
+            i++;
         }
+        
         return res;
     }
     
@@ -143,10 +140,14 @@ public class Sistema implements ISistema {
         
         Usuario u = new Artista(nombre, apellido, correo, nickname, fecha_nac, biografia, descripcion, link);
         this.Usuarios.put(nickname, u);
+        em.getTransaction().begin();
+        em.persist(u);
+        em.getTransaction().commit();
     }
     
     public boolean UsuarioxNickname(String nickname){
-        if(this.Usuarios.get(nickname) == null)
+        
+        if(em.find(Artista.class, nickname) == null && em.find(Espectador.class, nickname) == null)
             return false;
         else
             return true;
@@ -155,120 +156,122 @@ public class Sistema implements ISistema {
     
     public boolean UsuarioxEmail(String email){
         
-        String s;
-        Iterator it = this.Usuarios.values().iterator();
-
-        while (it.hasNext()){
-            Usuario u = (Usuario) it.next();
-            s = u.GetEmail();
+        try{
+            Query q = em.createQuery("SELECT a FROM Artista a WHERE a.email = :email");
+            q.setParameter("email", email);
+            Artista art = (Artista) q.getSingleResult();
+            return true;
+        }catch(Exception e){
             
-            if(s.equals(email))
-                return true;
         }
+        try{
+            Query q2 = em.createQuery("SELECT e FROM Espectador e WHERE e.email = :email");
+            q2.setParameter("email", email);
+            Espectador esp = (Espectador) q2.getSingleResult();
+            return true;
+        }
+        catch(Exception e){
+            
+        } 
         return false;
-           
+   
     }
     
     public String[] ColNickname(){
-        String res[] = new String[this.Usuarios.size()];
-        
-        Iterator it = this.Usuarios.values().iterator();
+        Query q = em.createQuery("Select a.nickname from Artista a");
+        List listaArtistas = q.getResultList();
+
+        Query q1 = em.createQuery("Select e.nickname from Espectador e");
+        List listaEspectadores = q1.getResultList();
+
+        String res[] = new String[listaEspectadores.size() + listaArtistas.size()];
 
         int i = 0;
-        while (it.hasNext()){
-            Usuario u = (Usuario) it.next();
-            if(u instanceof Artista){
-                res[i] = u.GetNickname() + " (A)";
-            }
-            else{
-                res[i] = u.GetNickname() + " (E)";
-            }
+
+        for(Object object :listaArtistas){
+            res[i] =(String) object + " (A)";
             i++;
         }
-        
+
+        for(Object object :listaEspectadores){
+            res[i] =(String)object + " (E)";
+            i++;
+        }
+
         return res;
     }
     
     public DtUsuario GetDtUsuario(String nickname){
-        Usuario u = (Usuario) this.Usuarios.get(nickname);
-        return u.ArmarDT();
+
+        if(em.find(Artista.class, nickname) == null){
+            
+            Espectador esp = em.find(Espectador.class, nickname);
+            DtEspectador dtEsp = esp.ArmarDT();
+            return dtEsp;
+        }
+        else{
+            Artista art = em.find(Artista.class,nickname);
+            DtArtista dtArt = art.ArmarDT();
+            return dtArt;
+       
+        }
         
+
+ 
     }
     
     public void modificarEspectador(String nickname, String nombre, String apellido, Date f){
-        Usuario u = (Espectador) this.Usuarios.get(nickname);
-        u.SetNombre(nombre);
-        u.SetApellido(apellido);
-        u.SetFecha(f);
+        em.getTransaction().begin();
+        Query q = em.createQuery("UPDATE Espectador e SET e.nombre = :nombre, e.apellido = :apellido, e.fecha_nac = :fecha WHERE e.nickname = :nickname");
+        q.setParameter("fecha", f);
+        q.setParameter("nombre", nombre);
+        q.setParameter("apellido", apellido);
+        q.setParameter("nickname", nickname);
+        q.executeUpdate();
+       
+        Espectador esp = em.find(Espectador.class, nickname);
+        em.refresh(esp);
+        em.getTransaction().commit();
+        
+        
     }
     
     public void ModificarArtista (String nickname, String nombre,String apellido, Date f,String descripcion, String biografia, String link){
-        Artista u = (Artista) this.Usuarios.get(nickname);
+        em.getTransaction().begin();
+        Query q = em.createQuery("UPDATE Artista a SET a.nombre = :nombre, a.apellido = :apellido, a.fecha_nac = :fecha, a.biografia = :biografia, a.descripcion = :descripcion, a.link = :link WHERE a.nickname = :nickname");
+        q.setParameter("fecha", f);
+        q.setParameter("nombre", nombre);
+        q.setParameter("apellido", apellido);
+        q.setParameter("biografia", biografia);
+        q.setParameter("descripcion", descripcion);
+        q.setParameter("link", link);
+        q.setParameter("nickname", nickname);
+        q.executeUpdate();
+       
+        Artista art = em.find(Artista.class, nickname);
+        em.refresh(art);
+        em.getTransaction().commit();
+        
+        
+        /*Artista u = (Artista) this.Usuarios.get(nickname);
         u.SetNombre(nombre);
         u.SetApellido (apellido);
         u.SetFecha (f);
         u.SetDescripcion (descripcion);
         u.SetBiografia (biografia);
-        u.SetLink (link);
+        u.SetLink (link);*/
     }
     
     public void PreCarga(){
-        Plataforma twitch = new Plataforma("Twitch","Twitch is the worlds leading live streaming platform for gamers and the things we love","www.twitch.com");
-        Plataforma facebook_live = new Plataforma("Facebook Live", "Facebook Live es la herramienta de vídeo en streaming que ofrece la red social por el momento para usuarios de dispositivos móviles y que permite realizar transmisiones en vivo de manera muy sencilla y rápida ya sea desde tu perfil personal o desde tu página de empresa" , "www.facebooklive.com");
-        Plataforma youtube = new Plataforma("YouTube", "YouTube es un portal del Internet que permite a sus usuarios subir y visualizar videos. Fue creado en febrero de 2005 por Chad Hurley, Steve Chen y Jawed Karim", "www.youtube.com");
-        this.Plataformas.put(twitch.GetNombre(), twitch);
-        this.Plataformas.put(youtube.GetNombre(), youtube);
-        this.Plataformas.put(facebook_live.GetNombre(), facebook_live);
-        
-        Date fecha_nac1 = new Date(1999,8,22,0,0,0); 
-        Date fecha_nac2 = new Date(1996,4,17,0,0,0);
-        Date fecha_nac3 = new Date(2000,8,1,0,0,0);
-        Date fecha_nac4 = new Date(2000,6,14,0,0,0);
-        Date fecha_nac5 = new Date(1999,11,14,0,0,0);
-        
-        Usuario Nahuel = new Espectador("Nahuel", "Perdomo", "nperdomo@gmail.com", "nperdomo", fecha_nac1 );
-        Usuario Andres = new Espectador("Andres", "Castro", "acastro@gmail.com", "acastro",fecha_nac2);
-        Usuario Alexis = new Espectador("Alexis", "Peralta", "aperalta@gmail.com", "aperalta", fecha_nac3);
-        Usuario Nicolas = new Espectador("Nicolas", "Guillen", "nguillen@gmail.com", "nguillen", fecha_nac4);
-        Usuario Felipe = new Espectador("Felipe", "Parada", "fparada@gmail.com", "fparada",fecha_nac5);
-        this.Usuarios.put(Nahuel.GetNickname(), Nahuel);
-        this.Usuarios.put(Andres.GetNickname(), Andres);
-        this.Usuarios.put(Alexis.GetNickname(), Alexis);
-        this.Usuarios.put(Nicolas.GetNickname(), Nicolas);
-        this.Usuarios.put(Felipe.GetNickname(), Felipe);
-        
-        Date f = new Date(1980,04,10,0,0,0);
-        Usuario user  = new Artista ("Isabel", "Mebarak", "shakira@gmail", "Shakira", f,"Mueve las caderas","Nacio en colombia","Shakira.com");
-        this.Usuarios.put("Shakira", user);
-        f = new Date(1982,6,15,0,0,0);
-        user  = new Artista("Ricky", "Marty", "Ricky@gmail", "RickyM",f,"Hay que pedirle mas mas a la vida...","Canto un disco con Maluma","RickylaVidaloca.com");
-        this.Usuarios.put("RickyM", user);
-        f = new Date(1990,12,16,0,0,0);
-        user  = new Artista ("Maluma", "Baby", "Maluma@gmail", "Maluma",f,"El es Maluma Babi","Es adopatado","malumababy.com");
-        this.Usuarios.put("Maluma", user);
-        f = new Date(1980,03,17,0,0,0);
-        user  = new Artista("Lucas", "Sugo", "Lukita@gmail", "Lucas_Sugo",f,"El mejor cantante del interior","Se separo de su grupo inicial","lucasparati.com");
-        this.Usuarios.put("Lucas_Sugo", user);
-        f = new Date(1995,03,17,0,0,0);
-        user  = new Artista ("Soledad", "Pastoruso", "Pastoruso@gmail", "Sole",f,"Canta folklore","Es argentina","Arriba.com");
-        this.Usuarios.put("Sole", user);
-
-        /*Date f1 = new DtFecha(10,04,1980,0,0,0);
-        Usuario user1  = new Artista ("Isabel", "Mebarak", "shakira@gmail", "Shakira", f1,"Mueve las caderas","Nacio en colombia","Shakira.com");
-        this.Usuarios.put("Shakira", user1);
-        DtFecha f2 = new DtFecha(15,6,1982,0,0,0);
-        Usuario user2  = new Artista("Ricky", "Marty", "Ricky@gmail", "RickyM",f2,"Hay que pedirle mas mas a la vida...","Canto un disco con Maluma","RickylaVidaloca.com");
-        this.Usuarios.put("RickyM", user2);
-        DtFecha f3 = new DtFecha(16,12,1990,0,0,0);
-        Usuario user3  = new Artista ("Maluma", "Baby", "Maluma@gmail", "Maluma",f3,"El es Maluma Babi","Es adopatado","malumababy.com");
-        this.Usuarios.put("Maluma", user3);
-        DtFecha f4 = new DtFecha(1,12,1980,0,0,0);
-        Usuario user4 = new Artista("Lucas", "Sugo", "Lukita@gmail", "Lucas_Sugo",f4,"El mejor cantante del interior","Se separo de su grupo inicial","lucasparati.com");
-        this.Usuarios.put("Lucas_Sugo", user4);
-        DtFecha f5 = new DtFecha(17,03,1995,0,0,0);
-        Usuario user5  = new Artista ("Soledad", "Pastoruso", "Pastoruso@gmail", "Sole",f5,"Canta folklore","Es argentina","Arriba.com");
-        this.Usuarios.put("Sole", user5);*/
+         Query q = em.createQuery("SELECT a FROM Plataforma a");
+         List plataformas = q.getResultList();
          
+         /*for (Object object : plataformas) {
+                Plataforma p = (Plataforma) object;
+                
+                this.Plataformas.put(p.GetNombre(), p);
+                
+            }*/
     }
     
     public String[] listarEspectaculos(String n){

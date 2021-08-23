@@ -30,6 +30,7 @@ public class main extends javax.swing.JFrame {
 
     private ISistema sis;
     SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy '-' HH:mm:ss");
+    SimpleDateFormat ft2 = new SimpleDateFormat ("dd.MM.yyyy");
     /**
      * Creates new form main
      */
@@ -40,7 +41,8 @@ public class main extends javax.swing.JFrame {
         //Inicialización
         SistemaFactory fabrica = SistemaFactory.getInstance();
         sis = fabrica.getISistema();
-        sis.PreCarga();
+        //sis.PreCarga();
+        
         
         this.FrameAltaUsuario.setVisible(false);
         this.FrameConsultarUsuario.setVisible(false);
@@ -2535,18 +2537,20 @@ public class main extends javax.swing.JFrame {
             String nombre = dtU.GetNombre();
             String apellido = dtU.GetApellido();
             Date f = dtU.GetFecha_Nac();
-
             this.FieldNombre3.setText(nombre);
             this.FieldApellido3.setText(apellido);
-            this.ComboBoxDia3.setSelectedIndex(f.getDate()- 1);
-            this.ComboBoxMes3.setSelectedIndex(f.getMonth()- 1);
-            this.ComboBoxAnio3.setSelectedIndex(f.getYear()- 1960);
+            
+            int anio = f.getYear() - 60;
+            int dia = f.getDate()- 1;
+            this.ComboBoxDia3.setSelectedIndex(dia);
+            this.ComboBoxMes3.setSelectedIndex(f.getMonth());
+            this.ComboBoxAnio3.setSelectedIndex(anio);
 
 
-
+            
             if(dtU instanceof DtArtista){
+                
                 DtArtista dtArt = (DtArtista) dtU;
-
                 String biografia = dtArt.GetBiografia();
                 String descripcion = dtArt.GetDescripcion();
                 String link = dtArt.GetLink();
@@ -2564,6 +2568,7 @@ public class main extends javax.swing.JFrame {
 
             }
             else if(dtU instanceof DtEspectador){
+                
                 this.LabelLink3.setVisible(false);
                 this.LabelBiografia3.setVisible(false);
                 this.LabelDescripcion3.setVisible(false);

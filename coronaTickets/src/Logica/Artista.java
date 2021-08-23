@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.swing.JOptionPane;
 
 
@@ -24,6 +25,7 @@ public class Artista extends Usuario {
     private String descripcion;
     private String biografia;
     private String link;
+    @OneToMany
     private Map <String,Espectaculo>organiza;
     
     public Artista(String nombre, String apellido, String email, String nickname, Date fecha_nac, String descripcion, String biografia, String link ){
