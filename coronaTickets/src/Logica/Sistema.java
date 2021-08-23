@@ -32,6 +32,7 @@ public class Sistema implements ISistema {
     private EntityManager em;
     
     public Sistema(){
+        
         this.Usuarios = new HashMap();
         this.Plataformas = new HashMap();
         this.Paquetes = new HashMap();
@@ -41,13 +42,13 @@ public class Sistema implements ISistema {
        
     }
     
-    public void pruebapersistencia(){
+    /*public void pruebapersistencia(){
         em.getTransaction().begin();
         Persona p = new Persona(4,"numero 4");
         em.persist(p);
         em.getTransaction().commit();
         JOptionPane.showMessageDialog(null, "SE CREO A LA PERSONA");
-    }
+    }*/
     
     public void crearEspectaculo(String Plataforma,String nombre,Date fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion, String artista){
         
@@ -132,6 +133,10 @@ public class Sistema implements ISistema {
         
         Usuario u = new Espectador(nombre, apellido, correo, nickname, fecha_nac);
         this.Usuarios.put(nickname, u);
+        em.getTransaction().begin();
+        em.persist(u);
+        em.getTransaction().commit();
+        
     }
     
     public void ingresarArtista(String nombre, String apellido, String correo, String nickname, Date fecha_nac, String descripcion, String biografia, String link){

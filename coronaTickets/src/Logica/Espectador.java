@@ -6,17 +6,21 @@
 package Logica;
 import Logica.Usuario;
 import java.util.Date;
+import javax.persistence.Entity;
 
 /**
  *
  * @author User
  */
+@Entity
 public class Espectador extends Usuario {
     
     public Espectador(String nombre, String apellido, String email, String nickname, Date fecha_nac){
     
         super(nombre, apellido, email, nickname, fecha_nac);
     }
+    
+    public Espectador(){}
     
     @Override
     public DtEspectador ArmarDT(){

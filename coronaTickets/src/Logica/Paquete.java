@@ -26,7 +26,7 @@ public class Paquete {
     private Date fecha_fin;
     private Date fecha_ini;
     @OneToMany 
-    private Map espectaculos;
+    private Map<String,Espectaculo> espectaculos;
 
     public Paquete(String nombre, String descripcion, float descuento, Date fecha_alta, Date fecha_fin, Date fecha_ini) {
         this.nombre = nombre;

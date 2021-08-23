@@ -3,6 +3,12 @@
   <persistence-unit name="coronaTicketsPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Logica.Paquete</class>
+    <class>Logica.Espectaculo</class>
+    <class>Logica.Funcion</class>
+    <class>Logica.Plataforma</class>
+    <class>Logica.Usuario</class>
+    <class>Logica.Espectador</class>
+    <class>Logica.Artista</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/coronaTickets"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

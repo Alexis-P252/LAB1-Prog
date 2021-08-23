@@ -5,17 +5,22 @@
  */
 package Logica;
 import Logica.DtEspectaculo;
+import Logica.Funcion;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author usuario
  */
+@Entity
 public class Espectaculo {
-    private String nombre;
+    @Id private String nombre;
     private Date fecha_registro;
     private float costo;
     private String url;
@@ -24,7 +29,8 @@ public class Espectaculo {
     private int duracion; 
     private String plataforma;
     private String descripcion;
-    private Map Funciones;
+    @OneToMany
+    private Map<String,Funcion> Funciones;
  
     public Espectaculo (){
     }

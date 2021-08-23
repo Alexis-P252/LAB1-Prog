@@ -6,16 +6,22 @@
 package Logica;
 import Logica.DtUsuario;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 /**
  *
  * @author User
  */
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario {
     protected String nombre;
     protected String apellido;
     protected String email;
-    protected String nickname;
+    @Id protected String nickname;
     protected Date fecha_nac;
     
     public Usuario(String nombre, String apellido, String email, String nickname, Date fecha_nac){

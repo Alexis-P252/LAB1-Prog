@@ -10,15 +10,20 @@ import Logica.Paquete;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 /**
  *
  * @author felip
  */
+@Entity
 public class Plataforma {
-    private String nombre;
+    @Id private String nombre;
     private String descripcion;
     private String url;
-    private Map Espectaculos;
+    @OneToMany
+    private Map<String,Espectaculo> Espectaculos;
 
     public Plataforma(String nombre, String descripcion, String url){
         this.nombre = nombre;

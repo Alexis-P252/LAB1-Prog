@@ -11,17 +11,22 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author usuario
  */
+@Entity
 public class Funcion {
-    private String nombre;
+    @Id private String nombre;
     private Date fecha_registro;
     private Date fecha_hora;
-    private Map Registros;
-    private Map Artistas;
+    //private Map Registros;
+    @OneToMany
+    private Map<String,Artista> Artistas;
     
 
 /// Constructores
@@ -31,7 +36,7 @@ public class Funcion {
         this.nombre = nombre;
         this.fecha_registro = fecha_registro;
         this.fecha_hora = fecha_hora;
-        this.Registros = new HashMap();
+        //this.Registros = new HashMap();
         this.Artistas = new HashMap();
     }      
 

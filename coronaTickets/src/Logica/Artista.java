@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import javax.persistence.Entity;
 import javax.swing.JOptionPane;
 
 
@@ -16,12 +17,14 @@ import javax.swing.JOptionPane;
  *
  * @author User
  */
+
+@Entity
 public class Artista extends Usuario {
     
     private String descripcion;
     private String biografia;
     private String link;
-    private Map organiza;
+    private Map <String,Espectaculo>organiza;
     
     public Artista(String nombre, String apellido, String email, String nickname, Date fecha_nac, String descripcion, String biografia, String link ){
         
@@ -31,6 +34,8 @@ public class Artista extends Usuario {
         this.link = link;
         this.organiza = new HashMap();
     }
+    
+    public Artista(){}
     
     public String GetDescripcion(){
         return this.descripcion;
