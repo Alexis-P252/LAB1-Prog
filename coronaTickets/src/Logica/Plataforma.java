@@ -12,7 +12,10 @@ import java.util.Iterator;
 import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 /**
  *
  * @author felip
