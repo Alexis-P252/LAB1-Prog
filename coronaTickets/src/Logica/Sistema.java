@@ -44,19 +44,14 @@ public class Sistema implements ISistema {
        
     }
     
-    /*public void pruebapersistencia(){
-        em.getTransaction().begin();
-        Persona p = new Persona(4,"numero 4");
-        em.persist(p);
-        em.getTransaction().commit();
-        JOptionPane.showMessageDialog(null, "SE CREO A LA PERSONA");
-    }*/
-    
+   
     public void crearEspectaculo(String Plataforma,String nombre,Date fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion, String artista){
         
         em.getTransaction().begin();
+        
         Plataforma p = em.find(Plataforma.class, Plataforma);
         Artista a = em.find(Artista.class, artista);
+        
         Espectaculo e = new Espectaculo(nombre,fecha_registro,costo,url,cant_max_espec,cant_min_espec,duracion,descripcion, Plataforma);
         em.persist(e);
         p.agregarEspectaculo(e);
@@ -75,18 +70,16 @@ public class Sistema implements ISistema {
         
     }
     
-    public boolean verificarEspectacunoEnPlataforma(String plataforma,String espectaculo){
+    public boolean verificarEspectaculo(String espectaculo){
         
-        Plataforma p = em.find(Plataforma.class, plataforma);
-        //Plataforma p = (Plataforma)this.Plataformas.get(plataforma);
-       
-        if(p.existeEspectaculo(espectaculo))
-                return true;
-            else
-                return false;
-  
+        if(em.find(Espectaculo.class,espectaculo) == null){
+            return false;
+        }
+        else{
+            return true;
+        }
+      
     }
-    
     
     public String[] listarArtistas(){
         
@@ -190,26 +183,30 @@ public class Sistema implements ISistema {
     
     public String[] ColNickname(){
         Query q = em.createQuery("Select a.nickname from Artista a");
-        List listaArtistas = q.getResultList();
-
         Query q1 = em.createQuery("Select e.nickname from Espectador e");
-        List listaEspectadores = q1.getResultList();
+        
+        try{
+            List listaArtistas = q.getResultList();
+            List listaEspectadores = q1.getResultList();
 
-        String res[] = new String[listaEspectadores.size() + listaArtistas.size()];
+            String res[] = new String[listaEspectadores.size() + listaArtistas.size()];
+            int i = 0;
 
-        int i = 0;
+            for(Object object :listaArtistas){
+                res[i] =(String) object + " (A)";
+                i++;
+            }
 
-        for(Object object :listaArtistas){
-            res[i] =(String) object + " (A)";
-            i++;
+            for(Object object :listaEspectadores){
+                res[i] =(String)object + " (E)";
+                i++;
+            }
+
+            return res;
+            
+        }catch(Exception e){
+            return new String[1];
         }
-
-        for(Object object :listaEspectadores){
-            res[i] =(String)object + " (E)";
-            i++;
-        }
-
-        return res;
     }
     
     public DtUsuario GetDtUsuario(String nickname){
@@ -226,9 +223,7 @@ public class Sistema implements ISistema {
             return dtArt;
        
         }
-        
-
- 
+  
     }
     
     public void modificarEspectador(String nickname, String nombre, String apellido, Date f){
@@ -266,31 +261,38 @@ public class Sistema implements ISistema {
     }
     
     
-    // RECIBE EL NOMBRE DE LA PLATAFORMA DE LA CUAL SE QUIEREN LISTAR LOS ESPECTACULOS.
+ 
     public String[] listarEspectaculos(String n){
-        //Query q = em.createQuery("SELECT pe.espectaculos_nombre FROM plataforma_espectaculo pe WHERE pe.plataforma_nombre = :plataforma");
-        //q.setParameter("plataforma", n);
+  
+        Query q = em.createQuery("SELECT pe.Espectaculos FROM Plataforma pe WHERE pe.nombre = :plataforma");
+        q.setParameter("plataforma", n);
+        
+        String[] ret = new String[1];
+        try{
+            List espectaculos = q.getResultList();
+        
+            String[] res = new String[espectaculos.size()];
+            int i = 0;
+
+            for(Object object: espectaculos){
+                Espectaculo esp = (Espectaculo) object;
+                res[i] = esp.getNombre();
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e){
+            return new String[1];
+        }
+        
         
   
-        Query q = em.createQuery("SELECT pe FROM plataforma_espectaculo pe");
         
- 
-        /*List espectaculos = q.getResultList();
-        String [] ret = new String[espectaculos.size()];
-        int i = 0;
-        
-        for(Object object: espectaculos){
-            Espectaculo esp = (Espectaculo) object;
-            ret[i] = esp.getNombre();
-            i++;
-        }*/
-        String[] ret = new String[10];
-        return ret;
     }
     
-    public DtEspectaculo mostrarEspectaculo (String plataforma, String espectaculo){
-        Query q = em.createQuery("SELECT e FROM Espectaculo e JOIN plataforma_espectaculo ep ON e.nombre = ep.espectaculos_nombre WHERE ep.plataforma_nombre = :plataforma AND ep.espectaculos_nombre = :espectaculo");
-        q.setParameter("plataforma", plataforma);
+    public DtEspectaculo mostrarEspectaculo (String espectaculo){
+       
+        Query q = em.createQuery("SELECT esp FROM Espectaculo esp WHERE esp.nombre = :espectaculo");
         q.setParameter("espectaculo", espectaculo);
         
         
@@ -300,18 +302,26 @@ public class Sistema implements ISistema {
     }
     
     public String[] listarespectaculosXArtista(String artista){
-        Query q = em.createQuery("SELECT e FROM Espectaculo e JOIN artista_espectaculo ae ON e.nombre = ae.organiza_nombre AND ae.artista_nickname = :artista");
-        q.setParameter("artista", artista);
-        List espectaculos = q.getResultList();
-        String[] res = new String[espectaculos.size()];
-        int i = 0;
-        
-        for (Object object: espectaculos){
-            Espectaculo e = (Espectaculo) object;
-            res[i] = e.getNombre();
-            i++;
+
+        Query q = em.createQuery("SELECT a.organiza FROM Artista a WHERE a.nickname = :nickname");
+        q.setParameter("nickname", artista);
+
+        try{
+            List espectaculos = q.getResultList();
+            String[] res = new String[espectaculos.size()];
+            int i = 0;
+           
+            for (Object object: espectaculos){
+                Espectaculo e = (Espectaculo) object;
+                res[i] = e.getNombre();
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e){
+            return new String[1];
         }
-        return res;
+        
         
         /*Artista a = (Artista) this.Usuarios.get(artista);
         return a.listarEspectaculosOrganizo();*/
@@ -381,11 +391,74 @@ public class Sistema implements ISistema {
     // LISTA LOS ESPECTACULOS QUE PERTENECEN A LA PLATAFORMA PERO QUE NO FORMAN PARTE DEL PAQUETE
     public String[] listarEspectaculosPaq (String plataforma, String paquete){
         
-        Paquete paq = (Paquete) this.Paquetes.get(paquete);
+        Query q = em.createQuery("SELECT e FROM Espectaculo e WHERE e.plataforma = :plataforma AND e.nombre != (SELECT FROM Paquete p WHERE p.nombre = :paquete)");
+        q.setParameter("paquete", paquete);
+        q.setParameter("plataforma", plataforma);
+        String[] res = new String[1];
+        res[0] = "hola";
+        return res;
+        /*Query q = em.createQuery("SELECT e FROM Espectaculo e WHERE e.plataforma = :plataforma");
+        Query q2 = em.createQuery("SELECT p.espectaculos FROM Paquete p WHERE p.nombre = :paquete");
+        q.setParameter("plataforma", plataforma);
+        q2.setParameter("paquete", paquete);
+        
+        List esp_plataforma;
+        List esp_paquete;
+        
+        try{
+            esp_plataforma = q.getResultList();
+        }catch(Exception e){
+            return new String[1];
+        }
+        
+        try{
+            esp_paquete = q2.getResultList();
+        }catch(Exception e){
+            String[] res = new String[esp_plataforma.size()];
+            int i=0;
+            for(Object object: esp_plataforma){
+                Espectaculo esp = (Espectaculo) object;
+                res[i] = esp.getNombre();
+                i++;
+            }
+            return res;
+        }
+        
+        try{
+            JOptionPane.showMessageDialog(null,"LLEGA HASTA ACA","Alta Paquete",JOptionPane.ERROR_MESSAGE);
+            
+            String[] res = new String[esp_plataforma.size()];
+            int i=0;
+            
+            for(Object object: esp_plataforma){
+                Espectaculo e = (Espectaculo) object;
+                String nombre = e.getNombre();
+                boolean esta = false;
+                
+                for(Object object2: esp_paquete){
+                    Espectaculo e2 = (Espectaculo) object2;
+                    if(e2.getNombre() == nombre){
+                        esta = true;
+                    }
+                }
+                if(esta == false){
+                    res[i] = nombre;
+                    i++;
+                }
+                
+            }
+            JOptionPane.showMessageDialog(null,"NO FALLA","Alta Paquete",JOptionPane.ERROR_MESSAGE);
+            return res;
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"SI FALLA","Alta Paquete",JOptionPane.ERROR_MESSAGE);
+            return new String[1];
+        }
+        
+       /* Paquete paq = (Paquete) this.Paquetes.get(paquete);
         Plataforma pla = (Plataforma) this.Plataformas.get(plataforma);
         
         String[] res = pla.listaEspectaculosxPaq(paq);
-        return res;
+        return res;*/
     }
 
 }

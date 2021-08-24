@@ -301,7 +301,7 @@ public class main extends javax.swing.JFrame {
         ListaEspectaculos10 = new javax.swing.JList<>();
         LabelSeleccionePlataforma10 = new javax.swing.JLabel();
         jScrollPane24 = new javax.swing.JScrollPane();
-        ListaPaquetes12 = new javax.swing.JList<>();
+        ListaPaquetes10 = new javax.swing.JList<>();
         jScrollPane25 = new javax.swing.JScrollPane();
         ListaPlataforma10 = new javax.swing.JList<>();
         LabelSeleccionePlataforma11 = new javax.swing.JLabel();
@@ -1922,13 +1922,13 @@ public class main extends javax.swing.JFrame {
         jPanel11.add(LabelSeleccionePlataforma10);
         LabelSeleccionePlataforma10.setBounds(160, 250, 190, 17);
 
-        ListaPaquetes12.setBackground(new java.awt.Color(204, 204, 204));
-        ListaPaquetes12.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        ListaPaquetes10.setBackground(new java.awt.Color(204, 204, 204));
+        ListaPaquetes10.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                ListaPaquetes12ValueChanged(evt);
+                ListaPaquetes10ValueChanged(evt);
             }
         });
-        jScrollPane24.setViewportView(ListaPaquetes12);
+        jScrollPane24.setViewportView(ListaPaquetes10);
 
         jPanel11.add(jScrollPane24);
         jScrollPane24.setBounds(50, 60, 140, 160);
@@ -2236,6 +2236,12 @@ public class main extends javax.swing.JFrame {
 
     private void AgregarEspaPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarEspaPaqActionPerformed
         // TODO add your handling code here:
+        ocultarVentanas();
+        this.FrameAddEspectaculo.setVisible(true);
+        String[] plataformas = sis.listarPlataformas();
+        String[] paquetes = sis.listarPaquetes();
+        this.ListaPlataforma10.setListData(plataformas);
+        this.ListaPaquetes10.setListData(paquetes);
     }//GEN-LAST:event_AgregarEspaPaqActionPerformed
 
     private void ConsultaPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaPaqueteActionPerformed
@@ -2841,8 +2847,8 @@ public class main extends javax.swing.JFrame {
             
             // AHORA VERIFICAMOS QUE EN LA PLATAFORMA SELECIONADA NO EXISTA YA UN ESPECTACULO CON EL NOMBRE ELEGIDO
             String Plataforma = this.ListaPlataforma4.getSelectedValue();
-            if(sis.verificarEspectacunoEnPlataforma(Plataforma,nombre)){
-                JOptionPane.showMessageDialog(this,"Ya existe un Espectaculo con ese Nombre en La plataforma "+Plataforma,"Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
+            if(sis.verificarEspectaculo(nombre)){
+                JOptionPane.showMessageDialog(this,"Ya existe un Espectaculo con ese nombre ","Alta Espectaculo",JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
@@ -2937,7 +2943,7 @@ public class main extends javax.swing.JFrame {
           return;
       }
       else{
-        DtEspectaculo Dt = sis.mostrarEspectaculo(plataforma, espectaculo);
+        DtEspectaculo Dt = sis.mostrarEspectaculo(espectaculo);
         String nombre = Dt.GetNombre();
         String cant_mint = ""+Dt.GetCant_min_espec();;  
         String cant_maxt =""+Dt.GetCant_max_espec();
@@ -3201,48 +3207,25 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nomEspec = this.ListaOrganizo2.getSelectedValue();
         if(nomEspec !=null){
-            String plataforma="";
-            String espectaculo="";
-            int f =0;
-            for(int i = 0; i< nomEspec.length();i++){
-                if(nomEspec.charAt(i)== ' ' && nomEspec.charAt(i+1)== '('){
-                    f= i+2 ;
-                    break; 
-                }
-                else{
-                    espectaculo = espectaculo + nomEspec.charAt(i);
-                }
-            }
-            for(int a = f; a< nomEspec.length();a++){
-                if(nomEspec.charAt(a)!= ')'){
-                    plataforma  = plataforma  + nomEspec.charAt(a);
-                }
-                else{
-                    break;
-                }
-            }
-            if (plataforma ==null || espectaculo ==null){
-              return;
-            }
-            else{
-                DtEspectaculo Dt = sis.mostrarEspectaculo(plataforma, espectaculo);
-                String nombre = Dt.GetNombre();
-                String cant_mint = ""+Dt.GetCant_min_espec();
-                String cant_maxt =""+Dt.GetCant_max_espec();
-                String descripcion = Dt.GetDescripcion();
-                String URL = Dt.GetUrl();
-                String duracion = ""+Dt.GetDuracion();
-                String costo = ""+Dt.GetCosto();
+            
+            DtEspectaculo Dt = sis.mostrarEspectaculo(nomEspec);
+            String nombre = Dt.GetNombre();
+            String cant_mint = ""+Dt.GetCant_min_espec();
+            String cant_maxt =""+Dt.GetCant_max_espec();
+            String descripcion = Dt.GetDescripcion();
+            String URL = Dt.GetUrl();
+            String duracion = ""+Dt.GetDuracion();
+            String costo = ""+Dt.GetCosto();
 
-                this.FieldNombre5.setText(nombre);
-                this.FieldEspMin5.setText(cant_mint);
-                this.FieldEspMax5.setText(cant_maxt);
-                this.FieldDescripcion5.setText (descripcion);
-                this.FieldURL5.setText(URL);
-                this.FieldDuracion5.setText(duracion);
-                this.FieldCosto5.setText(costo);
-                this.FrameConsultaEspectaculo.setVisible(true);
-            }
+            this.FieldNombre5.setText(nombre);
+            this.FieldEspMin5.setText(cant_mint);
+            this.FieldEspMax5.setText(cant_maxt);
+            this.FieldDescripcion5.setText (descripcion);
+            this.FieldURL5.setText(URL);
+            this.FieldDuracion5.setText(duracion);
+            this.FieldCosto5.setText(costo);
+            this.FrameConsultaEspectaculo.setVisible(true);
+            
         }
     }//GEN-LAST:event_ListaOrganizo2ValueChanged
 
@@ -3309,16 +3292,35 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ListaEspectaculos10ValueChanged
 
-    private void ListaPaquetes12ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPaquetes12ValueChanged
+    private void ListaPaquetes10ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPaquetes10ValueChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_ListaPaquetes12ValueChanged
+        if(this.ListaPlataforma10.getSelectedIndex() == -1){
+            return;
+        }
+        else{
+            String paquete = this.ListaPaquetes10.getSelectedValue();
+            String plataforma = this.ListaPlataforma10.getSelectedValue();
+            String espectaculos[] = sis.listarEspectaculosPaq(plataforma, paquete);
+            this.ListaEspectaculos10.setListData(espectaculos);
+        }
+    }//GEN-LAST:event_ListaPaquetes10ValueChanged
 
     private void ListaPlataforma10ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma10ValueChanged
         // TODO add your handling code here:
+        if(this.ListaPaquetes10.getSelectedIndex() == -1){
+            return;
+        }
+        else{
+            String paquete = this.ListaPaquetes10.getSelectedValue();
+            String plataforma = this.ListaPlataforma10.getSelectedValue();
+            String espectaculos[] = sis.listarEspectaculosPaq(plataforma, paquete);
+            this.ListaEspectaculos10.setListData(espectaculos);
+        }
     }//GEN-LAST:event_ListaPlataforma10ValueChanged
 
     private void ButtonCancelar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar10ActionPerformed
         // TODO add your handling code here:
+        this.FrameAddEspectaculo.setVisible(false);
     }//GEN-LAST:event_ButtonCancelar10ActionPerformed
 
     private void ButtonCancelar11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar11ActionPerformed
@@ -3377,6 +3379,7 @@ public class main extends javax.swing.JFrame {
         this.FrameConsultaEspectaculo.setVisible(false);
         this.FrameAltaPaquete.setVisible(false);
         this.FrameConsultaPaquete.setVisible(false);
+        this.FrameAddEspectaculo.setVisible(false);
         
         this.ListaUsuarios2.setModel(listmodel);
         this.ListaOrganizo2.setModel(listmodel);
@@ -3392,6 +3395,9 @@ public class main extends javax.swing.JFrame {
         this.ListaEspectaculos5.setModel(listmodel);
         this.ListaEspectaculos11.setModel(listmodel);
         this.ListaPaquetes11.setModel(listmodel);
+        this.ListaPlataforma10.setModel(listmodel);
+        this.ListaPaquetes10.setModel(listmodel);
+        this.ListaEspectaculos10.setModel(listmodel);
       
     }
     
@@ -3602,8 +3608,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JList<String> ListaFunciones6;
     private javax.swing.JList<String> ListaOrganizo2;
     private javax.swing.JList<String> ListaOrganizo3;
+    private javax.swing.JList<String> ListaPaquetes10;
     private javax.swing.JList<String> ListaPaquetes11;
-    private javax.swing.JList<String> ListaPaquetes12;
     private javax.swing.JList<String> ListaPaquetes5;
     private javax.swing.JList<String> ListaPaquetes6;
     private javax.swing.JList<String> ListaPlataforma10;
