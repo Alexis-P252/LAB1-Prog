@@ -103,5 +103,9 @@ public class Paquete {
         }
     }
     
+    public void addEsp(Espectaculo esp){
+        this.espectaculos.put(esp.getNombre(), esp);
+    }
+    
     
 }

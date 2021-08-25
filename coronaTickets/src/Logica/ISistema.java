@@ -30,7 +30,10 @@ public interface ISistema {
     public abstract void AgregarPaquete(String nombre, String descripcion, float descuento, Date fecha_alta, Date fecha_fin, Date fecha_ini);
     public abstract String[] listarPaquetes();
     public abstract DtPaquete mostrarPaquete(String paquete);
-    public abstract String[] listarEspectaculosPaq (String plataforma, String paquete);
+    public abstract boolean EspectaculoenPaq (String paquete, String espectaculo);
+    public abstract void AddEspectaculoaPaquete(String paquete, String espectaculo);
+    public abstract String[] listarEspectaculosxPaq(String paquete);
+    //public abstract void listarPaquetesdeEsp(String espectaculo);
 }
 
 
@@ -42,5 +45,6 @@ public interface ISistema {
         YA QUE SE DEBEN MOSTRAR PARA CADA ESPECTACULO LOS PAQUETES EN LOS QUE FORMA PARTE)
     - ENCONTRADO BUG EN MODIFICAR DATOS DE USUARIO. AL CREAR UN ESPECTADOR NUEVO (NO UNO DE LA PRECARGA) Y LUEGO IR A LA PANTALLA DE MODIFICAR SI SE PULSA SOBRE UN ARTISTA 
         Y LUEGO SOBRE EL ESPECTADOR NUEVO, LOS CAMPOS BIOGRAFIA DESCRIPCION Y LINK NO DESAPARECERAN, PUDIENDO EL USUARIO INGRESAR DATOS Y DARLE CONFIRMAR, ASIENDO QUE SE ROMPA.
+    - HACER QUE SALTE PANTALLA CONSULTA DE ESPECTACULO CUANDO SE HACE CLICK EN UN ESPECTACULO EN LA PANTALLA CONSULTA DE PAQUETE
 */
   

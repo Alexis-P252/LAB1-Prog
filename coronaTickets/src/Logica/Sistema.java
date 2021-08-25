@@ -41,7 +41,7 @@ public class Sistema implements ISistema {
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("coronaTicketsPU");
         this.em = emf.createEntityManager();
-       
+    
     }
     
    
@@ -389,77 +389,56 @@ public class Sistema implements ISistema {
     }
     
     // LISTA LOS ESPECTACULOS QUE PERTENECEN A LA PLATAFORMA PERO QUE NO FORMAN PARTE DEL PAQUETE
-    public String[] listarEspectaculosPaq (String plataforma, String paquete){
-        
-        Query q = em.createQuery("SELECT e FROM Espectaculo e WHERE e.plataforma = :plataforma AND e.nombre != (SELECT FROM Paquete p WHERE p.nombre = :paquete)");
+    public boolean EspectaculoenPaq (String paquete, String espectaculo){
+        Query q = em.createQuery("SELECT p.espectaculos FROM Paquete p WHERE p.nombre = :paquete");
         q.setParameter("paquete", paquete);
-        q.setParameter("plataforma", plataforma);
-        String[] res = new String[1];
-        res[0] = "hola";
-        return res;
-        /*Query q = em.createQuery("SELECT e FROM Espectaculo e WHERE e.plataforma = :plataforma");
-        Query q2 = em.createQuery("SELECT p.espectaculos FROM Paquete p WHERE p.nombre = :paquete");
-        q.setParameter("plataforma", plataforma);
-        q2.setParameter("paquete", paquete);
-        
-        List esp_plataforma;
-        List esp_paquete;
         
         try{
-            esp_plataforma = q.getResultList();
-        }catch(Exception e){
-            return new String[1];
-        }
-        
-        try{
-            esp_paquete = q2.getResultList();
-        }catch(Exception e){
-            String[] res = new String[esp_plataforma.size()];
-            int i=0;
-            for(Object object: esp_plataforma){
-                Espectaculo esp = (Espectaculo) object;
-                res[i] = esp.getNombre();
-                i++;
-            }
-            return res;
-        }
-        
-        try{
-            JOptionPane.showMessageDialog(null,"LLEGA HASTA ACA","Alta Paquete",JOptionPane.ERROR_MESSAGE);
-            
-            String[] res = new String[esp_plataforma.size()];
-            int i=0;
-            
-            for(Object object: esp_plataforma){
+            List espectaculos = q.getResultList();
+            for(Object object: espectaculos){
                 Espectaculo e = (Espectaculo) object;
-                String nombre = e.getNombre();
-                boolean esta = false;
-                
-                for(Object object2: esp_paquete){
-                    Espectaculo e2 = (Espectaculo) object2;
-                    if(e2.getNombre() == nombre){
-                        esta = true;
-                    }
+                if(e.getNombre() == espectaculo){
+                    return true;
                 }
-                if(esta == false){
-                    res[i] = nombre;
-                    i++;
-                }
+            }
+            return false;
+        }catch(Exception e){
+            return false;
+        }   
+    }
+    
+    public void AddEspectaculoaPaquete(String paquete, String espectaculo){
+        em.getTransaction().begin();
+        Espectaculo esp = em.find(Espectaculo.class,espectaculo);
+        Paquete p = em.find(Paquete.class, paquete);
+        p.addEsp(esp);
+        em.getTransaction().commit();
+    }
+    
+    public String[] listarEspectaculosxPaq(String paquete){
+        Query q = em.createQuery("SELECT p.espectaculos FROM Paquete p WHERE p.nombre = :paquete");
+        q.setParameter("paquete", paquete);
+        
+        try{
+            List espectaculos = q.getResultList();
+            String[] res = new String[espectaculos.size()];
+            int i = 0;
+    
+            for(Object object: espectaculos){
+                Espectaculo e = (Espectaculo) object;
+                res[i] = e.getNombre();
+                i++;
                 
             }
-            JOptionPane.showMessageDialog(null,"NO FALLA","Alta Paquete",JOptionPane.ERROR_MESSAGE);
             return res;
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"SI FALLA","Alta Paquete",JOptionPane.ERROR_MESSAGE);
             return new String[1];
         }
-        
-       /* Paquete paq = (Paquete) this.Paquetes.get(paquete);
-        Plataforma pla = (Plataforma) this.Plataformas.get(plataforma);
-        
-        String[] res = pla.listaEspectaculosxPaq(paq);
-        return res;*/
     }
-
+    
+    /*public void listarPaquetesdeEsp(String espectaculo){
+        Query q = em.createQuery("SELECT pe.paquete_nombre FROM Paquete p JOIN p.espectaculos pe ON p.nombre = pe.paquete_nombre WHERE pe.espectaculos_nombre = :espectaculo");
+        q.setParameter("espectaculo", espectaculo);
+    }*/
 }
 

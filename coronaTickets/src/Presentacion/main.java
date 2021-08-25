@@ -2231,7 +2231,25 @@ public class main extends javax.swing.JFrame {
     private void CrearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPaqueteActionPerformed
         // TODO add your handling code here:
         ocultarVentanas();
+        
+        Date fecha_act = new Date();
+
+        int anio = fecha_act.getYear();
+        anio = anio+1900;
+
+        this.ComboBoxAnio8.removeAllItems(); 
+        this.ComboBoxAnio_fin8.removeAllItems();
+
+        for(int i=0;i<10;i++){
+
+            this.ComboBoxAnio8.addItem(""+ anio);
+            this.ComboBoxAnio_fin8.addItem(""+ anio);
+
+            anio++;
+        }
         this.FrameAltaPaquete.setVisible(true);
+        
+        
     }//GEN-LAST:event_CrearPaqueteActionPerformed
 
     private void AgregarEspaPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarEspaPaqActionPerformed
@@ -3187,6 +3205,15 @@ public class main extends javax.swing.JFrame {
         
         Date fecha_alta = new Date();
         
+        
+        if(f_fin.before(f_ini) || f_fin.equals(f_ini)){
+            JOptionPane.showMessageDialog(this,"La fecha de fin no puede ser inferior o igual a la fecha de inicio","Alta Paquete",JOptionPane.ERROR_MESSAGE);
+            return;
+        }else if(f_fin.before(fecha_alta) || f_ini.before(fecha_alta) || f_fin.equals(fecha_alta)){
+            JOptionPane.showMessageDialog(this,"la fecha de inicio o final no pueden ser anteriores a la actual","Alta Paquete",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
    
         sis.AgregarPaquete(nombre, descripcion, descuento, fecha_alta, f_fin, f_ini);
         JOptionPane.showMessageDialog(this,"Paquete ingresado correctamente","Alta Paquete",JOptionPane.INFORMATION_MESSAGE);
@@ -3254,7 +3281,23 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldFechaFin11ActionPerformed
 
     private void ButtonConfirmar10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmar10ActionPerformed
-        this.FrameConsultaPaquete.setVisible(false);
+        
+        if(this.ListaEspectaculos10.getSelectedIndex() == -1 || this.ListaPaquetes10.getSelectedIndex() == -1 || this.ListaPlataforma10.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this,"Debe seleccionar un elemento de cada lista","Agregar Paquete a Espectaculo",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String paquete = this.ListaPaquetes10.getSelectedValue();
+        String espectaculo = this.ListaEspectaculos10.getSelectedValue();
+        
+        if(sis.EspectaculoenPaq(paquete, espectaculo) == true){
+            JOptionPane.showMessageDialog(this,"El espectaculo " + espectaculo +" ya pertenece al paquete "+ paquete,"Agregar Paquete a Espectaculo",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        sis.AddEspectaculoaPaquete(paquete, espectaculo);
+        JOptionPane.showMessageDialog(this,"El espectaculo " + espectaculo +" fue añadido al paquete "+ paquete,"Agregar Paquete a Espectaculo",JOptionPane.INFORMATION_MESSAGE);
+        
+        this.FrameAddEspectaculo.setVisible(false);
         
         this.FieldNombre11.setText("");
         this.FieldDescripcion11.setText("");
@@ -3280,6 +3323,8 @@ public class main extends javax.swing.JFrame {
             this.FieldFechaAlta11.setText(ft.format(dt.getFecha_alta())); 
             this.FieldFechaIni11.setText(ft.format(dt.getFecha_ini()));
             this.FieldFechaFin11.setText(ft.format(dt.getFecha_fin()));
+            String[] espectaculos = sis.listarEspectaculosxPaq(paquete);
+            this.ListaEspectaculos11.setListData(espectaculos);
             
         }
     }//GEN-LAST:event_ListaPaquetes11ValueChanged
@@ -3300,7 +3345,7 @@ public class main extends javax.swing.JFrame {
         else{
             String paquete = this.ListaPaquetes10.getSelectedValue();
             String plataforma = this.ListaPlataforma10.getSelectedValue();
-            String espectaculos[] = sis.listarEspectaculosPaq(plataforma, paquete);
+            String espectaculos[] = sis.listarEspectaculos(plataforma);
             this.ListaEspectaculos10.setListData(espectaculos);
         }
     }//GEN-LAST:event_ListaPaquetes10ValueChanged
@@ -3313,7 +3358,7 @@ public class main extends javax.swing.JFrame {
         else{
             String paquete = this.ListaPaquetes10.getSelectedValue();
             String plataforma = this.ListaPlataforma10.getSelectedValue();
-            String espectaculos[] = sis.listarEspectaculosPaq(plataforma, paquete);
+            String espectaculos[] = sis.listarEspectaculos(plataforma);
             this.ListaEspectaculos10.setListData(espectaculos);
         }
     }//GEN-LAST:event_ListaPlataforma10ValueChanged
