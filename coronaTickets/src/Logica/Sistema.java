@@ -41,7 +41,7 @@ public class Sistema implements ISistema {
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("coronaTicketsPU");
         this.em = emf.createEntityManager();
-    
+
     }
     
    
@@ -436,9 +436,25 @@ public class Sistema implements ISistema {
         }
     }
     
-    /*public void listarPaquetesdeEsp(String espectaculo){
-        Query q = em.createQuery("SELECT pe.paquete_nombre FROM Paquete p JOIN p.espectaculos pe ON p.nombre = pe.paquete_nombre WHERE pe.espectaculos_nombre = :espectaculo");
-        q.setParameter("espectaculo", espectaculo);
-    }*/
+    public String[] listarPaquetesdeEsp(String espectaculo){
+        
+        Query q = em.createNativeQuery("SELECT p.paquete_nombre FROM paquete_espectaculo p WHERE p.espectaculos_nombre = '"+ espectaculo+"'");
+     
+        try{
+            List lista = q.getResultList();
+            String[] res = new String[lista.size()];
+            int i=0;
+            for(Object object: lista){
+                String nombre = (String) object;
+                res[i] = nombre;
+                i++;
+            }
+            
+            return res;
+        }catch(Exception e){
+            return new String[1];
+        }
+        
+    }
 }
 

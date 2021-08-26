@@ -52,6 +52,8 @@ public class main extends javax.swing.JFrame {
         this.FrameAltaPaquete.setVisible(false);
         this.FrameConsultaPaquete.setVisible(false);
         this.FrameAddEspectaculo.setVisible(false);
+   
+        
        
         //
         GroupTipoUsuario.add(EspectadorButton);
@@ -1167,6 +1169,11 @@ public class main extends javax.swing.JFrame {
         jPanel6.setLayout(null);
 
         ListaPaquetes5.setBackground(new java.awt.Color(204, 204, 204));
+        ListaPaquetes5.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaPaquetes5ValueChanged(evt);
+            }
+        });
         jScrollPane9.setViewportView(ListaPaquetes5);
 
         jPanel6.add(jScrollPane9);
@@ -2977,6 +2984,9 @@ public class main extends javax.swing.JFrame {
         this.FieldURL5.setText(URL);
         this.FieldDuracion5.setText(duracion);
         this.FieldCosto5.setText(costo);
+        
+        String[] paquetes = sis.listarPaquetesdeEsp(espectaculo);
+        this.ListaPaquetes5.setListData(paquetes);
       }
     }//GEN-LAST:event_ListaEspectaculos5ValueChanged
 
@@ -3331,6 +3341,30 @@ public class main extends javax.swing.JFrame {
 
     private void ListaEspectaculos11ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos11ValueChanged
         // TODO add your handling code here:
+        String espectaculo = this.ListaEspectaculos11.getSelectedValue();
+        if(espectaculo != null){
+            DtEspectaculo dtEsp = sis.mostrarEspectaculo(espectaculo);
+            
+            String nombre = dtEsp.GetNombre();
+            String cant_mint = ""+dtEsp.GetCant_min_espec();;  
+            String cant_maxt =""+dtEsp.GetCant_max_espec();
+            String descripcion = dtEsp.GetDescripcion();
+            String URL = dtEsp.GetUrl();
+            String duracion = ""+dtEsp.GetDuracion();
+            String costo = ""+dtEsp.GetCosto();
+
+            this.FieldNombre5.setText(nombre);
+            this.FieldEspMin5.setText(cant_mint);
+            this.FieldEspMax5.setText(cant_maxt);
+            this.FieldDescripcion5.setText (descripcion);
+            this.FieldURL5.setText(URL);
+            this.FieldDuracion5.setText(duracion);
+            this.FieldCosto5.setText(costo);
+
+            String[] paquetes = sis.listarPaquetesdeEsp(espectaculo);
+            this.ListaPaquetes5.setListData(paquetes);
+            this.FrameConsultaEspectaculo.setVisible(true);
+        }
     }//GEN-LAST:event_ListaEspectaculos11ValueChanged
 
     private void ListaEspectaculos10ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos10ValueChanged
@@ -3378,6 +3412,32 @@ public class main extends javax.swing.JFrame {
         this.FieldFechaIni11.setText("");
         this.FieldFechaFin11.setText("");
     }//GEN-LAST:event_ButtonCancelar11ActionPerformed
+
+    private void ListaPaquetes5ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPaquetes5ValueChanged
+        // TODO add your handling code here:
+        String paquete = this.ListaPaquetes5.getSelectedValue();
+        if(paquete != null){
+            DtPaquete dtP = sis.mostrarPaquete(paquete);
+            String nombre = dtP.getNombre();
+            String descripcion = dtP.getDescripcion();
+            String descuento = ""+ dtP.getDescuento()+ "%";
+            String fecha_alta = dtP.getFecha_alta().toString();
+            String fecha_ini = dtP.getFecha_ini().toString();
+            String fecha_fin = dtP.getFecha_fin().toString();
+            
+            this.FieldNombre11.setText(nombre);
+            this.FieldDescripcion11.setText(descripcion);
+            this.FieldDescuento11.setText(descuento);
+            this.FieldFechaAlta11.setText(ft.format(dtP.getFecha_alta())); 
+            this.FieldFechaIni11.setText(ft.format(dtP.getFecha_ini()));
+            this.FieldFechaFin11.setText(ft.format(dtP.getFecha_fin()));
+            String[] espectaculos = sis.listarEspectaculosxPaq(paquete);
+            this.ListaEspectaculos11.setListData(espectaculos);
+            this.FrameConsultaPaquete.setVisible(true);
+            
+            
+        }
+    }//GEN-LAST:event_ListaPaquetes5ValueChanged
 
     /**
      * @param args the command line arguments
