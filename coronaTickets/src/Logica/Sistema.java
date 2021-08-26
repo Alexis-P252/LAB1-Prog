@@ -457,18 +457,19 @@ public class Sistema implements ISistema {
         
     }
     
-    public void AgregarFuncion(String nombre, Date fecha_hora, Date fecha_registro, String espectaculo, String[] artistas){
+    public void AgregarFuncion(String nombre, Date fecha_hora, Date fecha_registro, String espectaculo, List artistas){
+        em.getTransaction().begin();
+        Funcion f = new Funcion(nombre, fecha_registro, fecha_hora,espectaculo);
         
-        Funcion f = new Funcion(nombre, fecha_registro, fecha_hora);
-        
-        for(String object: artistas){
+        for(Object object: artistas){
             Artista art = em.find(Artista.class, object);
             f.agregarArtistaInvitado(art);
         }
         
         Espectaculo esp = em.find(Espectaculo.class, espectaculo);
         esp.agregarFuncion(f);
-        
+        em.persist(f);
+        em.getTransaction().commit();
     }
     
     public String[] Artistasinvitados(String funcion){
@@ -512,6 +513,25 @@ public class Sistema implements ISistema {
         DtFuncion dtF = f.crearDtFuncion();
 
         return dtF;
+    }
+    
+    public String[] listarArtistasmenosEspectador(String espectaculo){
+        Query q = em.createNativeQuery("SELECT DISTINCT a.nickname FROM artista a  WHERE a.nickname NOT IN (SELECT ae.artista_nickname FROM artista_espectaculo ae WHERE ae.organiza_nombre = " +"'" + espectaculo +"')");
+
+        try{
+            List lista = q.getResultList();
+            String[] res = new String[lista.size()];
+            int i=0;
+            for(Object object: lista){
+                String nombre = (String) object;
+                res[i] = nombre;
+                i++;
+            }
+
+            return res;
+        }catch(Exception e){
+            return new String[1];
+        }
     }
 }
 

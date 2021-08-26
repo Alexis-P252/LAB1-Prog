@@ -18,9 +18,12 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
  
 /**
  *
@@ -31,6 +34,7 @@ public class main extends javax.swing.JFrame {
     private ISistema sis;
     SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy '-' HH:mm:ss");
     SimpleDateFormat ft2 = new SimpleDateFormat ("dd.MM.yyyy");
+    public DefaultTableModel modelListaArtista6;
     /**
      * Creates new form main
      */
@@ -316,8 +320,6 @@ public class main extends javax.swing.JFrame {
         ListaEspectaculos06 = new javax.swing.JList<>();
         LabelSeleccioneArtista06 = new javax.swing.JLabel();
         LabelSeleccionePlataforma13 = new javax.swing.JLabel();
-        jScrollPane28 = new javax.swing.JScrollPane();
-        ListaArtista06 = new javax.swing.JList<>();
         LabelSeleccioneEspectaculo06 = new javax.swing.JLabel();
         ComboBoxMinuto06 = new javax.swing.JComboBox<>();
         LabelMes06 = new javax.swing.JLabel();
@@ -331,6 +333,8 @@ public class main extends javax.swing.JFrame {
         LabelSeleccioneFuncion06 = new javax.swing.JLabel();
         ButtonCancelar06 = new javax.swing.JButton();
         ComboBoxDia06 = new javax.swing.JComboBox<>();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        jTableArtistas6 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuUsuario = new javax.swing.JMenu();
         AltaUsuario = new javax.swing.JMenuItem();
@@ -2040,7 +2044,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         jPanel13.add(ButtonConfirmar06);
-        ButtonConfirmar06.setBounds(390, 410, 90, 30);
+        ButtonConfirmar06.setBounds(300, 420, 90, 30);
 
         ListaPlataforma06.setBackground(new java.awt.Color(204, 204, 204));
         ListaPlataforma06.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -2074,18 +2078,7 @@ public class main extends javax.swing.JFrame {
         LabelSeleccionePlataforma13.setForeground(new java.awt.Color(255, 255, 255));
         LabelSeleccionePlataforma13.setText(":");
         jPanel13.add(LabelSeleccionePlataforma13);
-        LabelSeleccionePlataforma13.setBounds(310, 310, 20, 17);
-
-        ListaArtista06.setBackground(new java.awt.Color(204, 204, 204));
-        ListaArtista06.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                ListaArtista06ValueChanged(evt);
-            }
-        });
-        jScrollPane28.setViewportView(ListaArtista06);
-
-        jPanel13.add(jScrollPane28);
-        jScrollPane28.setBounds(370, 40, 121, 140);
+        LabelSeleccionePlataforma13.setBounds(260, 310, 20, 17);
 
         LabelSeleccioneEspectaculo06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelSeleccioneEspectaculo06.setForeground(new java.awt.Color(255, 255, 255));
@@ -2101,7 +2094,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         jPanel13.add(ComboBoxMinuto06);
-        ComboBoxMinuto06.setBounds(330, 300, 50, 30);
+        ComboBoxMinuto06.setBounds(280, 300, 50, 30);
 
         LabelMes06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelMes06.setForeground(new java.awt.Color(255, 255, 255));
@@ -2160,13 +2153,13 @@ public class main extends javax.swing.JFrame {
             }
         });
         jPanel13.add(ComboBoxHora06);
-        ComboBoxHora06.setBounds(250, 300, 50, 30);
+        ComboBoxHora06.setBounds(200, 300, 50, 30);
 
         LabelSeleccioneFuncion06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelSeleccioneFuncion06.setForeground(new java.awt.Color(255, 255, 255));
         LabelSeleccioneFuncion06.setText("Hora de Función:");
         jPanel13.add(LabelSeleccioneFuncion06);
-        LabelSeleccioneFuncion06.setBounds(230, 270, 190, 17);
+        LabelSeleccioneFuncion06.setBounds(200, 270, 190, 17);
 
         ButtonCancelar06.setBackground(new java.awt.Color(204, 204, 204));
         ButtonCancelar06.setText("Cancelar");
@@ -2176,7 +2169,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         jPanel13.add(ButtonCancelar06);
-        ButtonCancelar06.setBounds(270, 410, 90, 30);
+        ButtonCancelar06.setBounds(200, 420, 90, 30);
 
         ComboBoxDia06.setBackground(new java.awt.Color(204, 204, 204));
         ComboBoxDia06.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
@@ -2187,6 +2180,31 @@ public class main extends javax.swing.JFrame {
         });
         jPanel13.add(ComboBoxDia06);
         ComboBoxDia06.setBounds(110, 300, 70, 30);
+
+        jTableArtistas6.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Artista", ""
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane16.setViewportView(jTableArtistas6);
+        if (jTableArtistas6.getColumnModel().getColumnCount() > 0) {
+            jTableArtistas6.getColumnModel().getColumn(0).setResizable(false);
+            jTableArtistas6.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jPanel13.add(jScrollPane16);
+        jScrollPane16.setBounds(370, 40, 170, 280);
 
         jPanel12.add(jPanel13);
         jPanel13.setBounds(0, 0, 570, 540);
@@ -2263,6 +2281,11 @@ public class main extends javax.swing.JFrame {
         jMenuBar1.add(menuEspectaculo);
 
         menuFuncion.setText("Funcion");
+        menuFuncion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFuncionActionPerformed(evt);
+            }
+        });
 
         AltaFuncion.setText("Alta de Funcion de Espectaculo");
         AltaFuncion.addActionListener(new java.awt.event.ActionListener() {
@@ -2448,26 +2471,27 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_ConsultaEspectaculoActionPerformed
 
     private void AltaFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltaFuncionActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:       
         ocultarVentanas();
         
+        int filas = jTableArtistas6.getRowCount();
+        for(int i = filas-1;i >= 0;i--){
+            modelListaArtista6.removeRow(i);
+        }
+        
         Date fecha_act = new Date();
-
         int anio = fecha_act.getYear();
         anio = anio+1900;
-
-        this.ComboBoxAnio06.removeAllItems(); 
-      
+        this.ComboBoxAnio06.removeAllItems();      
         for(int i=0;i<10;i++){
             this.ComboBoxAnio06.addItem(""+ anio);
             anio++;
-        }
-        
+        }        
         this.FrameAltaFuncion06.setVisible(true);
         String[] listaPlataforma = sis.listarPlataformas();
         this.ListaPlataforma06.setListData(listaPlataforma);
-        String[] listaArtistas = sis.listarArtistas();
-        this.ListaArtista06.setListData(listaArtistas);
+        
+        
     }//GEN-LAST:event_AltaFuncionActionPerformed
 
     private void ConsultaFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaFuncionActionPerformed
@@ -3698,6 +3722,7 @@ public class main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Seleccione un Espectaculo","Alta Funcion",JOptionPane.ERROR_MESSAGE);
             return;
         }
+        String espectaculo = this.ListaEspectaculos06.getSelectedValue();
         // VERIFICAMOS QUE EL CAMPO NOMBRE NO SE HAYA INTRODUCIDO NINGUN CARACTER, EN CASO DE QUE ASI SEA, SE DA UN MENSAJE DE ERROR.
         if(nombre.isEmpty()){
             JOptionPane.showMessageDialog(this,"Complete el campo nombre","Alta Funcion",JOptionPane.ERROR_MESSAGE);
@@ -3716,8 +3741,23 @@ public class main extends javax.swing.JFrame {
             return;
         }
         // OBTENEMOS LOS NICKNAMES DE LOS ARTISTAS INVITADOS SI ES QUE HAY.
-        
-
+        String artista;
+        boolean check;
+        List artistasSeleccionados = new ArrayList();
+        for(int i = 0;i<jTableArtistas6.getRowCount();i++){
+            artista = (String)jTableArtistas6.getValueAt(i, 0);
+            if(jTableArtistas6.getValueAt(i, 1) == null){
+                check = false;
+            }else{
+                check = (boolean)jTableArtistas6.getValueAt(i, 1);
+            }
+            if(check){
+                artistasSeleccionados.add(artista);
+            }
+        }
+        //LLAMAMOS A LA FUNCION AGREGARFUNCION PARA CREAR LA FUNCION
+        sis.AgregarFuncion(nombre, fechaHoy, fecha, espectaculo, artistasSeleccionados);
+        JOptionPane.showMessageDialog(this,"Funcion agregada correctamente","Alta Funcion",JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButtonConfirmar06ActionPerformed
 
     private void ListaPlataforma06ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma06ValueChanged
@@ -3729,11 +3769,22 @@ public class main extends javax.swing.JFrame {
 
     private void ListaEspectaculos06ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos06ValueChanged
         // TODO add your handling code here:
+        modelListaArtista6 = (DefaultTableModel)jTableArtistas6.getModel();
+        String nomEspectaculo = ListaEspectaculos06.getSelectedValue();
+        String ArtistasDisponibles[] = sis.listarArtistasmenosEspectador(nomEspectaculo);
+        String row[] = new String[2];
+        
+        int filas = jTableArtistas6.getRowCount();
+        for(int i = filas-1;i >= 0;i--){
+            modelListaArtista6.removeRow(i);
+        }
+        
+        for(int i = 0;i < ArtistasDisponibles.length;i++){
+            row[0] = ArtistasDisponibles[i];
+            modelListaArtista6.addRow(row);
+       }
+        
     }//GEN-LAST:event_ListaEspectaculos06ValueChanged
-
-    private void ListaArtista06ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaArtista06ValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ListaArtista06ValueChanged
 
     private void ComboBoxMinuto06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxMinuto06ActionPerformed
         // TODO add your handling code here:
@@ -3798,6 +3849,10 @@ public class main extends javax.swing.JFrame {
     private void ComboBoxDia06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxDia06ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboBoxDia06ActionPerformed
+
+    private void menuFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuFuncionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3866,7 +3921,7 @@ public class main extends javax.swing.JFrame {
         this.ListaEspectaculos10.setModel(listmodel);
         this.ListaPlataforma06.setModel(listmodel);
         this.ListaEspectaculos06.setModel(listmodel);
-        this.ListaArtista06.setModel(listmodel);
+        
       
     }
     
@@ -4087,7 +4142,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelURL6;
     private javax.swing.JLabel LabelURL8;
     private javax.swing.JLabel LabelURL9;
-    private javax.swing.JList<String> ListaArtista06;
     private javax.swing.JList<String> ListaArtista4;
     private javax.swing.JList<String> ListaEspectaculos06;
     private javax.swing.JList<String> ListaEspectaculos10;
@@ -4134,6 +4188,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
+    private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane21;
     private javax.swing.JScrollPane jScrollPane22;
@@ -4142,7 +4197,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane25;
     private javax.swing.JScrollPane jScrollPane26;
     private javax.swing.JScrollPane jScrollPane27;
-    private javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -4150,6 +4204,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTable jTableArtistas6;
     private javax.swing.JMenu menuEspectaculo;
     private javax.swing.JMenu menuFuncion;
     private javax.swing.JMenu menuPaquete;

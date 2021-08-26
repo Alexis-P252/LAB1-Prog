@@ -5,6 +5,7 @@
  */
 package Logica;
 import java.util.Date;
+import java.util.List;
 /**
  *
  * @author User
@@ -34,10 +35,11 @@ public interface ISistema {
     public abstract void AddEspectaculoaPaquete(String paquete, String espectaculo);
     public abstract String[] listarEspectaculosxPaq(String paquete);
     public abstract String[] listarPaquetesdeEsp(String espectaculo);
-    public abstract void AgregarFuncion(String nombre, Date fecha_hora, Date fecha_registro, String espectaculo, String[] artistas);
+    public abstract void AgregarFuncion(String nombre, Date fecha_hora, Date fecha_registro, String espectaculo, List artistas);
     public abstract String[] Artistasinvitados(String funcion);
     public abstract boolean ExisteFuncion(String funcion);
     public abstract DtFuncion MostrarFuncion (String funcion);
+    public String[] listarArtistasmenosEspectador(String espectaculo);
 }
 
 

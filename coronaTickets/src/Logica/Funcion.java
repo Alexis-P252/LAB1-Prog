@@ -24,6 +24,7 @@ public class Funcion {
     @Id private String nombre;
     private Date fecha_registro;
     private Date fecha_hora;
+    private String espectaculo;
     //private Map Registros;
     @OneToMany
     private Map<String,Artista> Artistas;
@@ -32,14 +33,15 @@ public class Funcion {
 /// Constructores
     public Funcion() {
     }
-    public Funcion(String nombre, Date fecha_registro, Date fecha_hora) {
+    public Funcion(String nombre, Date fecha_registro, Date fecha_hora,String espectaculo) {
         this.nombre = nombre;
         this.fecha_registro = fecha_registro;
         this.fecha_hora = fecha_hora;
         //this.Registros = new HashMap();
         this.Artistas = new HashMap();
+        this.espectaculo = espectaculo;
     }      
-
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -58,6 +60,10 @@ public class Funcion {
 
     public Date getFecha_registro() {
         return fecha_registro;
+    }
+    
+    public String getEspectaculo(){
+        return this.espectaculo;
     }
 
     public Date getFecha_hora() {
