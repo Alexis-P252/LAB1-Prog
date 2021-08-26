@@ -41,9 +41,7 @@ public class main extends javax.swing.JFrame {
         //Inicialización
         SistemaFactory fabrica = SistemaFactory.getInstance();
         sis = fabrica.getISistema();
-        //sis.PreCarga();
-        
-        
+     
         this.FrameAltaUsuario.setVisible(false);
         this.FrameConsultarUsuario.setVisible(false);
         this.FrameModificarUsuario.setVisible(false);
@@ -52,23 +50,19 @@ public class main extends javax.swing.JFrame {
         this.FrameAltaPaquete.setVisible(false);
         this.FrameConsultaPaquete.setVisible(false);
         this.FrameAddEspectaculo.setVisible(false);
+        this.FrameAltaFuncion06.setVisible(false);
    
-        
-       
-        //
+      
         GroupTipoUsuario.add(EspectadorButton);
         GroupTipoUsuario.add(ArtistaButton);
         
-        
-        
+   
         try{
             Image img=ImageIO.read(new File("ticket.png"));
             this.setIconImage(img);
         } catch(Exception e){
             System.out.println(e);
-        }
-        
-        
+        } 
     }
 
     /**
@@ -310,6 +304,33 @@ public class main extends javax.swing.JFrame {
         LabelSeleccionePlataforma12 = new javax.swing.JLabel();
         ButtonConfirmar10 = new javax.swing.JButton();
         ButtonCancelar10 = new javax.swing.JButton();
+        FrameAltaFuncion06 = new javax.swing.JInternalFrame();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        LabelNombre06 = new javax.swing.JLabel();
+        FieldNombre06 = new javax.swing.JTextField();
+        ButtonConfirmar06 = new javax.swing.JButton();
+        jScrollPane26 = new javax.swing.JScrollPane();
+        ListaPlataforma06 = new javax.swing.JList<>();
+        jScrollPane27 = new javax.swing.JScrollPane();
+        ListaEspectaculos06 = new javax.swing.JList<>();
+        LabelSeleccioneArtista06 = new javax.swing.JLabel();
+        LabelSeleccionePlataforma13 = new javax.swing.JLabel();
+        jScrollPane28 = new javax.swing.JScrollPane();
+        ListaArtista06 = new javax.swing.JList<>();
+        LabelSeleccioneEspectaculo06 = new javax.swing.JLabel();
+        ComboBoxMinuto06 = new javax.swing.JComboBox<>();
+        LabelMes06 = new javax.swing.JLabel();
+        ComboBoxAnio06 = new javax.swing.JComboBox<>();
+        ComboBoxMes06 = new javax.swing.JComboBox<>();
+        LabelDia06 = new javax.swing.JLabel();
+        LabelAnio06 = new javax.swing.JLabel();
+        LabelSeleccionePlataforma06 = new javax.swing.JLabel();
+        LabelSeleccioneDia06 = new javax.swing.JLabel();
+        ComboBoxHora06 = new javax.swing.JComboBox<>();
+        LabelSeleccioneFuncion06 = new javax.swing.JLabel();
+        ButtonCancelar06 = new javax.swing.JButton();
+        ComboBoxDia06 = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuUsuario = new javax.swing.JMenu();
         AltaUsuario = new javax.swing.JMenuItem();
@@ -1986,6 +2007,193 @@ public class main extends javax.swing.JFrame {
         FrameAddEspectaculo.getContentPane().add(jPanel11);
         jPanel11.setBounds(0, 0, 460, 520);
 
+        FrameAltaFuncion06.setTitle("Alta de Función de Espectáculo");
+        FrameAltaFuncion06.setVisible(true);
+        FrameAltaFuncion06.getContentPane().setLayout(null);
+
+        jPanel12.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel12.setLayout(null);
+
+        jPanel13.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel13.setLayout(null);
+
+        LabelNombre06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelNombre06.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNombre06.setText("Nombre");
+        jPanel13.add(LabelNombre06);
+        LabelNombre06.setBounds(40, 220, 70, 15);
+
+        FieldNombre06.setBackground(new java.awt.Color(204, 204, 204));
+        FieldNombre06.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldNombre06ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(FieldNombre06);
+        FieldNombre06.setBounds(110, 210, 160, 30);
+
+        ButtonConfirmar06.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonConfirmar06.setText("Confirmar");
+        ButtonConfirmar06.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonConfirmar06ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(ButtonConfirmar06);
+        ButtonConfirmar06.setBounds(390, 410, 90, 30);
+
+        ListaPlataforma06.setBackground(new java.awt.Color(204, 204, 204));
+        ListaPlataforma06.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaPlataforma06ValueChanged(evt);
+            }
+        });
+        jScrollPane26.setViewportView(ListaPlataforma06);
+
+        jPanel13.add(jScrollPane26);
+        jScrollPane26.setBounds(30, 40, 121, 140);
+
+        ListaEspectaculos06.setBackground(new java.awt.Color(204, 204, 204));
+        ListaEspectaculos06.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaEspectaculos06ValueChanged(evt);
+            }
+        });
+        jScrollPane27.setViewportView(ListaEspectaculos06);
+
+        jPanel13.add(jScrollPane27);
+        jScrollPane27.setBounds(200, 40, 121, 140);
+
+        LabelSeleccioneArtista06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccioneArtista06.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccioneArtista06.setText("Seleccione Artistas invitados");
+        jPanel13.add(LabelSeleccioneArtista06);
+        LabelSeleccioneArtista06.setBounds(370, 17, 190, 20);
+
+        LabelSeleccionePlataforma13.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        LabelSeleccionePlataforma13.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccionePlataforma13.setText(":");
+        jPanel13.add(LabelSeleccionePlataforma13);
+        LabelSeleccionePlataforma13.setBounds(310, 310, 20, 17);
+
+        ListaArtista06.setBackground(new java.awt.Color(204, 204, 204));
+        ListaArtista06.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaArtista06ValueChanged(evt);
+            }
+        });
+        jScrollPane28.setViewportView(ListaArtista06);
+
+        jPanel13.add(jScrollPane28);
+        jScrollPane28.setBounds(370, 40, 121, 140);
+
+        LabelSeleccioneEspectaculo06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccioneEspectaculo06.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccioneEspectaculo06.setText("Seleccione Espectaculo");
+        jPanel13.add(LabelSeleccioneEspectaculo06);
+        LabelSeleccioneEspectaculo06.setBounds(200, 20, 190, 17);
+
+        ComboBoxMinuto06.setBackground(new java.awt.Color(204, 204, 204));
+        ComboBoxMinuto06.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "" }));
+        ComboBoxMinuto06.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxMinuto06ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(ComboBoxMinuto06);
+        ComboBoxMinuto06.setBounds(330, 300, 50, 30);
+
+        LabelMes06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelMes06.setForeground(new java.awt.Color(255, 255, 255));
+        LabelMes06.setText("Mes");
+        jPanel13.add(LabelMes06);
+        LabelMes06.setBounds(40, 340, 118, 17);
+
+        ComboBoxAnio06.setBackground(new java.awt.Color(204, 204, 204));
+        ComboBoxAnio06.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxAnio06ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(ComboBoxAnio06);
+        ComboBoxAnio06.setBounds(110, 380, 70, 30);
+
+        ComboBoxMes06.setBackground(new java.awt.Color(204, 204, 204));
+        ComboBoxMes06.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        ComboBoxMes06.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxMes06ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(ComboBoxMes06);
+        ComboBoxMes06.setBounds(110, 340, 70, 30);
+
+        LabelDia06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelDia06.setForeground(new java.awt.Color(255, 255, 255));
+        LabelDia06.setText("Dia");
+        jPanel13.add(LabelDia06);
+        LabelDia06.setBounds(40, 300, 60, 20);
+
+        LabelAnio06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelAnio06.setForeground(new java.awt.Color(255, 255, 255));
+        LabelAnio06.setText("Año");
+        jPanel13.add(LabelAnio06);
+        LabelAnio06.setBounds(40, 380, 118, 17);
+
+        LabelSeleccionePlataforma06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccionePlataforma06.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccionePlataforma06.setText("Seleccione Plataforma");
+        jPanel13.add(LabelSeleccionePlataforma06);
+        LabelSeleccionePlataforma06.setBounds(30, 20, 190, 17);
+
+        LabelSeleccioneDia06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccioneDia06.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccioneDia06.setText("Día de Funcion:");
+        jPanel13.add(LabelSeleccioneDia06);
+        LabelSeleccioneDia06.setBounds(40, 270, 190, 17);
+
+        ComboBoxHora06.setBackground(new java.awt.Color(204, 204, 204));
+        ComboBoxHora06.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
+        ComboBoxHora06.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxHora06ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(ComboBoxHora06);
+        ComboBoxHora06.setBounds(250, 300, 50, 30);
+
+        LabelSeleccioneFuncion06.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccioneFuncion06.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccioneFuncion06.setText("Hora de Función:");
+        jPanel13.add(LabelSeleccioneFuncion06);
+        LabelSeleccioneFuncion06.setBounds(230, 270, 190, 17);
+
+        ButtonCancelar06.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonCancelar06.setText("Cancelar");
+        ButtonCancelar06.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelar06ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(ButtonCancelar06);
+        ButtonCancelar06.setBounds(270, 410, 90, 30);
+
+        ComboBoxDia06.setBackground(new java.awt.Color(204, 204, 204));
+        ComboBoxDia06.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        ComboBoxDia06.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxDia06ActionPerformed(evt);
+            }
+        });
+        jPanel13.add(ComboBoxDia06);
+        ComboBoxDia06.setBounds(110, 300, 70, 30);
+
+        jPanel12.add(jPanel13);
+        jPanel13.setBounds(0, 0, 570, 540);
+
+        FrameAltaFuncion06.getContentPane().add(jPanel12);
+        jPanel12.setBounds(0, 0, 680, 540);
+
         jMenuBar1.setName("CoronaTickets"); // NOI18N
 
         menuUsuario.setText("Usuario");
@@ -2123,27 +2331,35 @@ public class main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FrameAltaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(FrameAltaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(52, 52, 52)
                                 .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
+                                .addGap(18, 18, 18)
                                 .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(FrameAltaFuncion06, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FrameAddEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2151,22 +2367,26 @@ public class main extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(FrameAltaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(FrameAltaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FrameAddEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FrameAddEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(257, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(FrameAltaFuncion06, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(298, Short.MAX_VALUE))
         );
 
         try {
@@ -2229,6 +2449,25 @@ public class main extends javax.swing.JFrame {
 
     private void AltaFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AltaFuncionActionPerformed
         // TODO add your handling code here:
+        ocultarVentanas();
+        
+        Date fecha_act = new Date();
+
+        int anio = fecha_act.getYear();
+        anio = anio+1900;
+
+        this.ComboBoxAnio06.removeAllItems(); 
+      
+        for(int i=0;i<10;i++){
+            this.ComboBoxAnio06.addItem(""+ anio);
+            anio++;
+        }
+        
+        this.FrameAltaFuncion06.setVisible(true);
+        String[] listaPlataforma = sis.listarPlataformas();
+        this.ListaPlataforma06.setListData(listaPlataforma);
+        String[] listaArtistas = sis.listarArtistas();
+        this.ListaArtista06.setListData(listaArtistas);
     }//GEN-LAST:event_AltaFuncionActionPerformed
 
     private void ConsultaFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaFuncionActionPerformed
@@ -3440,6 +3679,126 @@ public class main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ListaPaquetes5ValueChanged
 
+    private void FieldNombre06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldNombre06ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldNombre06ActionPerformed
+
+    private void ButtonConfirmar06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmar06ActionPerformed
+        // TODO add your handling code here:
+        String nombre = this.FieldNombre06.getText();
+        int dia = this.ComboBoxDia06.getSelectedIndex() + 1;
+        int mes = this.ComboBoxMes06.getSelectedIndex()+1;
+        String anios = (String) this.ComboBoxAnio06.getSelectedItem();
+        int anio = Integer.parseInt(anios);
+        int hora = this.ComboBoxHora06.getSelectedIndex();
+        int minuto = this.ComboBoxMinuto06.getSelectedIndex();
+
+        //CONTROLAR SI SELECCIONARON ESPECTACULO
+        if(this.ListaEspectaculos06.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this,"Seleccione un Espectaculo","Alta Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // VERIFICAMOS QUE EL CAMPO NOMBRE NO SE HAYA INTRODUCIDO NINGUN CARACTER, EN CASO DE QUE ASI SEA, SE DA UN MENSAJE DE ERROR.
+        if(nombre.isEmpty()){
+            JOptionPane.showMessageDialog(this,"Complete el campo nombre","Alta Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //AQUI CONTROLAMOS QUE LA FECHA INGRESADA SEA MAYOR A LA ACTUAL
+        Date fecha = new Date();//(int year, int month, int date, int hrs, int min)
+        Date fechaHoy = new Date (anio-1900,mes-1,dia,hora,minuto,0);
+        if(fechaHoy.before(fecha) || fechaHoy.equals(fecha)){
+            JOptionPane.showMessageDialog(this,"La fecha de la funcion debe ser mayor que la actual","Alta Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // VERIFICAMOS QUE EL NOMBRE NO PERTENEZCA YA A OTRA FUNCION
+        if(sis.ExisteFuncion(nombre) == true){
+            JOptionPane.showMessageDialog(this,"El nombre introducido ya pertenece a otra Funcion","Alta Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // OBTENEMOS LOS NICKNAMES DE LOS ARTISTAS INVITADOS SI ES QUE HAY.
+        
+
+    }//GEN-LAST:event_ButtonConfirmar06ActionPerformed
+
+    private void ListaPlataforma06ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma06ValueChanged
+        // TODO add your handling code here:
+        String plataforma = this.ListaPlataforma06.getSelectedValue();
+        String espectaculos[] = sis.listarEspectaculos(plataforma);
+        this.ListaEspectaculos06.setListData(espectaculos);
+    }//GEN-LAST:event_ListaPlataforma06ValueChanged
+
+    private void ListaEspectaculos06ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos06ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaEspectaculos06ValueChanged
+
+    private void ListaArtista06ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaArtista06ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaArtista06ValueChanged
+
+    private void ComboBoxMinuto06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxMinuto06ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxMinuto06ActionPerformed
+
+    private void ComboBoxAnio06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxAnio06ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxAnio06ActionPerformed
+
+    private void ComboBoxMes06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxMes06ActionPerformed
+        //SI SELECCIONA FEBRERO
+        if(this.ComboBoxMes06.getSelectedItem() == "2" ){
+            if(this.ComboBoxDia06.getItemCount() == 30){
+                this.ComboBoxDia06.removeItem("30");
+                this.ComboBoxDia06.removeItem("29");
+            }else if(this.ComboBoxDia06.getItemCount() == 31){
+                this.ComboBoxDia06.removeItem("31");
+                this.ComboBoxDia06.removeItem("30");
+                this.ComboBoxDia06.removeItem("29");
+            }
+        }
+        //SI SELECCIONA UN MES QUE TIENE 30 DIAS
+        if(this.ComboBoxMes06.getSelectedItem() == "4" ||  this.ComboBoxMes06.getSelectedItem() == "6" ||
+            this.ComboBoxMes06.getSelectedItem() == "9" || this.ComboBoxMes06.getSelectedItem() == "11"){
+
+            if(this.ComboBoxDia06.getItemCount() == 28){
+                this.ComboBoxDia06.addItem("29");
+                this.ComboBoxDia06.addItem("30");
+            }else if(this.ComboBoxDia06.getItemCount() == 31){
+                this.ComboBoxDia06.removeItem("31");
+            }
+        }
+
+        // SI SELECCIONA UN MES QUE TIENE 31 DIAS
+        //Enero, Marzo, Mayo, Julio, Agosto, Octubre y Diciembre.
+        if(this.ComboBoxMes06.getSelectedItem() == "1" || this.ComboBoxMes06.getSelectedItem() == "3" || this.ComboBoxMes06.getSelectedItem() == "5" ||
+            this.ComboBoxMes06.getSelectedItem() == "7" || this.ComboBoxMes06.getSelectedItem() == "8" || this.ComboBoxMes06.getSelectedItem() == "10" ||
+            this.ComboBoxMes06.getSelectedItem() == "12"){
+
+            if(this.ComboBoxDia06.getItemCount() == 28){
+                this.ComboBoxDia06.addItem("29");
+                this.ComboBoxDia06.addItem("30");
+                this.ComboBoxDia06.addItem("31");
+            }else if(this.ComboBoxDia06.getItemCount() == 30){
+                this.ComboBoxDia06.addItem("31");
+            }
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxMes06ActionPerformed
+
+    private void ComboBoxHora06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxHora06ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxHora06ActionPerformed
+
+    private void ButtonCancelar06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar06ActionPerformed
+        // TODO add your handling code here:
+        this.FrameAltaFuncion06.setVisible(false);
+        this.FieldNombre06.setText("");
+    }//GEN-LAST:event_ButtonCancelar06ActionPerformed
+
+    private void ComboBoxDia06ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxDia06ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxDia06ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3486,6 +3845,7 @@ public class main extends javax.swing.JFrame {
         this.FrameAltaPaquete.setVisible(false);
         this.FrameConsultaPaquete.setVisible(false);
         this.FrameAddEspectaculo.setVisible(false);
+        this.FrameAltaFuncion06.setVisible(false);
         
         this.ListaUsuarios2.setModel(listmodel);
         this.ListaOrganizo2.setModel(listmodel);
@@ -3504,6 +3864,9 @@ public class main extends javax.swing.JFrame {
         this.ListaPlataforma10.setModel(listmodel);
         this.ListaPaquetes10.setModel(listmodel);
         this.ListaEspectaculos10.setModel(listmodel);
+        this.ListaPlataforma06.setModel(listmodel);
+        this.ListaEspectaculos06.setModel(listmodel);
+        this.ListaArtista06.setModel(listmodel);
       
     }
     
@@ -3533,6 +3896,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton BotonConfirmar9;
     private javax.swing.JButton BotonSalir2;
     private javax.swing.JButton ButtonCancelar;
+    private javax.swing.JButton ButtonCancelar06;
     private javax.swing.JButton ButtonCancelar10;
     private javax.swing.JButton ButtonCancelar11;
     private javax.swing.JButton ButtonCancelar4;
@@ -3540,20 +3904,26 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCancelar6;
     private javax.swing.JButton ButtonCancelar7;
     private javax.swing.JButton ButtonConfirmar;
+    private javax.swing.JButton ButtonConfirmar06;
     private javax.swing.JButton ButtonConfirmar10;
     private javax.swing.JButton ButtonConfirmar4;
     private javax.swing.JComboBox<String> ComboBoxAnio;
+    private javax.swing.JComboBox<String> ComboBoxAnio06;
     private javax.swing.JComboBox<String> ComboBoxAnio3;
     private javax.swing.JComboBox<String> ComboBoxAnio8;
     private javax.swing.JComboBox<String> ComboBoxAnio_fin8;
     private javax.swing.JComboBox<String> ComboBoxDia;
+    private javax.swing.JComboBox<String> ComboBoxDia06;
     private javax.swing.JComboBox<String> ComboBoxDia3;
     private javax.swing.JComboBox<String> ComboBoxDia8;
     private javax.swing.JComboBox<String> ComboBoxDia_fin8;
+    private javax.swing.JComboBox<String> ComboBoxHora06;
     private javax.swing.JComboBox<String> ComboBoxMes;
+    private javax.swing.JComboBox<String> ComboBoxMes06;
     private javax.swing.JComboBox<String> ComboBoxMes3;
     private javax.swing.JComboBox<String> ComboBoxMes8;
     private javax.swing.JComboBox<String> ComboBoxMes_fin8;
+    private javax.swing.JComboBox<String> ComboBoxMinuto06;
     private javax.swing.JMenuItem ConsultaEspectaculo;
     private javax.swing.JMenuItem ConsultaFuncion;
     private javax.swing.JMenuItem ConsultaPaquete;
@@ -3599,6 +3969,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldNickname;
     private javax.swing.JTextField FieldNickname2;
     private javax.swing.JTextField FieldNombre;
+    private javax.swing.JTextField FieldNombre06;
     private javax.swing.JTextField FieldNombre11;
     private javax.swing.JTextField FieldNombre2;
     private javax.swing.JTextField FieldNombre3;
@@ -3612,6 +3983,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldURL6;
     private javax.swing.JInternalFrame FrameAddEspectaculo;
     private javax.swing.JInternalFrame FrameAltaEspectaculo;
+    private javax.swing.JInternalFrame FrameAltaFuncion06;
     private javax.swing.JInternalFrame FrameAltaPaquete;
     private javax.swing.JInternalFrame FrameAltaUsuario;
     private javax.swing.JInternalFrame FrameConsultaEspectaculo;
@@ -3620,6 +3992,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JInternalFrame FrameModificarUsuario;
     private javax.swing.ButtonGroup GroupTipoUsuario;
     private javax.swing.JLabel LabelAnio;
+    private javax.swing.JLabel LabelAnio06;
     private javax.swing.JLabel LabelAnio3;
     private javax.swing.JLabel LabelAnio8;
     private javax.swing.JLabel LabelAnio_fin8;
@@ -3642,6 +4015,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelDescripcion8;
     private javax.swing.JLabel LabelDescuento8;
     private javax.swing.JLabel LabelDia;
+    private javax.swing.JLabel LabelDia06;
     private javax.swing.JLabel LabelDia3;
     private javax.swing.JLabel LabelDia8;
     private javax.swing.JLabel LabelDia_fin8;
@@ -3668,6 +4042,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelLink2;
     private javax.swing.JLabel LabelLink3;
     private javax.swing.JLabel LabelMes;
+    private javax.swing.JLabel LabelMes06;
     private javax.swing.JLabel LabelMes3;
     private javax.swing.JLabel LabelMes8;
     private javax.swing.JLabel LabelMes_fin8;
@@ -3675,6 +4050,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelNickname2;
     private javax.swing.JLabel LabelNickname3;
     private javax.swing.JLabel LabelNombre;
+    private javax.swing.JLabel LabelNombre06;
     private javax.swing.JLabel LabelNombre2;
     private javax.swing.JLabel LabelNombre3;
     private javax.swing.JLabel LabelNombre4;
@@ -3682,7 +4058,10 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelNombre7;
     private javax.swing.JLabel LabelNombre8;
     private javax.swing.JLabel LabelSeleccionarUsuario3;
+    private javax.swing.JLabel LabelSeleccioneArtista06;
     private javax.swing.JLabel LabelSeleccioneArtista4;
+    private javax.swing.JLabel LabelSeleccioneDia06;
+    private javax.swing.JLabel LabelSeleccioneEspectaculo06;
     private javax.swing.JLabel LabelSeleccioneEspectaculo10;
     private javax.swing.JLabel LabelSeleccioneEspectaculo15;
     private javax.swing.JLabel LabelSeleccioneEspectaculo5;
@@ -3690,9 +4069,12 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelSeleccioneEspectaculo7;
     private javax.swing.JLabel LabelSeleccioneEspectaculo8;
     private javax.swing.JLabel LabelSeleccioneEspectaculo9;
+    private javax.swing.JLabel LabelSeleccioneFuncion06;
+    private javax.swing.JLabel LabelSeleccionePlataforma06;
     private javax.swing.JLabel LabelSeleccionePlataforma10;
     private javax.swing.JLabel LabelSeleccionePlataforma11;
     private javax.swing.JLabel LabelSeleccionePlataforma12;
+    private javax.swing.JLabel LabelSeleccionePlataforma13;
     private javax.swing.JLabel LabelSeleccionePlataforma5;
     private javax.swing.JLabel LabelSeleccionePlataforma6;
     private javax.swing.JLabel LabelSeleccionePlataforma7;
@@ -3705,7 +4087,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelURL6;
     private javax.swing.JLabel LabelURL8;
     private javax.swing.JLabel LabelURL9;
+    private javax.swing.JList<String> ListaArtista06;
     private javax.swing.JList<String> ListaArtista4;
+    private javax.swing.JList<String> ListaEspectaculos06;
     private javax.swing.JList<String> ListaEspectaculos10;
     private javax.swing.JList<String> ListaEspectaculos11;
     private javax.swing.JList<String> ListaEspectaculos5;
@@ -3718,6 +4102,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JList<String> ListaPaquetes11;
     private javax.swing.JList<String> ListaPaquetes5;
     private javax.swing.JList<String> ListaPaquetes6;
+    private javax.swing.JList<String> ListaPlataforma06;
     private javax.swing.JList<String> ListaPlataforma10;
     private javax.swing.JList<String> ListaPlataforma4;
     private javax.swing.JList<String> ListaPlataforma5;
@@ -3732,6 +4117,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -3753,6 +4140,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane23;
     private javax.swing.JScrollPane jScrollPane24;
     private javax.swing.JScrollPane jScrollPane25;
+    private javax.swing.JScrollPane jScrollPane26;
+    private javax.swing.JScrollPane jScrollPane27;
+    private javax.swing.JScrollPane jScrollPane28;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
