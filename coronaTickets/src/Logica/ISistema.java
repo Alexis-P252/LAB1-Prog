@@ -34,14 +34,13 @@ public interface ISistema {
     public abstract void AddEspectaculoaPaquete(String paquete, String espectaculo);
     public abstract String[] listarEspectaculosxPaq(String paquete);
     public abstract String[] listarPaquetesdeEsp(String espectaculo);
+    public abstract void AgregarFuncion(String nombre, Date fecha_hora, Date fecha_registro, String espectaculo, String[] artistas);
+    public abstract String[] Artistasinvitados(String funcion);
+    public abstract boolean ExisteFuncion(String funcion);
+    public abstract DtFuncion MostrarFuncion (String funcion);
 }
 
 
 
-/* COSAS PARA HACER
+/* COSAS PARA HACER*/
 
-    - CONTROLAR FECHAS EN ALTA DE PAQUETE DE ESPECTACULO
-    - ENCONTRADO BUG EN MODIFICAR DATOS DE USUARIO. AL CREAR UN ESPECTADOR NUEVO (NO UNO DE LA PRECARGA) Y LUEGO IR A LA PANTALLA DE MODIFICAR SI SE PULSA SOBRE UN ARTISTA 
-        Y LUEGO SOBRE EL ESPECTADOR NUEVO, LOS CAMPOS BIOGRAFIA DESCRIPCION Y LINK NO DESAPARECERAN, PUDIENDO EL USUARIO INGRESAR DATOS Y DARLE CONFIRMAR, LOGRANDO QUE SE ROMPA.
-*/
-  

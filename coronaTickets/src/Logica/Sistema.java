@@ -456,5 +456,62 @@ public class Sistema implements ISistema {
         }
         
     }
+    
+    public void AgregarFuncion(String nombre, Date fecha_hora, Date fecha_registro, String espectaculo, String[] artistas){
+        
+        Funcion f = new Funcion(nombre, fecha_registro, fecha_hora);
+        
+        for(String object: artistas){
+            Artista art = em.find(Artista.class, object);
+            f.agregarArtistaInvitado(art);
+        }
+        
+        Espectaculo esp = em.find(Espectaculo.class, espectaculo);
+        esp.agregarFuncion(f);
+        
+    }
+    
+    public String[] Artistasinvitados(String funcion){
+        Query q = em.createQuery("SELECT fa FROM Funcion.Artistas fa WHERE Funcion.nombre = :funcion");
+        q.setParameter("funcion", funcion);
+        
+        try{
+            List artistas = q.getResultList();
+            String[] res = new String[artistas.size()];
+            int i=0;
+            
+            for(Object object: artistas){
+                Artista art = (Artista) object;
+                res[i] = art.GetNickname();
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e){
+            return new String[1];
+        }
+        
+    }
+    
+    public boolean ExisteFuncion(String funcion){
+        if(em.find(Funcion.class, funcion) == null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+
+    public DtFuncion MostrarFuncion (String funcion){
+    Query q = em.createQuery("SELECT f FROM Funcion f WHERE f.nombre = :funcion");
+        q.setParameter("funcion", funcion);
+
+        Funcion f= (Funcion) q.getSingleResult();
+
+        DtFuncion dtF = f.crearDtFuncion();
+
+        return dtF;
+    }
 }
 

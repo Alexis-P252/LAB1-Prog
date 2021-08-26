@@ -6,7 +6,10 @@
 package Logica;
 import Logica.Usuario;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -15,9 +18,13 @@ import javax.persistence.Entity;
 @Entity
 public class Espectador extends Usuario {
     
+    @OneToMany
+    private Map<String,Registro> registros;
+    
     public Espectador(String nombre, String apellido, String email, String nickname, Date fecha_nac){
     
         super(nombre, apellido, email, nickname, fecha_nac);
+        this.registros = new HashMap();
     }
     
     public Espectador(){}

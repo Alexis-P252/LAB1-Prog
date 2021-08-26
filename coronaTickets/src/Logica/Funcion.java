@@ -66,7 +66,11 @@ public class Funcion {
     public DtFuncion crearDtFuncion (){
         DtFuncion dt = new DtFuncion (this.nombre, this.fecha_registro,this.fecha_hora);
         return dt;
-    } 
+    }
+    
+    public void agregarArtistaInvitado(Artista art){
+        this.Artistas.put(art.GetNickname(), art);
+    }
     
 
 }

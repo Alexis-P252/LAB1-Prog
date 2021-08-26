@@ -9,6 +9,7 @@
     <class>Logica.Usuario</class>
     <class>Logica.Espectador</class>
     <class>Logica.Artista</class>
+    <class>Logica.Registro</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/coronaTickets"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

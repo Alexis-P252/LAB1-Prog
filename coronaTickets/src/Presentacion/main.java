@@ -3203,19 +3203,20 @@ public class main extends javax.swing.JFrame {
         String nombre = this.FieldNombre8.getText();
         String descripcion = this.FieldDescripcion8.getText();
   
+        Date fecha_alta = new Date();
+
         int d_ini = this.ComboBoxDia8.getSelectedIndex()+1;
         int m_ini = this.ComboBoxMes8.getSelectedIndex()+1;
-        int a_ini = this.ComboBoxAnio8.getSelectedIndex()+1960;
+        int a_ini = this.ComboBoxAnio8.getSelectedIndex()+ (fecha_alta.getYear()+1900);
         Date f_ini = new Date(a_ini-1900, m_ini-1, d_ini,0,0,0);
-        
+
         int d_fin = this.ComboBoxDia_fin8.getSelectedIndex()+1;
         int m_fin = this.ComboBoxMes_fin8.getSelectedIndex()+1;
-        int a_fin = this.ComboBoxAnio_fin8.getSelectedIndex()+1960;
+        int a_fin = this.ComboBoxAnio_fin8.getSelectedIndex()+ (fecha_alta.getYear()+1900);
         Date f_fin = new Date(a_fin-1900, m_fin-1, d_fin,0,0,0);
         
-        Date fecha_alta = new Date();
-        
-        
+       
+         
         if(f_fin.before(f_ini) || f_fin.equals(f_ini)){
             JOptionPane.showMessageDialog(this,"La fecha de fin no puede ser inferior o igual a la fecha de inicio","Alta Paquete",JOptionPane.ERROR_MESSAGE);
             return;
