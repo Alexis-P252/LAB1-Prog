@@ -119,4 +119,8 @@ public class Espectaculo {
         DtEspectaculo dt = new DtEspectaculo(this.nombre,this.fecha_registro,this.costo,this.url, this.cant_max_espec, this.cant_min_espec, this.duracion, this.descripcion);
         return dt;   
     }
+    
+    public void agregarFuncion(Funcion f){
+        this.Funciones.put(f.getNombre(), f);
+    }
 }
