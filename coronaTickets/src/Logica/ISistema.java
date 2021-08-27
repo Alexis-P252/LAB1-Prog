@@ -20,7 +20,6 @@ public interface ISistema {
     public abstract void modificarEspectador(String nickname, String nombre, String apellido, Date f);
     public abstract void ModificarArtista (String nickname, String nombre,String apellido, Date f,String descripcion, String biografia, String link);
     public abstract String[] listarArtistas();
-    public abstract DtArtista[] listarDtArtistas();
     public abstract String[] listarPlataformas();
     public abstract void crearEspectaculo(String Plataforma,String nombre,Date fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion, String artista);
     public abstract boolean verificarEspectaculo(String espectaculo);
@@ -47,3 +46,5 @@ public interface ISistema {
 
 /* COSAS PARA HACER*/
 
+// VERIFICAR FUNCION COLNICKNAME DEL SISTEMA, PUEDE SER QUE SI SOLO HAY UN TIPO DE USUARIO RETORNE ERRONEAMENTE UN STRING VACIO.
+// CAMBIAR NOMBRE A FUNCION listarArtistasmenosEspectador DEL SISTEMA
