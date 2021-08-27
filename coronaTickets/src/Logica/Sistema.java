@@ -473,7 +473,7 @@ public class Sistema implements ISistema {
     }
     
     public String[] Artistasinvitados(String funcion){
-        Query q = em.createQuery("SELECT fa FROM Funcion.Artistas fa WHERE Funcion.nombre = :funcion");
+        Query q = em.createQuery("SELECT f.Artistas FROM Funcion f WHERE f.nombre = :funcion");
         q.setParameter("funcion", funcion);
         
         try{
@@ -528,6 +528,25 @@ public class Sistema implements ISistema {
                 i++;
             }
 
+            return res;
+        }catch(Exception e){
+            return new String[1];
+        }
+    }
+    
+    public String[] listarFuncionesxEspectaculo(String espectaculo){
+        Query q = em.createQuery("SELECT e.Funciones FROM Espectaculo e WHERE e.nombre = :nombre");
+        q.setParameter("nombre", espectaculo);
+        
+        try{
+            List funciones = q.getResultList();
+            String[] res = new String[funciones.size()];
+            int i = 0;
+            for(Object object: funciones){
+                Funcion f = (Funcion) object;
+                res[i] = f.getNombre();
+                i++;
+            }
             return res;
         }catch(Exception e){
             return new String[1];

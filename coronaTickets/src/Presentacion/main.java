@@ -13,6 +13,7 @@ import Logica.DtUsuario;
 import Logica.DtEspectador;
 import Logica.DtArtista;
 import Logica.DtEspectaculo;
+import Logica.DtFuncion;
 import Logica.DtPaquete;
 import java.awt.Image;
 import java.io.File;
@@ -55,6 +56,7 @@ public class main extends javax.swing.JFrame {
         this.FrameConsultaPaquete.setVisible(false);
         this.FrameAddEspectaculo.setVisible(false);
         this.FrameAltaFuncion06.setVisible(false);
+        this.FrameConsultaFuncion.setVisible(false);
    
       
         GroupTipoUsuario.add(EspectadorButton);
@@ -208,7 +210,6 @@ public class main extends javax.swing.JFrame {
         FieldDuracion5 = new javax.swing.JTextField();
         LabelEsp_Max5 = new javax.swing.JLabel();
         FieldEspMax5 = new javax.swing.JTextField();
-        ButtonCancelar5 = new javax.swing.JButton();
         jScrollPane8 = new javax.swing.JScrollPane();
         ListaPlataforma5 = new javax.swing.JList<>();
         jScrollPane10 = new javax.swing.JScrollPane();
@@ -236,7 +237,7 @@ public class main extends javax.swing.JFrame {
         FieldDuracion7 = new javax.swing.JTextField();
         LabelEsp_Max6 = new javax.swing.JLabel();
         FieldEspMax6 = new javax.swing.JTextField();
-        ButtonCancelar6 = new javax.swing.JButton();
+        ButtonCerrar5 = new javax.swing.JButton();
         jScrollPane13 = new javax.swing.JScrollPane();
         ListaPlataforma6 = new javax.swing.JList<>();
         jScrollPane14 = new javax.swing.JScrollPane();
@@ -335,6 +336,31 @@ public class main extends javax.swing.JFrame {
         ComboBoxDia06 = new javax.swing.JComboBox<>();
         jScrollPane16 = new javax.swing.JScrollPane();
         jTableArtistas6 = new javax.swing.JTable();
+        FrameConsultaFuncion = new javax.swing.JInternalFrame();
+        jScrollPane28 = new javax.swing.JScrollPane();
+        ListaPlataforma13 = new javax.swing.JList<>();
+        LabelSeleccionePlataforma14 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        LabelSeleccioneFuncion11 = new javax.swing.JLabel();
+        LabelSeleccioneEspectaculo14 = new javax.swing.JLabel();
+        jScrollPane29 = new javax.swing.JScrollPane();
+        ListaFuncion13 = new javax.swing.JList<>();
+        jScrollPane30 = new javax.swing.JScrollPane();
+        ListaArtistasInvitados13 = new javax.swing.JList<>();
+        LabelNombre9 = new javax.swing.JLabel();
+        FieldNombre13 = new javax.swing.JTextField();
+        LabelFecha_Hora13 = new javax.swing.JLabel();
+        FieldFecha_hora13 = new javax.swing.JTextField();
+        LabelFecha_Alta13 = new javax.swing.JLabel();
+        FieldFecha_alta13 = new javax.swing.JTextField();
+        jScrollPane31 = new javax.swing.JScrollPane();
+        ListaEspectaculos13 = new javax.swing.JList<>();
+        LabelNombre10 = new javax.swing.JLabel();
+        ButtonCancelar12 = new javax.swing.JButton();
+        ButtonCancelar8 = new javax.swing.JButton();
+        ButtonCancelar13 = new javax.swing.JButton();
+        LabelSeleccioneEspectaculo12 = new javax.swing.JLabel();
+        LabelSeleccioneEspectaculo13 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuUsuario = new javax.swing.JMenu();
         AltaUsuario = new javax.swing.JMenuItem();
@@ -1316,16 +1342,6 @@ public class main extends javax.swing.JFrame {
         jPanel6.add(FieldEspMax5);
         FieldEspMax5.setBounds(440, 250, 160, 30);
 
-        ButtonCancelar5.setBackground(new java.awt.Color(204, 204, 204));
-        ButtonCancelar5.setText("Cerrar");
-        ButtonCancelar5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCancelar5ActionPerformed(evt);
-            }
-        });
-        jPanel6.add(ButtonCancelar5);
-        ButtonCancelar5.setBounds(520, 430, 90, 30);
-
         ListaPlataforma5.setBackground(new java.awt.Color(204, 204, 204));
         ListaPlataforma5.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -1361,6 +1377,11 @@ public class main extends javax.swing.JFrame {
         LabelSeleccioneEspectaculo7.setBounds(370, 10, 190, 17);
 
         ListaFunciones5.setBackground(new java.awt.Color(204, 204, 204));
+        ListaFunciones5.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaFunciones5ValueChanged(evt);
+            }
+        });
         jScrollPane11.setViewportView(ListaFunciones5);
 
         jPanel6.add(jScrollPane11);
@@ -1499,15 +1520,15 @@ public class main extends javax.swing.JFrame {
         jPanel8.add(FieldEspMax6);
         FieldEspMax6.setBounds(440, 250, 160, 30);
 
-        ButtonCancelar6.setBackground(new java.awt.Color(204, 204, 204));
-        ButtonCancelar6.setText("Cerrar");
-        ButtonCancelar6.addActionListener(new java.awt.event.ActionListener() {
+        ButtonCerrar5.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonCerrar5.setText("Cerrar");
+        ButtonCerrar5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCancelar6ActionPerformed(evt);
+                ButtonCerrar5ActionPerformed(evt);
             }
         });
-        jPanel8.add(ButtonCancelar6);
-        ButtonCancelar6.setBounds(520, 430, 90, 30);
+        jPanel8.add(ButtonCerrar5);
+        ButtonCerrar5.setBounds(520, 430, 90, 30);
 
         ListaPlataforma6.setBackground(new java.awt.Color(204, 204, 204));
         ListaPlataforma6.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -2181,6 +2202,7 @@ public class main extends javax.swing.JFrame {
         jPanel13.add(ComboBoxDia06);
         ComboBoxDia06.setBounds(110, 300, 70, 30);
 
+        jTableArtistas6.setBackground(new java.awt.Color(204, 204, 204));
         jTableArtistas6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -2211,6 +2233,174 @@ public class main extends javax.swing.JFrame {
 
         FrameAltaFuncion06.getContentPane().add(jPanel12);
         jPanel12.setBounds(0, 0, 680, 540);
+
+        FrameConsultaFuncion.setTitle("Consulta de Funcion de Espectaculo");
+        FrameConsultaFuncion.setVisible(true);
+        FrameConsultaFuncion.getContentPane().setLayout(null);
+
+        ListaPlataforma13.setBackground(new java.awt.Color(204, 204, 204));
+        ListaPlataforma13.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaPlataforma13ValueChanged(evt);
+            }
+        });
+        jScrollPane28.setViewportView(ListaPlataforma13);
+
+        FrameConsultaFuncion.getContentPane().add(jScrollPane28);
+        jScrollPane28.setBounds(30, 40, 121, 140);
+
+        LabelSeleccionePlataforma14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccionePlataforma14.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccionePlataforma14.setText("Seleccione Plataforma");
+        FrameConsultaFuncion.getContentPane().add(LabelSeleccionePlataforma14);
+        LabelSeleccionePlataforma14.setBounds(30, 20, 190, 17);
+
+        jPanel14.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel14.setLayout(null);
+
+        LabelSeleccioneFuncion11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccioneFuncion11.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccioneFuncion11.setText("Seleccione Funcion");
+        jPanel14.add(LabelSeleccioneFuncion11);
+        LabelSeleccioneFuncion11.setBounds(460, 20, 190, 17);
+
+        LabelSeleccioneEspectaculo14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccioneEspectaculo14.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccioneEspectaculo14.setText("Seleccione Espectaculo");
+        jPanel14.add(LabelSeleccioneEspectaculo14);
+        LabelSeleccioneEspectaculo14.setBounds(250, 20, 190, 17);
+
+        ListaFuncion13.setBackground(new java.awt.Color(204, 204, 204));
+        ListaFuncion13.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaFuncion13ValueChanged(evt);
+            }
+        });
+        jScrollPane29.setViewportView(ListaFuncion13);
+
+        jPanel14.add(jScrollPane29);
+        jScrollPane29.setBounds(460, 40, 121, 140);
+
+        ListaArtistasInvitados13.setBackground(new java.awt.Color(204, 204, 204));
+        ListaArtistasInvitados13.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaArtistasInvitados13ValueChanged(evt);
+            }
+        });
+        jScrollPane30.setViewportView(ListaArtistasInvitados13);
+
+        jPanel14.add(jScrollPane30);
+        jScrollPane30.setBounds(460, 220, 121, 140);
+
+        LabelNombre9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelNombre9.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNombre9.setText("Artistas invitados");
+        jPanel14.add(LabelNombre9);
+        LabelNombre9.setBounds(330, 220, 110, 15);
+
+        FieldNombre13.setEditable(false);
+        FieldNombre13.setBackground(new java.awt.Color(204, 204, 204));
+        FieldNombre13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldNombre13ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(FieldNombre13);
+        FieldNombre13.setBounds(120, 220, 160, 30);
+
+        LabelFecha_Hora13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelFecha_Hora13.setForeground(new java.awt.Color(255, 255, 255));
+        LabelFecha_Hora13.setText("Fecha y hora");
+        jPanel14.add(LabelFecha_Hora13);
+        LabelFecha_Hora13.setBounds(30, 270, 70, 15);
+
+        FieldFecha_hora13.setEditable(false);
+        FieldFecha_hora13.setBackground(new java.awt.Color(204, 204, 204));
+        FieldFecha_hora13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldFecha_hora13ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(FieldFecha_hora13);
+        FieldFecha_hora13.setBounds(120, 270, 160, 30);
+
+        LabelFecha_Alta13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelFecha_Alta13.setForeground(new java.awt.Color(255, 255, 255));
+        LabelFecha_Alta13.setText("Fecha alta");
+        jPanel14.add(LabelFecha_Alta13);
+        LabelFecha_Alta13.setBounds(30, 320, 70, 15);
+
+        FieldFecha_alta13.setEditable(false);
+        FieldFecha_alta13.setBackground(new java.awt.Color(204, 204, 204));
+        FieldFecha_alta13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FieldFecha_alta13ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(FieldFecha_alta13);
+        FieldFecha_alta13.setBounds(120, 320, 160, 30);
+
+        ListaEspectaculos13.setBackground(new java.awt.Color(204, 204, 204));
+        ListaEspectaculos13.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaEspectaculos13ValueChanged(evt);
+            }
+        });
+        jScrollPane31.setViewportView(ListaEspectaculos13);
+
+        jPanel14.add(jScrollPane31);
+        jScrollPane31.setBounds(250, 40, 121, 140);
+
+        LabelNombre10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelNombre10.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNombre10.setText("Nombre");
+        jPanel14.add(LabelNombre10);
+        LabelNombre10.setBounds(30, 220, 70, 15);
+
+        ButtonCancelar12.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonCancelar12.setText("Cancelar");
+        ButtonCancelar12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelar12ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(ButtonCancelar12);
+        ButtonCancelar12.setBounds(220, 460, 90, 30);
+
+        ButtonCancelar8.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonCancelar8.setText("Cerrar");
+        ButtonCancelar8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelar8ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(ButtonCancelar8);
+        ButtonCancelar8.setBounds(520, 430, 90, 30);
+
+        ButtonCancelar13.setBackground(new java.awt.Color(204, 204, 204));
+        ButtonCancelar13.setText("Cerrar");
+        ButtonCancelar13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelar13ActionPerformed(evt);
+            }
+        });
+        jPanel14.add(ButtonCancelar13);
+        ButtonCancelar13.setBounds(350, 390, 90, 30);
+
+        FrameConsultaFuncion.getContentPane().add(jPanel14);
+        jPanel14.setBounds(0, 0, 670, 570);
+
+        LabelSeleccioneEspectaculo12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccioneEspectaculo12.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccioneEspectaculo12.setText("Seleccione Espectaculo");
+        FrameConsultaFuncion.getContentPane().add(LabelSeleccioneEspectaculo12);
+        LabelSeleccioneEspectaculo12.setBounds(200, 20, 190, 17);
+
+        LabelSeleccioneEspectaculo13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelSeleccioneEspectaculo13.setForeground(new java.awt.Color(255, 255, 255));
+        LabelSeleccioneEspectaculo13.setText("Seleccione Espectaculo");
+        FrameConsultaFuncion.getContentPane().add(LabelSeleccioneEspectaculo13);
+        LabelSeleccioneEspectaculo13.setBounds(200, 20, 190, 17);
 
         jMenuBar1.setName("CoronaTickets"); // NOI18N
 
@@ -2363,26 +2553,29 @@ public class main extends javax.swing.JFrame {
                                 .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 1228, Short.MAX_VALUE)
+                                .addComponent(FrameAltaFuncion06, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addComponent(FrameAltaFuncion06, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(56, 56, 56)
+                                        .addComponent(FrameConsultaFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FrameAddEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2396,7 +2589,9 @@ public class main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(FrameConsultarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(FrameConsultaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -2404,11 +2599,11 @@ public class main extends javax.swing.JFrame {
                             .addComponent(FrameConsultaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(FrameAddEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(FrameModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(FrameAltaPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(FrameAltaFuncion06, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(FrameAltaFuncion06, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(FrameConsultaFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(298, Short.MAX_VALUE))
         );
 
@@ -2496,6 +2691,10 @@ public class main extends javax.swing.JFrame {
 
     private void ConsultaFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsultaFuncionActionPerformed
         // TODO add your handling code here:
+        ocultarVentanas();
+        this.FrameConsultaFuncion.setVisible(true);
+        String [] listaPlataforma = sis.listarPlataformas();
+        this.ListaPlataforma13.setListData(listaPlataforma);
     }//GEN-LAST:event_ConsultaFuncionActionPerformed
 
     private void CrearPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearPaqueteActionPerformed
@@ -2761,7 +2960,8 @@ public class main extends javax.swing.JFrame {
 
     private void ListaUsuarios2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaUsuarios2ValueChanged
         // TODO add your handling code here:
-        
+        DefaultListModel listmodel = new DefaultListModel();
+        this.ListaOrganizo2.setModel(listmodel);
         this.FieldApellido2.setText("");
         this.FieldNombre2.setText("");
         this.FieldCorreo2.setText("");
@@ -3194,24 +3394,21 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldEspMax5ActionPerformed
 
-    private void ButtonCancelar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar5ActionPerformed
+    private void ButtonCancelar13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar13ActionPerformed
         // TODO add your handling code here:
-        this.FrameConsultaEspectaculo.setVisible(false);
-        //this.ListaEspectaculos5.clearSelection();
-        this.FieldNombre5.setText("");
-        this.FieldDescripcion5.setText("");
-        this.FieldDuracion5.setText("");
-        this.FieldURL5.setText("");
-        this.FieldEspMin5.setText("");
-        this.FieldEspMax5.setText("");
-        this.FieldCosto5.setText("");
-        this.ListaEspectaculos5.setSelectedIndex(-1);
-        this.ListaPlataforma5.setSelectedIndex(-1);
+        this.FieldNombre13.setText("");
+        this.FieldFecha_alta13.setText("");
+        this.FieldFecha_hora13.setText("");
+        this.FrameConsultaFuncion.setVisible(false);
+       
         
         
-    }//GEN-LAST:event_ButtonCancelar5ActionPerformed
+    }//GEN-LAST:event_ButtonCancelar13ActionPerformed
 
     private void ListaPlataforma5ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma5ValueChanged
+        DefaultListModel listmodel = new DefaultListModel();
+        this.ListaEspectaculos5.setModel(listmodel);
+        this.ListaFunciones5.setModel(listmodel);
         String plataforma = this.ListaPlataforma5.getSelectedValue();
         String espectaculos[] = sis.listarEspectaculos(plataforma); 
         this.ListaEspectaculos5.setListData(espectaculos);   
@@ -3250,6 +3447,9 @@ public class main extends javax.swing.JFrame {
         
         String[] paquetes = sis.listarPaquetesdeEsp(espectaculo);
         this.ListaPaquetes5.setListData(paquetes);
+        
+        String[] funciones = sis.listarFuncionesxEspectaculo(espectaculo);
+        this.ListaFunciones5.setListData(funciones);
       }
     }//GEN-LAST:event_ListaEspectaculos5ValueChanged
 
@@ -3293,9 +3493,21 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldEspMax6ActionPerformed
 
-    private void ButtonCancelar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar6ActionPerformed
+    private void ButtonCerrar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCerrar5ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonCancelar6ActionPerformed
+        this.FrameConsultaEspectaculo.setVisible(false);
+        //this.ListaEspectaculos5.clearSelection();
+        this.FieldNombre5.setText("");
+        this.FieldDescripcion5.setText("");
+        this.FieldDuracion5.setText("");
+        this.FieldURL5.setText("");
+        this.FieldEspMin5.setText("");
+        this.FieldEspMax5.setText("");
+        this.FieldCosto5.setText("");
+        this.ListaEspectaculos5.setSelectedIndex(-1);
+        this.ListaPlataforma5.setSelectedIndex(-1);
+        
+    }//GEN-LAST:event_ButtonCerrar5ActionPerformed
 
     private void ListaPlataforma6ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma6ValueChanged
         // TODO add your handling code here:
@@ -3525,6 +3737,11 @@ public class main extends javax.swing.JFrame {
             this.FieldURL5.setText(URL);
             this.FieldDuracion5.setText(duracion);
             this.FieldCosto5.setText(costo);
+            
+            String[] funciones = sis.listarFuncionesxEspectaculo(nomEspec);
+            this.ListaFunciones5.setListData(funciones);
+            String[] paquetes = sis.listarPaquetesdeEsp(nomEspec);
+            this.ListaPaquetes5.setListData(paquetes);
             this.FrameConsultaEspectaculo.setVisible(true);
             
         }
@@ -3758,6 +3975,14 @@ public class main extends javax.swing.JFrame {
         //LLAMAMOS A LA FUNCION AGREGARFUNCION PARA CREAR LA FUNCION
         sis.AgregarFuncion(nombre, fechaHoy, fecha, espectaculo, artistasSeleccionados);
         JOptionPane.showMessageDialog(this,"Funcion agregada correctamente","Alta Funcion",JOptionPane.INFORMATION_MESSAGE);
+        this.FieldNombre06.setText("");
+        this.ComboBoxAnio06.setSelectedIndex(0);
+        this.ComboBoxDia06.setSelectedIndex(0);
+        this.ComboBoxMes06.setSelectedIndex(0);
+        this.ComboBoxMinuto06.setSelectedIndex(0);
+        this.ComboBoxHora06.setSelectedIndex(0);
+        this.FrameAltaFuncion06.setVisible(false);
+        
     }//GEN-LAST:event_ButtonConfirmar06ActionPerformed
 
     private void ListaPlataforma06ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma06ValueChanged
@@ -3854,6 +4079,86 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuFuncionActionPerformed
 
+    private void ListaPlataforma13ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma13ValueChanged
+        // TODO add your handling code here:
+        String plataforma = this.ListaPlataforma13.getSelectedValue();
+        if(plataforma != null){
+            DefaultListModel listmodel = new DefaultListModel();
+            this.ListaEspectaculos13.setModel(listmodel);
+            this.ListaFuncion13.setModel(listmodel);
+            String [] espectaculos = sis.listarEspectaculos(plataforma);
+            this.ListaEspectaculos13.setListData(espectaculos);
+        }
+    }//GEN-LAST:event_ListaPlataforma13ValueChanged
+
+    private void ListaFuncion13ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaFuncion13ValueChanged
+        // TODO add your handling code here:
+        String funcion = this.ListaFuncion13.getSelectedValue();
+        if(funcion != null){
+            DtFuncion dtF = sis.MostrarFuncion(funcion);
+            this.FieldNombre13.setText(dtF.getNombre());
+            this.FieldFecha_hora13.setText(ft.format(dtF.getFecha_hora()));
+            this.FieldFecha_alta13.setText(ft.format(dtF.getFecha_registro()));
+            
+            String[] artistasInvitados = sis.Artistasinvitados(funcion);
+            this.ListaArtistasInvitados13.setListData(artistasInvitados);
+            
+            
+        }
+    }//GEN-LAST:event_ListaFuncion13ValueChanged
+
+    private void ListaArtistasInvitados13ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaArtistasInvitados13ValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ListaArtistasInvitados13ValueChanged
+
+    private void FieldNombre13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldNombre13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldNombre13ActionPerformed
+
+    private void FieldFecha_hora13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldFecha_hora13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldFecha_hora13ActionPerformed
+
+    private void FieldFecha_alta13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldFecha_alta13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FieldFecha_alta13ActionPerformed
+
+    private void ListaEspectaculos13ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectaculos13ValueChanged
+        // TODO add your handling code here:
+        String espectaculo = this.ListaEspectaculos13.getSelectedValue();
+        if(espectaculo != null){
+            String[] funciones = sis.listarFuncionesxEspectaculo(espectaculo);
+            this.ListaFuncion13.setListData(funciones);
+            
+        }
+    }//GEN-LAST:event_ListaEspectaculos13ValueChanged
+
+    private void ButtonCancelar12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonCancelar12ActionPerformed
+
+    private void ButtonCancelar8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonCancelar8ActionPerformed
+
+    private void ListaFunciones5ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaFunciones5ValueChanged
+        // TODO add your handling code here:
+        String funcion = this.ListaFunciones5.getSelectedValue();
+        if(funcion != null){
+           DtFuncion dtF = sis.MostrarFuncion(funcion);
+            this.FieldNombre13.setText(dtF.getNombre());
+            this.FieldFecha_hora13.setText(ft.format(dtF.getFecha_hora()));
+            this.FieldFecha_alta13.setText(ft.format(dtF.getFecha_registro()));
+
+            String[] artistasInvitados = sis.Artistasinvitados(funcion);
+            this.ListaArtistasInvitados13.setListData(artistasInvitados);
+            this.FrameConsultaFuncion.setVisible(true);
+            
+        }
+        
+        
+    }//GEN-LAST:event_ListaFunciones5ValueChanged
+
     /**
      * @param args the command line arguments
      */
@@ -3901,6 +4206,7 @@ public class main extends javax.swing.JFrame {
         this.FrameConsultaPaquete.setVisible(false);
         this.FrameAddEspectaculo.setVisible(false);
         this.FrameAltaFuncion06.setVisible(false);
+        this.FrameConsultaFuncion.setVisible(false);
         
         this.ListaUsuarios2.setModel(listmodel);
         this.ListaOrganizo2.setModel(listmodel);
@@ -3921,8 +4227,11 @@ public class main extends javax.swing.JFrame {
         this.ListaEspectaculos10.setModel(listmodel);
         this.ListaPlataforma06.setModel(listmodel);
         this.ListaEspectaculos06.setModel(listmodel);
-        
-      
+        this.ListaEspectaculos13.setModel(listmodel);
+        this.ListaFuncion13.setModel(listmodel);
+        this.ListaArtistasInvitados13.setModel(listmodel);
+        this.ListaPlataforma13.setModel(listmodel);
+       
     }
     
     public boolean isNumeric(String cadena){
@@ -3954,10 +4263,12 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCancelar06;
     private javax.swing.JButton ButtonCancelar10;
     private javax.swing.JButton ButtonCancelar11;
+    private javax.swing.JButton ButtonCancelar12;
+    private javax.swing.JButton ButtonCancelar13;
     private javax.swing.JButton ButtonCancelar4;
-    private javax.swing.JButton ButtonCancelar5;
-    private javax.swing.JButton ButtonCancelar6;
     private javax.swing.JButton ButtonCancelar7;
+    private javax.swing.JButton ButtonCancelar8;
+    private javax.swing.JButton ButtonCerrar5;
     private javax.swing.JButton ButtonConfirmar;
     private javax.swing.JButton ButtonConfirmar06;
     private javax.swing.JButton ButtonConfirmar10;
@@ -4019,6 +4330,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldFechaFin11;
     private javax.swing.JTextField FieldFechaIni11;
     private javax.swing.JTextField FieldFechaNac2;
+    private javax.swing.JTextField FieldFecha_alta13;
+    private javax.swing.JTextField FieldFecha_hora13;
     private javax.swing.JTextField FieldLink2;
     private javax.swing.JTextField FieldLink3;
     private javax.swing.JTextField FieldNickname;
@@ -4026,6 +4339,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldNombre;
     private javax.swing.JTextField FieldNombre06;
     private javax.swing.JTextField FieldNombre11;
+    private javax.swing.JTextField FieldNombre13;
     private javax.swing.JTextField FieldNombre2;
     private javax.swing.JTextField FieldNombre3;
     private javax.swing.JTextField FieldNombre4;
@@ -4042,6 +4356,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JInternalFrame FrameAltaPaquete;
     private javax.swing.JInternalFrame FrameAltaUsuario;
     private javax.swing.JInternalFrame FrameConsultaEspectaculo;
+    private javax.swing.JInternalFrame FrameConsultaFuncion;
     private javax.swing.JInternalFrame FrameConsultaPaquete;
     private javax.swing.JInternalFrame FrameConsultarUsuario;
     private javax.swing.JInternalFrame FrameModificarUsuario;
@@ -4090,7 +4405,9 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelEspectaculosRegistro2;
     private javax.swing.JLabel LabelFechaNac2;
     private javax.swing.JLabel LabelFechaNac3;
+    private javax.swing.JLabel LabelFecha_Alta13;
     private javax.swing.JLabel LabelFecha_Fin8;
+    private javax.swing.JLabel LabelFecha_Hora13;
     private javax.swing.JLabel LabelFecha_Ini8;
     private javax.swing.JLabel LabelFecha_Nac;
     private javax.swing.JLabel LabelIngreseDatos8;
@@ -4106,18 +4423,23 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelNickname3;
     private javax.swing.JLabel LabelNombre;
     private javax.swing.JLabel LabelNombre06;
+    private javax.swing.JLabel LabelNombre10;
     private javax.swing.JLabel LabelNombre2;
     private javax.swing.JLabel LabelNombre3;
     private javax.swing.JLabel LabelNombre4;
     private javax.swing.JLabel LabelNombre6;
     private javax.swing.JLabel LabelNombre7;
     private javax.swing.JLabel LabelNombre8;
+    private javax.swing.JLabel LabelNombre9;
     private javax.swing.JLabel LabelSeleccionarUsuario3;
     private javax.swing.JLabel LabelSeleccioneArtista06;
     private javax.swing.JLabel LabelSeleccioneArtista4;
     private javax.swing.JLabel LabelSeleccioneDia06;
     private javax.swing.JLabel LabelSeleccioneEspectaculo06;
     private javax.swing.JLabel LabelSeleccioneEspectaculo10;
+    private javax.swing.JLabel LabelSeleccioneEspectaculo12;
+    private javax.swing.JLabel LabelSeleccioneEspectaculo13;
+    private javax.swing.JLabel LabelSeleccioneEspectaculo14;
     private javax.swing.JLabel LabelSeleccioneEspectaculo15;
     private javax.swing.JLabel LabelSeleccioneEspectaculo5;
     private javax.swing.JLabel LabelSeleccioneEspectaculo6;
@@ -4125,11 +4447,13 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelSeleccioneEspectaculo8;
     private javax.swing.JLabel LabelSeleccioneEspectaculo9;
     private javax.swing.JLabel LabelSeleccioneFuncion06;
+    private javax.swing.JLabel LabelSeleccioneFuncion11;
     private javax.swing.JLabel LabelSeleccionePlataforma06;
     private javax.swing.JLabel LabelSeleccionePlataforma10;
     private javax.swing.JLabel LabelSeleccionePlataforma11;
     private javax.swing.JLabel LabelSeleccionePlataforma12;
     private javax.swing.JLabel LabelSeleccionePlataforma13;
+    private javax.swing.JLabel LabelSeleccionePlataforma14;
     private javax.swing.JLabel LabelSeleccionePlataforma5;
     private javax.swing.JLabel LabelSeleccionePlataforma6;
     private javax.swing.JLabel LabelSeleccionePlataforma7;
@@ -4143,11 +4467,14 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelURL8;
     private javax.swing.JLabel LabelURL9;
     private javax.swing.JList<String> ListaArtista4;
+    private javax.swing.JList<String> ListaArtistasInvitados13;
     private javax.swing.JList<String> ListaEspectaculos06;
     private javax.swing.JList<String> ListaEspectaculos10;
     private javax.swing.JList<String> ListaEspectaculos11;
+    private javax.swing.JList<String> ListaEspectaculos13;
     private javax.swing.JList<String> ListaEspectaculos5;
     private javax.swing.JList<String> ListaEspectaculos6;
+    private javax.swing.JList<String> ListaFuncion13;
     private javax.swing.JList<String> ListaFunciones5;
     private javax.swing.JList<String> ListaFunciones6;
     private javax.swing.JList<String> ListaOrganizo2;
@@ -4158,6 +4485,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JList<String> ListaPaquetes6;
     private javax.swing.JList<String> ListaPlataforma06;
     private javax.swing.JList<String> ListaPlataforma10;
+    private javax.swing.JList<String> ListaPlataforma13;
     private javax.swing.JList<String> ListaPlataforma4;
     private javax.swing.JList<String> ListaPlataforma5;
     private javax.swing.JList<String> ListaPlataforma6;
@@ -4173,6 +4501,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -4197,7 +4526,11 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane25;
     private javax.swing.JScrollPane jScrollPane26;
     private javax.swing.JScrollPane jScrollPane27;
+    private javax.swing.JScrollPane jScrollPane28;
+    private javax.swing.JScrollPane jScrollPane29;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane30;
+    private javax.swing.JScrollPane jScrollPane31;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
