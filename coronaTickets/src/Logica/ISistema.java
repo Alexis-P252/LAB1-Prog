@@ -38,14 +38,18 @@ public interface ISistema {
     public abstract String[] Artistasinvitados(String funcion);
     public abstract boolean ExisteFuncion(String funcion);
     public abstract DtFuncion MostrarFuncion (String funcion);
-    public String[] listarArtistasmenosEspectador(String espectaculo);
+    public String[] listarArtistasmenosOrganizador(String espectaculo);
     public abstract String[] listarFuncionesxEspectaculo(String espectaculo);
     public abstract String[] listarEspectadores();
+    public abstract float darPrecioEspectaculo(String espectaculo);
+    public abstract boolean espectadorRegistrado(String espectador, String funcion);
+    public abstract boolean cantMaxAsistentes(String espectaculo, String funcion);
+    public abstract void agregarRegistro(String espectador,String funcion, String espectaculo, Date f, int costo);
 }
 
 
 
 /* COSAS PARA HACER*/
 
-// VERIFICAR FUNCION COLNICKNAME DEL SISTEMA, PUEDE SER QUE SI SOLO HAY UN TIPO DE USUARIO RETORNE ERRONEAMENTE UN STRING VACIO.
-// CAMBIAR NOMBRE A FUNCION listarArtistasmenosEspectador DEL SISTEMA
+
+

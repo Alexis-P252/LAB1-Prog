@@ -2560,7 +2560,7 @@ public class main extends javax.swing.JFrame {
         LabelSeleccionePlataforma17.setBounds(30, 200, 190, 17);
 
         jPanel15.add(jPanel16);
-        jPanel16.setBounds(0, 0, 700, 540);
+        jPanel16.setBounds(0, 0, 690, 460);
 
         FrameRegistroAFuncionDeEspectaculo22.getContentPane().add(jPanel15);
         jPanel15.setBounds(0, 0, 710, 540);
@@ -4163,7 +4163,7 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
         modelListaArtista6 = (DefaultTableModel)jTableArtistas6.getModel();
         String nomEspectaculo = ListaEspectaculos06.getSelectedValue();
-        String ArtistasDisponibles[] = sis.listarArtistasmenosEspectador(nomEspectaculo);
+        String ArtistasDisponibles[] = sis.listarArtistasmenosOrganizador(nomEspectaculo);
         String row[] = new String[2];
         
         int filas = jTableArtistas6.getRowCount();
@@ -4328,12 +4328,55 @@ public class main extends javax.swing.JFrame {
 
     private void ButtonConfirmar22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonConfirmar22ActionPerformed
         // TODO add your handling code here:
+        if(this.ListaPlataforma22.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this,"Debe seleccionar una plataforma","Registro a Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(this.ListaEspectaculos22.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this,"Debe seleccionar un espectaculo","Registro a Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(this.ListaFuncion22.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this,"Debe seleccionar una funcion","Registro a Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(this.ListaEspectador22.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(this,"Debe seleccionar un espectador","Registro a Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String espectador = this.ListaEspectador22.getSelectedValue();
+        String funcion = this.ListaFuncion22.getSelectedValue();
+        String espectaculo = this.ListaEspectaculos22.getSelectedValue();
+        
+        if(sis.espectadorRegistrado(espectador, funcion) == true){
+            JOptionPane.showMessageDialog(this,"Este espectador ya esta registrado a esta funcion","Registro a Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(sis.cantMaxAsistentes(espectaculo, funcion) == true){
+            JOptionPane.showMessageDialog(this,"Esta funcion ya tiene todos los cupos llenos","Registro a Funcion",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Date f = new Date();
+        int costo = 1;
+        
+        
+        sis.agregarRegistro(espectador, funcion, espectaculo, f, costo);
+        JOptionPane.showMessageDialog(this,"Registro agregado correctamente","Registro a Funcion",JOptionPane.INFORMATION_MESSAGE);
+        this.FieldCostoTotal22.setText("");
+        this.FrameRegistroAFuncionDeEspectaculo22.setVisible(false);
+        
+        
     }//GEN-LAST:event_ButtonConfirmar22ActionPerformed
 
     private void ListaPlataforma22ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaPlataforma22ValueChanged
+        DefaultListModel listmodel = new DefaultListModel();
+        this.ListaFuncion22.setModel(listmodel);
         String plataforma = this.ListaPlataforma22.getSelectedValue();
         String espectaculos[] = sis.listarEspectaculos(plataforma);
         this.ListaEspectaculos22.setListData(espectaculos);
+        this.FieldCostoTotal22.setText("");
     }//GEN-LAST:event_ListaPlataforma22ValueChanged
 
     private void ListaEspectador22ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectador22ValueChanged
@@ -4351,6 +4394,8 @@ public class main extends javax.swing.JFrame {
         if(espectaculo != null){
             String[] funciones = sis.listarFuncionesxEspectaculo(espectaculo);
             this.ListaFuncion22.setListData(funciones);
+            float costo = sis.darPrecioEspectaculo(espectaculo);
+            this.FieldCostoTotal22.setText("" + costo);
         }
     }//GEN-LAST:event_ListaEspectaculos22ValueChanged
 

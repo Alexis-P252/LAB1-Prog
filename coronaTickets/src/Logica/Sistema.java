@@ -189,26 +189,21 @@ public class Sistema implements ISistema {
     
     // DEVUELVE UN ARREGLO CON TODOS LOS NICKNAMES DE LOS USUARIOS, TANTO ESPECTADORES COMO ARTISTAS.
     public String[] ColNickname(){
-        Query q = em.createQuery("Select a.nickname from Artista a");
-        Query q1 = em.createQuery("Select e.nickname from Espectador e");
+        //Query q = em.createQuery("Select a.nickname from Artista a UNION Select e.nickname from Espectador e");
+        Query q = em.createQuery("Select CONCAT(a.nickname, ' (A)') FROM Artista a UNION Select CONCAT(e.nickname, ' (E)') FROM Espectador e");
         
+     
         try{
-            List listaArtistas = q.getResultList();
-            List listaEspectadores = q1.getResultList();
+            List lista = q.getResultList();
+            //List listaEspectadores = q1.getResultList();
 
-            String res[] = new String[listaEspectadores.size() + listaArtistas.size()];
+            String res[] = new String[lista.size()];
             int i = 0;
 
-            for(Object object :listaArtistas){
-                res[i] =(String) object + " (A)";
+            for(Object object :lista){
+                res[i] =(String) object;
                 i++;
             }
-
-            for(Object object :listaEspectadores){
-                res[i] =(String)object + " (E)";
-                i++;
-            }
-
             return res;
             
         }catch(Exception e){
@@ -533,7 +528,7 @@ public class Sistema implements ISistema {
     
     // LISTA TODOS LOS ARTISTAS A EXCEPCION DEL ARTISTA ORGANIZADOR DEL ESPECTACULO CON NOMBRE IGUAL AL VALOR RECIBIDO POR PARAMETRO
     // EN CASO DE QUE LA QUERY NO RETORNE NINGUN VALOR, SE RETORNA UN ARREGLO VACIO.
-    public String[] listarArtistasmenosEspectador(String espectaculo){
+    public String[] listarArtistasmenosOrganizador(String espectaculo){
         
         Query q = em.createNativeQuery("SELECT DISTINCT a.nickname FROM artista a  WHERE a.nickname NOT IN (SELECT ae.artista_nickname FROM artista_espectaculo ae WHERE ae.organiza_nombre = " +"'" + espectaculo +"')");
 
@@ -576,5 +571,70 @@ public class Sistema implements ISistema {
             return new String[1];
         }
     }
+    
+    
+    // DADO EL NOMBRE DE UN ESPECTACULO DEVUELVE EL PRECIO DEL MISMO
+    public float darPrecioEspectaculo(String espectaculo){
+        Query q = em.createQuery("SELECT e.costo FROM Espectaculo e WHERE e.nombre = :espectaculo");
+        q.setParameter("espectaculo", espectaculo);
+        float costo = (float) q.getSingleResult();
+        return costo;
+    }
+    
+    
+    
+    public boolean espectadorRegistrado(String espectador, String funcion){
+        
+        Query q = em.createNativeQuery("SELECT COUNT(*) FROM espectador_registro er WHERE er.espectador_nickname = '" + espectador +"' AND er.registros_key = '"+funcion+"'");
+        
+        long cant = (long) q.getSingleResult();
+        
+        if(cant == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    
+    
+    public boolean cantMaxAsistentes(String espectaculo, String funcion){
+        Query q = em.createQuery("SELECT e.cant_max_espec FROM Espectaculo e WHERE e.nombre = :espectaculo");
+        q.setParameter("espectaculo", espectaculo);
+        int max = (int) q.getSingleResult();
+        
+        Query q2 = em.createNativeQuery("SELECT COUNT(*) FROM espectador_registro er WHERE  er.registros_key = '"+funcion+"'");
+        long cant = (long) q2.getSingleResult();
+        
+        if(cant < max){
+            return false;
+        }
+        else{
+            return true;
+        }
+        
+    }
+    
+    public void agregarRegistro(String espectador,String funcion, String espectaculo, Date f, int costo){
+        
+        em.getTransaction().begin();
+        
+        Espectador esp = (Espectador) em.find(Espectador.class, espectador);
+        Funcion fu = (Funcion) em.find(Funcion.class, funcion);
+        Espectaculo e = (Espectaculo) em.find(Espectaculo.class, espectaculo);
+        
+        if(costo != 0){
+             costo = (int) e.getCosto();
+        }
+        
+        Registro r = new Registro(f, e.getCosto(), fu);
+        em.persist(r);
+        
+        esp.agregarRegistro(r, fu.getNombre());
+        
+        em.getTransaction().commit();
+        
+    }
+    
 }
 

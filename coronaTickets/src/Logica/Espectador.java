@@ -34,4 +34,8 @@ public class Espectador extends Usuario {
         DtEspectador dt = new DtEspectador(nombre, apellido, email, nickname, fecha_nac);
         return dt;
     }
+    
+    public void agregarRegistro(Registro r, String funcion){
+        this.registros.put(funcion,r);
+    }
 }
