@@ -40,6 +40,7 @@ public interface ISistema {
     public abstract DtFuncion MostrarFuncion (String funcion);
     public String[] listarArtistasmenosEspectador(String espectaculo);
     public abstract String[] listarFuncionesxEspectaculo(String espectaculo);
+    public abstract String[] listarEspectadores();
 }
 
 

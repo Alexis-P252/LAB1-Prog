@@ -87,6 +87,28 @@ public class Sistema implements ISistema {
         }
     }
     
+    
+    // LISTA TODOS LOS ESPECTADORES EXISTENTES, EN CASO DE QUE LA CONSULTA NO DEVUELVA NINGUN ESPECTADOR, DEVUELVE UN ARREGLO VACIO.
+    public String[] listarEspectadores(){
+        
+        Query q = em.createQuery("SELECT e.nickname FROM Espectador e");
+        try{
+            List lista = q.getResultList();
+            String res[] = new String[lista.size()];
+            int i = 0;
+            
+            for(Object object: lista){
+                res[i] = (String) object;
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e){
+            return new String[1];
+        }
+    }
+    
+    
  
     // LISTA TODAS LAS PLATAFORMAS EXISTENTES, EN CASO DE QUE LA CONSULTA NO DEVUELVA NIGNUNA PLATAFORMA, DEVUELVE UN ARREGLO VACIO
     public String[] listarPlataformas(){
@@ -106,7 +128,7 @@ public class Sistema implements ISistema {
         }catch(Exception e){
             return new String[1];
         }
-    } 
+    }
     
     
     // CREA UN NUEVO ESPECTADOR CON LOS DATOS RECIBIDIDOS Y LO PERSISTE.
