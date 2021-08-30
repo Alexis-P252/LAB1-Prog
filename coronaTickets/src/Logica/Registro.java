@@ -54,7 +54,7 @@ public class Registro {
     }
     
     public DtRegistro ArmarDt(){
-        DtRegistro dt = new DtRegistro(1,this.funcion.getNombre(),this.funcion.getEspectaculo(),this.getFecha(),this.getCanjeado(),this.getCosto());
+        DtRegistro dt = new DtRegistro(this.id,this.funcion.getNombre(),this.funcion.getEspectaculo(),this.funcion.getFecha_hora(),this.getCanjeado(),this.getCosto());
         return dt;
     }
     

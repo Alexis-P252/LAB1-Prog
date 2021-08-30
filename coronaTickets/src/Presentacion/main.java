@@ -2535,6 +2535,11 @@ public class main extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTableRegistrosPrevios22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableRegistrosPrevios22MouseClicked(evt);
+            }
+        });
         jScrollPane17.setViewportView(jTableRegistrosPrevios22);
 
         jPanel16.add(jScrollPane17);
@@ -3170,6 +3175,9 @@ public class main extends javax.swing.JFrame {
                 
                 String[] listaespectaculos  = sis.listarespectaculosXArtista(nickname);
                 this.ListaOrganizo2.setListData(listaespectaculos);
+                
+            }
+            else{
                 
             }
         }
@@ -4360,11 +4368,39 @@ public class main extends javax.swing.JFrame {
             return;
         }
         
-        Date f = new Date();
         int costo = 1;
+        Date f = new Date();
         
-        
-        
+        if(sis.alMenos3Registros(espectador)){
+            String funcionRegistro;
+            boolean check;
+            int cant = 0;
+            List RegistrosSeleccionados = new ArrayList();
+            
+            for(int i = 0;i<jTableRegistrosPrevios22.getRowCount();i++){
+                funcionRegistro = (String)jTableRegistrosPrevios22.getValueAt(i, 0);
+                if(jTableRegistrosPrevios22.getValueAt(i, 3) == null){
+                    check = false;
+                }else{
+                    check = (boolean)jTableRegistrosPrevios22.getValueAt(i, 3);
+                }
+                if(check){
+                    cant++;
+                    RegistrosSeleccionados.add(funcionRegistro);
+                    
+                }
+            }
+       
+            if(cant != 3 && cant != 0){
+                JOptionPane.showMessageDialog(this,"Debe seleccionar 3 registros para canjear o ninguno si no desea hacerlo","Registro a Funcion",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            else if (cant == 3){
+                costo = 0;
+                sis.CanjeoRegistros(RegistrosSeleccionados, espectador);
+            }
+        }
+    
         sis.agregarRegistro(espectador, funcion, espectaculo, f, costo);
         JOptionPane.showMessageDialog(this,"Registro agregado correctamente","Registro a Funcion",JOptionPane.INFORMATION_MESSAGE);
         this.FieldCostoTotal22.setText("");
@@ -4385,9 +4421,18 @@ public class main extends javax.swing.JFrame {
     private void ListaEspectador22ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectador22ValueChanged
         // TODO add your handling code here:
         
+        int filasB = this.jTableRegistrosPrevios22.getRowCount();
+        for(int i = filasB-1;i >= 0;i--){
+            modelListaRegistros22.removeRow(i);
+        }
+        
+  
+       
         try{
             String espectador = ListaEspectador22.getSelectedValue();
             if(sis.alMenos3Registros(espectador)){
+                JOptionPane.showMessageDialog(this,"Puedes canjear 3 de tu registros actuales para obtener este de forma gratuita. Selecciona 3 para hacer el intercambio o ningunno en caso de que no quieras hacerlo","Registro a Funcion",JOptionPane.INFORMATION_MESSAGE);
+            
                 int filas = jTableRegistrosPrevios22.getRowCount();
                 //LIMPIO LA TABLA ANTES DE CARGAR LOS VALORES NUEVOS
                 for(int i = filas-1;i >= 0;i--){
@@ -4411,10 +4456,7 @@ public class main extends javax.swing.JFrame {
         }catch(Exception e){
         
         }
-        
-          
-        
-        
+         
     }//GEN-LAST:event_ListaEspectador22ValueChanged
 
     private void ButtonCancelar22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar22ActionPerformed
@@ -4430,6 +4472,7 @@ public class main extends javax.swing.JFrame {
             this.ListaFuncion22.setListData(funciones);
             float costo = sis.darPrecioEspectaculo(espectaculo);
             this.FieldCostoTotal22.setText("" + costo);
+            ContarRegistrosSeleccionados();
         }
     }//GEN-LAST:event_ListaEspectaculos22ValueChanged
 
@@ -4440,6 +4483,12 @@ public class main extends javax.swing.JFrame {
     private void FieldCostoTotal22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FieldCostoTotal22ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_FieldCostoTotal22ActionPerformed
+
+    private void jTableRegistrosPrevios22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRegistrosPrevios22MouseClicked
+        // TODO add your handling code here:
+        ContarRegistrosSeleccionados();
+           
+    }//GEN-LAST:event_jTableRegistrosPrevios22MouseClicked
 
     /**
      * @param args the command line arguments
@@ -4527,6 +4576,31 @@ public class main extends javax.swing.JFrame {
         } catch (NumberFormatException nfe){
             return false;
         }
+    }
+    
+    public void ContarRegistrosSeleccionados(){
+        boolean check;
+        int cant = 0;
+           
+            for(int i = 0;i<jTableRegistrosPrevios22.getRowCount();i++){
+                if(jTableRegistrosPrevios22.getValueAt(i, 3) == null){
+                    check = false;
+                }else{
+                    check = (boolean)jTableRegistrosPrevios22.getValueAt(i, 3);
+                }
+                if(check){
+                    cant++;
+                }
+            }
+            
+            if(cant == 3){
+                this.FieldCostoTotal22.setText("0");
+            }
+            else{
+                String espectaculo = this.ListaEspectaculos22.getSelectedValue();
+                float precio = sis.darPrecioEspectaculo(espectaculo);
+                this.FieldCostoTotal22.setText("" + precio);
+            }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

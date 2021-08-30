@@ -628,7 +628,7 @@ public class Sistema implements ISistema {
              costo = (int) e.getCosto();
         }
         
-        Registro r = new Registro(f, e.getCosto(), fu);
+        Registro r = new Registro(f, costo, fu);
         em.persist(r);
         
         esp.agregarRegistro(r, fu.getNombre());
@@ -683,6 +683,29 @@ public class Sistema implements ISistema {
            return null;
         }
         
+    }
+    
+    public void CanjeoRegistros(List RegistrosSeleccionados, String espectador){
+        
+        em.getTransaction().begin();
+        
+        for(Object object: RegistrosSeleccionados){
+            
+            String funcion = (String) object;
+            
+            Query q = em.createNativeQuery("SELECT r.id FROM registro r  WHERE r.funcion_nombre = '"+funcion+"' AND r.id IN (SELECT er.registros_id FROM espectador_registro er WHERE espectador_nickname = '"+espectador+"')");
+            int id = (int) q.getSingleResult();
+            
+            Query q2 = em.createQuery("UPDATE Registro r SET r.canjeado = true WHERE r.id = :id");
+            q2.setParameter("id", id);
+            q2.executeUpdate();
+            Registro r = em.find(Registro.class, id);
+            em.refresh(r);
+            
+        }
+        em.getTransaction().commit();
+        
+       
     }
     
 }

@@ -47,11 +47,15 @@ public interface ISistema {
     public abstract void agregarRegistro(String espectador,String funcion, String espectaculo, Date f, int costo);
     public abstract List ListarRegistros (String espectador);
     public abstract boolean alMenos3Registros (String espectador);
+    public abstract void CanjeoRegistros(List RegistrosSeleccionados, String espectador);
 }
 
 
 
 /* COSAS PARA HACER*/
+
+
+    //hacer que desde consulta de usuario se pueda ir a consulta de funcion (registro) 
 
 
 
