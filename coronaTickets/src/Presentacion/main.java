@@ -4362,6 +4362,7 @@ public class main extends javax.swing.JFrame {
         int costo = 1;
         
         
+        
         sis.agregarRegistro(espectador, funcion, espectaculo, f, costo);
         JOptionPane.showMessageDialog(this,"Registro agregado correctamente","Registro a Funcion",JOptionPane.INFORMATION_MESSAGE);
         this.FieldCostoTotal22.setText("");
@@ -4381,6 +4382,12 @@ public class main extends javax.swing.JFrame {
 
     private void ListaEspectador22ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectador22ValueChanged
         // TODO add your handling code here:
+        String espectador = ListaEspectador22.getSelectedValue();
+        
+        //if(tiene 3 o mas registros posibles)
+          //  listarlos
+        
+        
     }//GEN-LAST:event_ListaEspectador22ValueChanged
 
     private void ButtonCancelar22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelar22ActionPerformed

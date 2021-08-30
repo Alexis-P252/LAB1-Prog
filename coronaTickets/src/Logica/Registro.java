@@ -22,6 +22,7 @@ public class Registro {
     private int id;
     private Date fecha;
     private float costo;
+    private boolean canjeado;
     @OneToOne
     Funcion funcion;
 
@@ -31,6 +32,8 @@ public class Registro {
         this.fecha = fecha;
         this.costo = costo;
         this.funcion = funcion;
+        this.canjeado = false;
+        
     }
 
     public Date getFecha() {
@@ -43,6 +46,10 @@ public class Registro {
 
     public Funcion getFuncion() {
         return funcion;
+    }
+    
+    public boolean getCanjeado(){
+        return canjeado;
     }
     
     

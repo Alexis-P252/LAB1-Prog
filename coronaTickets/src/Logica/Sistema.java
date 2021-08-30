@@ -636,5 +636,31 @@ public class Sistema implements ISistema {
         
     }
     
+    public boolean alMenos3Registros (String espectador){
+        Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :espectador");
+        q.setParameter("espectador", espectador);
+        
+        try{
+            List registros = q.getResultList();
+            int i = 0;
+            Date actual = new Date();
+            for(Object object : registros){
+                Registro r = (Registro) object;
+                if(r.getCanjeado() != false && r.getFecha().after(actual)){
+                    i++;
+                }
+            }
+            
+            if(i >= 3){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch(Exception e){
+           return false;
+        }
+    }
+    
 }
 
