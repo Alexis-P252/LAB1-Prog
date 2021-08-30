@@ -612,6 +612,11 @@ public class main extends javax.swing.JFrame {
         FrameConsultarUsuario.getContentPane().setLayout(null);
 
         ListaRegistro2.setBackground(new java.awt.Color(204, 204, 204));
+        ListaRegistro2.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaRegistro2ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(ListaRegistro2);
 
         FrameConsultarUsuario.getContentPane().add(jScrollPane1);
@@ -3136,6 +3141,7 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultListModel listmodel = new DefaultListModel();
         this.ListaOrganizo2.setModel(listmodel);
+        this.ListaRegistro2.setModel(listmodel);
         this.FieldApellido2.setText("");
         this.FieldNombre2.setText("");
         this.FieldCorreo2.setText("");
@@ -3178,7 +3184,8 @@ public class main extends javax.swing.JFrame {
                 
             }
             else{
-                
+                String[] listafunciones = sis.listarfuncionesxEspectador(nickname);
+                this.ListaRegistro2.setListData(listafunciones);
             }
         }
         catch(Exception e) {}
@@ -4431,7 +4438,7 @@ public class main extends javax.swing.JFrame {
         try{
             String espectador = ListaEspectador22.getSelectedValue();
             if(sis.alMenos3Registros(espectador)){
-                JOptionPane.showMessageDialog(this,"Puedes canjear 3 de tu registros actuales para obtener este de forma gratuita. Selecciona 3 para hacer el intercambio o ningunno en caso de que no quieras hacerlo","Registro a Funcion",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Puedes canjear 3 de tu registros actuales para obtener este de forma gratuita. Selecciona 3 para hacer el intercambio o ninguno en caso de que no quieras hacerlo","Registro a Funcion",JOptionPane.INFORMATION_MESSAGE);
             
                 int filas = jTableRegistrosPrevios22.getRowCount();
                 //LIMPIO LA TABLA ANTES DE CARGAR LOS VALORES NUEVOS
@@ -4489,6 +4496,21 @@ public class main extends javax.swing.JFrame {
         ContarRegistrosSeleccionados();
            
     }//GEN-LAST:event_jTableRegistrosPrevios22MouseClicked
+
+    private void ListaRegistro2ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaRegistro2ValueChanged
+        // TODO add your handling code here:
+        String funcion = this.ListaRegistro2.getSelectedValue();
+        if(funcion != null){
+            DtFuncion dtF = sis.MostrarFuncion(funcion);
+            this.FieldNombre13.setText(dtF.getNombre());
+            this.FieldFecha_hora13.setText(ft.format(dtF.getFecha_hora()));
+            this.FieldFecha_alta13.setText(ft.format(dtF.getFecha_registro()));
+            
+            String[] artistasInvitados = sis.Artistasinvitados(funcion);
+            this.ListaArtistasInvitados13.setListData(artistasInvitados);
+            this.FrameConsultaFuncion.setVisible(true);
+        }
+    }//GEN-LAST:event_ListaRegistro2ValueChanged
 
     /**
      * @param args the command line arguments

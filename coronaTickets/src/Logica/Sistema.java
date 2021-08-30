@@ -704,8 +704,30 @@ public class Sistema implements ISistema {
             
         }
         em.getTransaction().commit();
+      
+    }
+    
+    
+    public String[] listarfuncionesxEspectador(String nickname){
         
-       
+        Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :nickname");
+        q.setParameter("nickname", nickname);
+        
+        try{
+            List registros = q.getResultList();
+            String[] res = new String[registros.size()];
+            int i = 0;
+            
+            for(Object object: registros){
+                Registro r = (Registro) object;
+                res[i] = r.funcion.getNombre();
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e ){
+            return new String[1];
+        }
     }
     
 }

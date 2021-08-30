@@ -48,6 +48,7 @@ public interface ISistema {
     public abstract List ListarRegistros (String espectador);
     public abstract boolean alMenos3Registros (String espectador);
     public abstract void CanjeoRegistros(List RegistrosSeleccionados, String espectador);
+    public abstract String[] listarfuncionesxEspectador(String nickname);
 }
 
 
