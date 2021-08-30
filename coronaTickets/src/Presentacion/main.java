@@ -15,12 +15,14 @@ import Logica.DtArtista;
 import Logica.DtEspectaculo;
 import Logica.DtFuncion;
 import Logica.DtPaquete;
+import Logica.DtRegistro;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -36,6 +38,7 @@ public class main extends javax.swing.JFrame {
     SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy '-' HH:mm:ss");
     SimpleDateFormat ft2 = new SimpleDateFormat ("dd.MM.yyyy");
     public DefaultTableModel modelListaArtista6;
+    public DefaultTableModel modelListaRegistros22;
     /**
      * Creates new form main
      */
@@ -2442,7 +2445,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         jPanel16.add(ButtonConfirmar22);
-        ButtonConfirmar22.setBounds(500, 330, 90, 30);
+        ButtonConfirmar22.setBounds(540, 330, 90, 30);
 
         ListaPlataforma22.setBackground(new java.awt.Color(204, 204, 204));
         ListaPlataforma22.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -2482,7 +2485,7 @@ public class main extends javax.swing.JFrame {
         LabelSeleccionePlataforma15.setForeground(new java.awt.Color(255, 255, 255));
         LabelSeleccionePlataforma15.setText("Costo Total");
         jPanel16.add(LabelSeleccionePlataforma15);
-        LabelSeleccionePlataforma15.setBounds(430, 200, 190, 17);
+        LabelSeleccionePlataforma15.setBounds(510, 230, 190, 17);
 
         ButtonCancelar22.setBackground(new java.awt.Color(204, 204, 204));
         ButtonCancelar22.setText("Cancelar");
@@ -2492,7 +2495,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         jPanel16.add(ButtonCancelar22);
-        ButtonCancelar22.setBounds(390, 330, 90, 30);
+        ButtonCancelar22.setBounds(450, 330, 90, 30);
 
         ListaEspectaculos22.setBackground(new java.awt.Color(204, 204, 204));
         ListaEspectaculos22.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -2521,11 +2524,11 @@ public class main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Registros Previos", ""
+                "Funcion", "Fecha", "Costo", ""
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -2535,7 +2538,7 @@ public class main extends javax.swing.JFrame {
         jScrollPane17.setViewportView(jTableRegistrosPrevios22);
 
         jPanel16.add(jScrollPane17);
-        jScrollPane17.setBounds(190, 220, 190, 140);
+        jScrollPane17.setBounds(160, 220, 280, 140);
 
         LabelSeleccionePlataforma16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelSeleccionePlataforma16.setForeground(new java.awt.Color(255, 255, 255));
@@ -2551,7 +2554,7 @@ public class main extends javax.swing.JFrame {
             }
         });
         jPanel16.add(FieldCostoTotal22);
-        FieldCostoTotal22.setBounds(430, 220, 80, 30);
+        FieldCostoTotal22.setBounds(510, 250, 80, 30);
 
         LabelSeleccionePlataforma17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelSeleccionePlataforma17.setForeground(new java.awt.Color(255, 255, 255));
@@ -2809,7 +2812,6 @@ public class main extends javax.swing.JFrame {
         this.FrameRegistroAFuncionDeEspectaculo22.setVisible(true);
         String [] plataformas = sis.listarPlataformas();
         this.ListaPlataforma22.setListData(plataformas);
-        
         String[] espectadores = sis.listarEspectadores();
         this.ListaEspectador22.setListData(espectadores);
     }//GEN-LAST:event_RegistroFuncionUsuarioActionPerformed
@@ -4382,10 +4384,35 @@ public class main extends javax.swing.JFrame {
 
     private void ListaEspectador22ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaEspectador22ValueChanged
         // TODO add your handling code here:
-        String espectador = ListaEspectador22.getSelectedValue();
         
-        //if(tiene 3 o mas registros posibles)
-          //  listarlos
+        try{
+            String espectador = ListaEspectador22.getSelectedValue();
+            if(sis.alMenos3Registros(espectador)){
+                int filas = jTableRegistrosPrevios22.getRowCount();
+                //LIMPIO LA TABLA ANTES DE CARGAR LOS VALORES NUEVOS
+                for(int i = filas-1;i >= 0;i--){
+                    modelListaRegistros22.removeRow(i);
+                }
+
+                List dtr2 = sis.ListarRegistros(espectador);
+                String row[] = new String[4];
+                modelListaRegistros22 = (DefaultTableModel)this.jTableRegistrosPrevios22.getModel();
+                //RECORRO LA LISTA PARA LLENAR LA TABLA CON LOS VALORES NUEVOS
+                for(Object object : dtr2){
+                    DtRegistro dtr = (DtRegistro) object;
+                    
+                    row[0] = dtr.getFuncion();
+                    row[1] = ft.format(dtr.getFecha());
+                    row[2] = ""+dtr.getCosto();
+                    modelListaRegistros22.addRow(row);
+                   
+                }
+            }
+        }catch(Exception e){
+        
+        }
+        
+          
         
         
     }//GEN-LAST:event_ListaEspectador22ValueChanged

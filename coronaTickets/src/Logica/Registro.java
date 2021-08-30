@@ -5,6 +5,7 @@
  */
 package Logica;
 import Logica.Funcion;
+import Logica.DtRegistro;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,6 +53,10 @@ public class Registro {
         return canjeado;
     }
     
+    public DtRegistro ArmarDt(){
+        DtRegistro dt = new DtRegistro(1,this.funcion.getNombre(),this.funcion.getEspectaculo(),this.getFecha(),this.getCanjeado(),this.getCosto());
+        return dt;
+    }
     
 }
 

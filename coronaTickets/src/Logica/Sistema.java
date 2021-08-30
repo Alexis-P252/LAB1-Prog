@@ -14,6 +14,7 @@ import Logica.Usuario;
 import Logica.DtEspectaculo;
 import Logica.DtUsuario;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -639,18 +640,16 @@ public class Sistema implements ISistema {
     public boolean alMenos3Registros (String espectador){
         Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :espectador");
         q.setParameter("espectador", espectador);
-        
         try{
-            List registros = q.getResultList();
+            List registros = q.getResultList();    
             int i = 0;
             Date actual = new Date();
             for(Object object : registros){
-                Registro r = (Registro) object;
-                if(r.getCanjeado() != false && r.getFecha().after(actual)){
-                    i++;
+                Registro r = (Registro) object;    
+                if(r.getCanjeado() != true && r.funcion.getFecha_hora().after(actual)){
+                    i++;         
                 }
             }
-            
             if(i >= 3){
                 return true;
             }
@@ -660,6 +659,30 @@ public class Sistema implements ISistema {
         }catch(Exception e){
            return false;
         }
+    }
+    
+    public List ListarRegistros (String espectador){
+        Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :espectador");
+        q.setParameter("espectador", espectador);
+        
+        try{
+            List registros = q.getResultList();
+            List<DtRegistro> listaDtRegistros = new ArrayList<DtRegistro>();
+
+            int i = 0;
+            Date actual = new Date();
+            for(Object object : registros){
+                Registro r = (Registro) object;
+                if(r.getCanjeado() != true && r.funcion.getFecha_hora().after(actual)){ 
+                    DtRegistro dtr = r.ArmarDt();
+                    listaDtRegistros.add(dtr);
+                }
+            }
+            return listaDtRegistros;
+        }catch(Exception e){
+           return null;
+        }
+        
     }
     
 }

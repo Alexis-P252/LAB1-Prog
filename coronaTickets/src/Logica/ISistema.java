@@ -45,6 +45,8 @@ public interface ISistema {
     public abstract boolean espectadorRegistrado(String espectador, String funcion);
     public abstract boolean cantMaxAsistentes(String espectaculo, String funcion);
     public abstract void agregarRegistro(String espectador,String funcion, String espectaculo, Date f, int costo);
+    public abstract List ListarRegistros (String espectador);
+    public abstract boolean alMenos3Registros (String espectador);
 }
 
 

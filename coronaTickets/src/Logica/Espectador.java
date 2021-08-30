@@ -5,8 +5,11 @@
  */
 package Logica;
 import Logica.Usuario;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -38,4 +41,6 @@ public class Espectador extends Usuario {
     public void agregarRegistro(Registro r, String funcion){
         this.registros.put(funcion,r);
     }
+    
+    
 }
