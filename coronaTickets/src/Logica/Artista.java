@@ -25,6 +25,7 @@ public class Artista extends Usuario {
     private String descripcion;
     private String biografia;
     private String link;
+    
     @OneToMany
     private Map <String,Espectaculo>organiza;
     
@@ -62,7 +63,8 @@ public class Artista extends Usuario {
     public void SetBiografia (String bio){
         this.biografia = bio;
     } 
-     
+    
+    
     @Override 
     public DtArtista ArmarDT(){
          DtArtista dt = new DtArtista(nombre, apellido, email, nickname, fecha_nac, descripcion, biografia, link);

@@ -35,17 +35,19 @@ import javax.swing.table.DefaultTableModel;
 public class main extends javax.swing.JFrame {
 
     private ISistema sis;
+    
     SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy '-' HH:mm:ss");
     SimpleDateFormat ft2 = new SimpleDateFormat ("dd.MM.yyyy");
+    
     public DefaultTableModel modelListaArtista6;
     public DefaultTableModel modelListaRegistros22;
     /**
      * Creates new form main
      */
     public main(){
+        
         initComponents();
         
-    
         //Inicialización
         SistemaFactory fabrica = SistemaFactory.getInstance();
         sis = fabrica.getISistema();
@@ -2796,7 +2798,7 @@ public class main extends javax.swing.JFrame {
         ocultarVentanas();
         this.FrameAltaUsuario.setSize(673, 500);   
         this.FrameAltaUsuario.setVisible(true);
-        this.EspectadorButton.doClick();
+        this.EspectadorButton.doClick(); // SE SELECCIONA POR DEFECTO EL BOTON ESPECTADOR
         
         
     }//GEN-LAST:event_AltaUsuarioActionPerformed
@@ -2819,6 +2821,7 @@ public class main extends javax.swing.JFrame {
 
     private void RegistroFuncionUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistroFuncionUsuarioActionPerformed
         // TODO add your handling code here:
+        ocultarVentanas();
         this.FrameRegistroAFuncionDeEspectaculo22.setVisible(true);
         String [] plataformas = sis.listarPlataformas();
         this.ListaPlataforma22.setListData(plataformas);
@@ -3166,7 +3169,7 @@ public class main extends javax.swing.JFrame {
             this.FieldApellido2.setText(apellido);
             this.FieldCorreo2.setText(correo);
             this.FieldNickname2.setText(nickname);
-            this.FieldFechaNac2.setText(ft.format(f));
+            this.FieldFechaNac2.setText(ft2.format(f));
 
             if(dtU instanceof DtArtista){
                 DtArtista dtArt = (DtArtista) dtU;
