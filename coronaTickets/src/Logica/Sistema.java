@@ -36,8 +36,7 @@ public class Sistema implements ISistema {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("coronaTicketsPU");
         this.em = emf.createEntityManager();
     }
-    
-    
+   
     
     //  ** CREA UN NUEVO ESPECTACULO CON LOS DATOS RECIBIDOS 
     //  ** LO PERSISTE A NIVEL DE LA BASE DE DATOS
@@ -57,6 +56,8 @@ public class Sistema implements ISistema {
         em.getTransaction().commit();
  
     }
+    
+    
     // VERIFICA SI EL NOMBRE DEL ESPECTACULO RECIBIDIDO COMO PARAMETRO PERTENECE A UN ESPECTACULO YA CREADO, DEVUELTE TRUE EN CASO POSITIVO, FALSE EN CASO NEGATIVO
     public boolean verificarEspectaculo(String espectaculo){
         
@@ -68,6 +69,8 @@ public class Sistema implements ISistema {
         }
       
     }
+    
+    
     // LISTA TODOS LOS ARTISTAS EXISTENTES, EN CASO DE QUE LA CONSULTA NO DEVUELVA NINGUN ARTISTA, DEVUELVE UN ARREGLO VACIO.
     public String[] listarArtistas(){
         
@@ -583,7 +586,7 @@ public class Sistema implements ISistema {
     }
     
     
-    
+    // VERIFICA SI EL ESPECTADOR CON NOMBRE IGUAL AL VALOR PASADO POR PARAMETRO YA SE REGISTRO A LA FUNCION CON NOMBRE IGUAL AL VALOR PASADO POR PARAMETRO
     public boolean espectadorRegistrado(String espectador, String funcion){
         
         Query q = em.createNativeQuery("SELECT COUNT(*) FROM espectador_registro er WHERE er.espectador_nickname = '" + espectador +"' AND er.registros_key = '"+funcion+"'");
@@ -599,6 +602,8 @@ public class Sistema implements ISistema {
     }
     
     
+    // VERIFICA SI TODAVIA NO SE HAN REGISTRADO EL MAXIMO DE PERSONAS PARA UNA FUNCION DE UN ESPECTACULO EN CONCRETO, 
+    //COMPARANDO EL ATRIBUTO CANT_MAX_ESPEC DEL ESPECTACULO CON LA CANTIDAD DE REGISTROS A LA FUNCION.
     public boolean cantMaxAsistentes(String espectaculo, String funcion){
         Query q = em.createQuery("SELECT e.cant_max_espec FROM Espectaculo e WHERE e.nombre = :espectaculo");
         q.setParameter("espectaculo", espectaculo);
@@ -616,6 +621,8 @@ public class Sistema implements ISistema {
         
     }
     
+    
+    // CREA Y AGREGA UN NUEVO REGISTRO. ASOCIA EL REGISTRO CON EL ESPECTADOR QUE SE REGISTRO.
     public void agregarRegistro(String espectador,String funcion, String espectaculo, Date f, int costo){
         
         em.getTransaction().begin();
@@ -637,6 +644,9 @@ public class Sistema implements ISistema {
         
     }
     
+    
+    // VERIFICA SI EXISTEN AL MENOS 3 REGISTROS DE UN ESPECTADOR QUE CUMPLAN CON LA CONDICION DE QUE PUEDEN SER CANJEADOS PARA OBTENER UN NUEVO REGISTRO GRATIS
+    // ESTO LO HACE VERIIFCANDO QUE LOS REGISTROS NO HAYAN SIDO CANJEADOS ANTES Y VERIFICANDO QUE LA FUNCION DEL REGISTRO TODAVIA NO HAYA SUCEDIDO.
     public boolean alMenos3Registros (String espectador){
         Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :espectador");
         q.setParameter("espectador", espectador);
@@ -661,6 +671,8 @@ public class Sistema implements ISistema {
         }
     }
     
+    
+    // LISTA LOS REGISTROS QUE CUMPLEN CON LA CONDICION INDICADA EN LA FUNCION DE ARRIBA
     public List ListarRegistros (String espectador){
         Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :espectador");
         q.setParameter("espectador", espectador);
@@ -685,6 +697,8 @@ public class Sistema implements ISistema {
         
     }
     
+    
+    // RECIBE UNA LISTA DE  3 REGISTROS QUE FUERON CANJEADOS, APLICA UN UPDATE A NIVEL DE LA BASE DE DATOS PARA MARCARLOS COMO CANJEADOS
     public void CanjeoRegistros(List RegistrosSeleccionados, String espectador){
         
         em.getTransaction().begin();
@@ -708,6 +722,7 @@ public class Sistema implements ISistema {
     }
     
     
+    // LISTA TODAS LAS FUNCIONES A LAS CUALES SE REGISTRO UN ESPECTADOR EN CONCRETO.
     public String[] listarfuncionesxEspectador(String nickname){
         
         Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :nickname");
