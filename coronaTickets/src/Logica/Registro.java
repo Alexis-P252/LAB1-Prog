@@ -5,6 +5,7 @@
  */
 package Logica;
 import Logica.Funcion;
+import Logica.DtRegistro;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ public class Registro {
     private int id;
     private Date fecha;
     private float costo;
+    private boolean canjeado;
     @OneToOne
     Funcion funcion;
 
@@ -31,6 +33,8 @@ public class Registro {
         this.fecha = fecha;
         this.costo = costo;
         this.funcion = funcion;
+        this.canjeado = false;
+        
     }
 
     public Date getFecha() {
@@ -45,6 +49,14 @@ public class Registro {
         return funcion;
     }
     
+    public boolean getCanjeado(){
+        return canjeado;
+    }
+    
+    public DtRegistro ArmarDt(){
+        DtRegistro dt = new DtRegistro(this.id,this.funcion.getNombre(),this.funcion.getEspectaculo(),this.funcion.getFecha_hora(),this.getCanjeado(),this.getCosto());
+        return dt;
+    }
     
 }
 

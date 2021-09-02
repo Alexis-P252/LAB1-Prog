@@ -14,6 +14,7 @@ import Logica.Usuario;
 import Logica.DtEspectaculo;
 import Logica.DtUsuario;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -35,8 +36,7 @@ public class Sistema implements ISistema {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("coronaTicketsPU");
         this.em = emf.createEntityManager();
     }
-    
-    
+   
     
     //  ** CREA UN NUEVO ESPECTACULO CON LOS DATOS RECIBIDOS 
     //  ** LO PERSISTE A NIVEL DE LA BASE DE DATOS
@@ -56,6 +56,8 @@ public class Sistema implements ISistema {
         em.getTransaction().commit();
  
     }
+    
+    
     // VERIFICA SI EL NOMBRE DEL ESPECTACULO RECIBIDIDO COMO PARAMETRO PERTENECE A UN ESPECTACULO YA CREADO, DEVUELTE TRUE EN CASO POSITIVO, FALSE EN CASO NEGATIVO
     public boolean verificarEspectaculo(String espectaculo){
         
@@ -67,6 +69,8 @@ public class Sistema implements ISistema {
         }
       
     }
+    
+    
     // LISTA TODOS LOS ARTISTAS EXISTENTES, EN CASO DE QUE LA CONSULTA NO DEVUELVA NINGUN ARTISTA, DEVUELVE UN ARREGLO VACIO.
     public String[] listarArtistas(){
         
@@ -87,6 +91,28 @@ public class Sistema implements ISistema {
         }
     }
     
+    
+    // LISTA TODOS LOS ESPECTADORES EXISTENTES, EN CASO DE QUE LA CONSULTA NO DEVUELVA NINGUN ESPECTADOR, DEVUELVE UN ARREGLO VACIO.
+    public String[] listarEspectadores(){
+        
+        Query q = em.createQuery("SELECT e.nickname FROM Espectador e");
+        try{
+            List lista = q.getResultList();
+            String res[] = new String[lista.size()];
+            int i = 0;
+            
+            for(Object object: lista){
+                res[i] = (String) object;
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e){
+            return new String[1];
+        }
+    }
+    
+    
  
     // LISTA TODAS LAS PLATAFORMAS EXISTENTES, EN CASO DE QUE LA CONSULTA NO DEVUELVA NIGNUNA PLATAFORMA, DEVUELVE UN ARREGLO VACIO
     public String[] listarPlataformas(){
@@ -106,7 +132,7 @@ public class Sistema implements ISistema {
         }catch(Exception e){
             return new String[1];
         }
-    } 
+    }
     
     
     // CREA UN NUEVO ESPECTADOR CON LOS DATOS RECIBIDIDOS Y LO PERSISTE.
@@ -167,26 +193,21 @@ public class Sistema implements ISistema {
     
     // DEVUELVE UN ARREGLO CON TODOS LOS NICKNAMES DE LOS USUARIOS, TANTO ESPECTADORES COMO ARTISTAS.
     public String[] ColNickname(){
-        Query q = em.createQuery("Select a.nickname from Artista a");
-        Query q1 = em.createQuery("Select e.nickname from Espectador e");
+        //Query q = em.createQuery("Select a.nickname from Artista a UNION Select e.nickname from Espectador e");
+        Query q = em.createQuery("Select CONCAT(a.nickname, ' (A)') FROM Artista a UNION Select CONCAT(e.nickname, ' (E)') FROM Espectador e");
         
+     
         try{
-            List listaArtistas = q.getResultList();
-            List listaEspectadores = q1.getResultList();
+            List lista = q.getResultList();
+            //List listaEspectadores = q1.getResultList();
 
-            String res[] = new String[listaEspectadores.size() + listaArtistas.size()];
+            String res[] = new String[lista.size()];
             int i = 0;
 
-            for(Object object :listaArtistas){
-                res[i] =(String) object + " (A)";
+            for(Object object :lista){
+                res[i] =(String) object;
                 i++;
             }
-
-            for(Object object :listaEspectadores){
-                res[i] =(String)object + " (E)";
-                i++;
-            }
-
             return res;
             
         }catch(Exception e){
@@ -511,7 +532,7 @@ public class Sistema implements ISistema {
     
     // LISTA TODOS LOS ARTISTAS A EXCEPCION DEL ARTISTA ORGANIZADOR DEL ESPECTACULO CON NOMBRE IGUAL AL VALOR RECIBIDO POR PARAMETRO
     // EN CASO DE QUE LA QUERY NO RETORNE NINGUN VALOR, SE RETORNA UN ARREGLO VACIO.
-    public String[] listarArtistasmenosEspectador(String espectaculo){
+    public String[] listarArtistasmenosOrganizador(String espectaculo){
         
         Query q = em.createNativeQuery("SELECT DISTINCT a.nickname FROM artista a  WHERE a.nickname NOT IN (SELECT ae.artista_nickname FROM artista_espectaculo ae WHERE ae.organiza_nombre = " +"'" + espectaculo +"')");
 
@@ -554,5 +575,175 @@ public class Sistema implements ISistema {
             return new String[1];
         }
     }
+    
+    
+    // DADO EL NOMBRE DE UN ESPECTACULO DEVUELVE EL PRECIO DEL MISMO
+    public float darPrecioEspectaculo(String espectaculo){
+        Query q = em.createQuery("SELECT e.costo FROM Espectaculo e WHERE e.nombre = :espectaculo");
+        q.setParameter("espectaculo", espectaculo);
+        float costo = (float) q.getSingleResult();
+        return costo;
+    }
+    
+    
+    // VERIFICA SI EL ESPECTADOR CON NOMBRE IGUAL AL VALOR PASADO POR PARAMETRO YA SE REGISTRO A LA FUNCION CON NOMBRE IGUAL AL VALOR PASADO POR PARAMETRO
+    public boolean espectadorRegistrado(String espectador, String funcion){
+        
+        Query q = em.createNativeQuery("SELECT COUNT(*) FROM espectador_registro er WHERE er.espectador_nickname = '" + espectador +"' AND er.registros_key = '"+funcion+"'");
+        
+        long cant = (long) q.getSingleResult();
+        
+        if(cant == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    
+    
+    // VERIFICA SI TODAVIA NO SE HAN REGISTRADO EL MAXIMO DE PERSONAS PARA UNA FUNCION DE UN ESPECTACULO EN CONCRETO, 
+    //COMPARANDO EL ATRIBUTO CANT_MAX_ESPEC DEL ESPECTACULO CON LA CANTIDAD DE REGISTROS A LA FUNCION.
+    public boolean cantMaxAsistentes(String espectaculo, String funcion){
+        Query q = em.createQuery("SELECT e.cant_max_espec FROM Espectaculo e WHERE e.nombre = :espectaculo");
+        q.setParameter("espectaculo", espectaculo);
+        int max = (int) q.getSingleResult();
+        
+        Query q2 = em.createNativeQuery("SELECT COUNT(*) FROM espectador_registro er WHERE  er.registros_key = '"+funcion+"'");
+        long cant = (long) q2.getSingleResult();
+        
+        if(cant < max){
+            return false;
+        }
+        else{
+            return true;
+        }
+        
+    }
+    
+    
+    // CREA Y AGREGA UN NUEVO REGISTRO. ASOCIA EL REGISTRO CON EL ESPECTADOR QUE SE REGISTRO.
+    public void agregarRegistro(String espectador,String funcion, String espectaculo, Date f, int costo){
+        
+        em.getTransaction().begin();
+        
+        Espectador esp = (Espectador) em.find(Espectador.class, espectador);
+        Funcion fu = (Funcion) em.find(Funcion.class, funcion);
+        Espectaculo e = (Espectaculo) em.find(Espectaculo.class, espectaculo);
+        
+        if(costo != 0){
+             costo = (int) e.getCosto();
+        }
+        
+        Registro r = new Registro(f, costo, fu);
+        em.persist(r);
+        
+        esp.agregarRegistro(r, fu.getNombre());
+        
+        em.getTransaction().commit();
+        
+    }
+    
+    
+    // VERIFICA SI EXISTEN AL MENOS 3 REGISTROS DE UN ESPECTADOR QUE CUMPLAN CON LA CONDICION DE QUE PUEDEN SER CANJEADOS PARA OBTENER UN NUEVO REGISTRO GRATIS
+    // ESTO LO HACE VERIIFCANDO QUE LOS REGISTROS NO HAYAN SIDO CANJEADOS ANTES Y VERIFICANDO QUE LA FUNCION DEL REGISTRO TODAVIA NO HAYA SUCEDIDO.
+    public boolean alMenos3Registros (String espectador){
+        Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :espectador");
+        q.setParameter("espectador", espectador);
+        try{
+            List registros = q.getResultList();    
+            int i = 0;
+            Date actual = new Date();
+            for(Object object : registros){
+                Registro r = (Registro) object;    
+                if(r.getCanjeado() != true && r.funcion.getFecha_hora().after(actual)){
+                    i++;         
+                }
+            }
+            if(i >= 3){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch(Exception e){
+           return false;
+        }
+    }
+    
+    
+    // LISTA LOS REGISTROS QUE CUMPLEN CON LA CONDICION INDICADA EN LA FUNCION DE ARRIBA
+    public List ListarRegistros (String espectador){
+        Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :espectador");
+        q.setParameter("espectador", espectador);
+        
+        try{
+            List registros = q.getResultList();
+            List<DtRegistro> listaDtRegistros = new ArrayList<DtRegistro>();
+
+            int i = 0;
+            Date actual = new Date();
+            for(Object object : registros){
+                Registro r = (Registro) object;
+                if(r.getCanjeado() != true && r.funcion.getFecha_hora().after(actual)){ 
+                    DtRegistro dtr = r.ArmarDt();
+                    listaDtRegistros.add(dtr);
+                }
+            }
+            return listaDtRegistros;
+        }catch(Exception e){
+           return null;
+        }
+        
+    }
+    
+    
+    // RECIBE UNA LISTA DE  3 REGISTROS QUE FUERON CANJEADOS, APLICA UN UPDATE A NIVEL DE LA BASE DE DATOS PARA MARCARLOS COMO CANJEADOS
+    public void CanjeoRegistros(List RegistrosSeleccionados, String espectador){
+        
+        em.getTransaction().begin();
+        
+        for(Object object: RegistrosSeleccionados){
+            
+            String funcion = (String) object;
+            
+            Query q = em.createNativeQuery("SELECT r.id FROM registro r  WHERE r.funcion_nombre = '"+funcion+"' AND r.id IN (SELECT er.registros_id FROM espectador_registro er WHERE espectador_nickname = '"+espectador+"')");
+            int id = (int) q.getSingleResult();
+            
+            Query q2 = em.createQuery("UPDATE Registro r SET r.canjeado = true WHERE r.id = :id");
+            q2.setParameter("id", id);
+            q2.executeUpdate();
+            Registro r = em.find(Registro.class, id);
+            em.refresh(r);
+            
+        }
+        em.getTransaction().commit();
+      
+    }
+    
+    
+    // LISTA TODAS LAS FUNCIONES A LAS CUALES SE REGISTRO UN ESPECTADOR EN CONCRETO.
+    public String[] listarfuncionesxEspectador(String nickname){
+        
+        Query q = em.createQuery("SELECT e.registros FROM Espectador e WHERE e.nickname = :nickname");
+        q.setParameter("nickname", nickname);
+        
+        try{
+            List registros = q.getResultList();
+            String[] res = new String[registros.size()];
+            int i = 0;
+            
+            for(Object object: registros){
+                Registro r = (Registro) object;
+                res[i] = r.funcion.getNombre();
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e ){
+            return new String[1];
+        }
+    }
+    
 }
 
