@@ -24,9 +24,9 @@ public class Espectador extends Usuario {
     @OneToMany
     private Map<String,Registro> registros;
     
-    public Espectador(String nombre, String apellido, String email, String nickname, Date fecha_nac){
+    public Espectador(String nombre, String apellido, String email, String nickname, Date fecha_nac, String password){
     
-        super(nombre, apellido, email, nickname, fecha_nac);
+        super(nombre, apellido, email, nickname, fecha_nac, password);
         this.registros = new HashMap();
     }
     

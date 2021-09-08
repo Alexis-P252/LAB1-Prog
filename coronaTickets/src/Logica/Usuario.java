@@ -6,10 +6,13 @@
 package Logica;
 import Logica.DtUsuario;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -21,16 +24,23 @@ public abstract class Usuario {
     protected String nombre;
     protected String apellido;
     protected String email;
+    protected String password;
     @Id protected String nickname;
     protected Date fecha_nac;
+    @OneToMany
+    protected Map<String,Usuario> seguidores;
     
-    public Usuario(String nombre, String apellido, String email, String nickname, Date fecha_nac){
+    
+    
+    public Usuario(String nombre, String apellido, String email, String nickname, Date fecha_nac, String password){
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.nickname = nickname;
         this.fecha_nac = fecha_nac;
-        
+        this.password = password;
+        this.seguidores = new HashMap();
+    
     }
     
     public Usuario(){}
@@ -69,5 +79,7 @@ public abstract class Usuario {
     
     public abstract DtUsuario ArmarDT();
     
-    
+    public void addSeguidor(Usuario u){
+        this.seguidores.put(u.GetNickname(), u);
+    }
 }

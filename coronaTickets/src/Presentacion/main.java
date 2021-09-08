@@ -71,12 +71,7 @@ public class main extends javax.swing.JFrame {
         GroupTipoUsuario.add(ArtistaButton);
         
    
-        try{
-            Image img=ImageIO.read(new File("ticket.png"));
-            this.setIconImage(img);
-        } catch(Exception e){
-            System.out.println(e);
-        } 
+       
     }
 
     /**
@@ -90,17 +85,6 @@ public class main extends javax.swing.JFrame {
 
         GroupTipoUsuario = new javax.swing.ButtonGroup();
         FrameAltaUsuario = new javax.swing.JInternalFrame();
-        jLabel1 = new javax.swing.JLabel();
-        EspectadorButton = new javax.swing.JRadioButton();
-        ArtistaButton = new javax.swing.JRadioButton();
-        LabelNickname = new javax.swing.JLabel();
-        FieldNickname = new javax.swing.JTextField();
-        LabelNombre = new javax.swing.JLabel();
-        FieldNombre = new javax.swing.JTextField();
-        LabelApellido = new javax.swing.JLabel();
-        FieldApellido = new javax.swing.JTextField();
-        LabelEmail = new javax.swing.JLabel();
-        FieldEmail = new javax.swing.JTextField();
         LabelFecha_Nac = new javax.swing.JLabel();
         LabelDescripcion = new javax.swing.JLabel();
         FieldDescripcion = new javax.swing.JTextField();
@@ -117,6 +101,21 @@ public class main extends javax.swing.JFrame {
         LabelAnio = new javax.swing.JLabel();
         LabelMes = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        EspectadorButton = new javax.swing.JRadioButton();
+        ArtistaButton = new javax.swing.JRadioButton();
+        LabelNickname = new javax.swing.JLabel();
+        FieldNickname = new javax.swing.JTextField();
+        LabelEmail = new javax.swing.JLabel();
+        FieldEmail = new javax.swing.JTextField();
+        LabelNombre = new javax.swing.JLabel();
+        FieldNombre = new javax.swing.JTextField();
+        LabelApellido = new javax.swing.JLabel();
+        FieldApellido = new javax.swing.JTextField();
+        LabelEmail1 = new javax.swing.JLabel();
+        FieldConfPassword1 = new javax.swing.JPasswordField();
+        LabelEmail2 = new javax.swing.JLabel();
+        FieldPassword1 = new javax.swing.JPasswordField();
         FrameConsultarUsuario = new javax.swing.JInternalFrame();
         jScrollPane1 = new javax.swing.JScrollPane();
         ListaRegistro2 = new javax.swing.JList<>();
@@ -427,76 +426,6 @@ public class main extends javax.swing.JFrame {
         FrameAltaUsuario.setVisible(true);
         FrameAltaUsuario.getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Indique si el usuario a ingresar es Espectador o Artista");
-        FrameAltaUsuario.getContentPane().add(jLabel1);
-        jLabel1.setBounds(30, 20, 390, 22);
-
-        EspectadorButton.setBackground(new java.awt.Color(51, 51, 51));
-        EspectadorButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        EspectadorButton.setForeground(new java.awt.Color(255, 255, 255));
-        EspectadorButton.setText("Espectador");
-        EspectadorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EspectadorButtonActionPerformed(evt);
-            }
-        });
-        FrameAltaUsuario.getContentPane().add(EspectadorButton);
-        EspectadorButton.setBounds(30, 50, 90, 30);
-
-        ArtistaButton.setBackground(new java.awt.Color(51, 51, 51));
-        ArtistaButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ArtistaButton.setForeground(new java.awt.Color(255, 255, 255));
-        ArtistaButton.setText("Artista");
-        ArtistaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ArtistaButtonActionPerformed(evt);
-            }
-        });
-        FrameAltaUsuario.getContentPane().add(ArtistaButton);
-        ArtistaButton.setBounds(30, 80, 80, 30);
-
-        LabelNickname.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        LabelNickname.setForeground(new java.awt.Color(255, 255, 255));
-        LabelNickname.setText("Nickname");
-        FrameAltaUsuario.getContentPane().add(LabelNickname);
-        LabelNickname.setBounds(30, 130, 70, 15);
-
-        FieldNickname.setBackground(new java.awt.Color(204, 204, 204));
-        FrameAltaUsuario.getContentPane().add(FieldNickname);
-        FieldNickname.setBounds(100, 130, 143, 30);
-
-        LabelNombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        LabelNombre.setForeground(new java.awt.Color(255, 255, 255));
-        LabelNombre.setText("Nombre");
-        FrameAltaUsuario.getContentPane().add(LabelNombre);
-        LabelNombre.setBounds(270, 130, 45, 21);
-
-        FieldNombre.setBackground(new java.awt.Color(204, 204, 204));
-        FrameAltaUsuario.getContentPane().add(FieldNombre);
-        FieldNombre.setBounds(330, 130, 143, 30);
-
-        LabelApellido.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        LabelApellido.setForeground(new java.awt.Color(255, 255, 255));
-        LabelApellido.setText("Apellido");
-        FrameAltaUsuario.getContentPane().add(LabelApellido);
-        LabelApellido.setBounds(270, 180, 45, 17);
-
-        FieldApellido.setBackground(new java.awt.Color(204, 204, 204));
-        FrameAltaUsuario.getContentPane().add(FieldApellido);
-        FieldApellido.setBounds(330, 180, 143, 30);
-
-        LabelEmail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        LabelEmail.setForeground(new java.awt.Color(255, 255, 255));
-        LabelEmail.setText("Email");
-        FrameAltaUsuario.getContentPane().add(LabelEmail);
-        LabelEmail.setBounds(30, 180, 45, 17);
-
-        FieldEmail.setBackground(new java.awt.Color(204, 204, 204));
-        FrameAltaUsuario.getContentPane().add(FieldEmail);
-        FieldEmail.setBounds(100, 180, 143, 30);
-
         LabelFecha_Nac.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LabelFecha_Nac.setForeground(new java.awt.Color(255, 255, 255));
         LabelFecha_Nac.setText("Fecha nacimiento");
@@ -602,20 +531,100 @@ public class main extends javax.swing.JFrame {
         LabelMes.setBounds(340, 290, 118, 17);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setLayout(null);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Indique si el usuario a ingresar es Espectador o Artista");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(30, 20, 390, 22);
+
+        EspectadorButton.setBackground(new java.awt.Color(51, 51, 51));
+        EspectadorButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        EspectadorButton.setForeground(new java.awt.Color(255, 255, 255));
+        EspectadorButton.setText("Espectador");
+        EspectadorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EspectadorButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(EspectadorButton);
+        EspectadorButton.setBounds(30, 40, 90, 30);
+
+        ArtistaButton.setBackground(new java.awt.Color(51, 51, 51));
+        ArtistaButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        ArtistaButton.setForeground(new java.awt.Color(255, 255, 255));
+        ArtistaButton.setText("Artista");
+        ArtistaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ArtistaButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ArtistaButton);
+        ArtistaButton.setBounds(30, 70, 80, 30);
+
+        LabelNickname.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelNickname.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNickname.setText("Nickname");
+        jPanel1.add(LabelNickname);
+        LabelNickname.setBounds(20, 110, 70, 15);
+
+        FieldNickname.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(FieldNickname);
+        FieldNickname.setBounds(90, 110, 150, 30);
+
+        LabelEmail.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelEmail.setForeground(new java.awt.Color(255, 255, 255));
+        LabelEmail.setText("Conf. Contaraseña");
+        jPanel1.add(LabelEmail);
+        LabelEmail.setBounds(270, 190, 110, 17);
+
+        FieldEmail.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(FieldEmail);
+        FieldEmail.setBounds(90, 150, 150, 30);
+
+        LabelNombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelNombre.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNombre.setText("Nombre");
+        jPanel1.add(LabelNombre);
+        LabelNombre.setBounds(270, 110, 45, 21);
+
+        FieldNombre.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(FieldNombre);
+        FieldNombre.setBounds(380, 110, 150, 30);
+
+        LabelApellido.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelApellido.setForeground(new java.awt.Color(255, 255, 255));
+        LabelApellido.setText("Apellido");
+        jPanel1.add(LabelApellido);
+        LabelApellido.setBounds(270, 150, 45, 17);
+
+        FieldApellido.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(FieldApellido);
+        FieldApellido.setBounds(380, 150, 150, 30);
+
+        LabelEmail1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelEmail1.setForeground(new java.awt.Color(255, 255, 255));
+        LabelEmail1.setText("Email");
+        jPanel1.add(LabelEmail1);
+        LabelEmail1.setBounds(20, 150, 45, 17);
+
+        FieldConfPassword1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(FieldConfPassword1);
+        FieldConfPassword1.setBounds(380, 190, 150, 30);
+
+        LabelEmail2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LabelEmail2.setForeground(new java.awt.Color(255, 255, 255));
+        LabelEmail2.setText("Contrasena");
+        jPanel1.add(LabelEmail2);
+        LabelEmail2.setBounds(20, 200, 70, 17);
+
+        FieldPassword1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.add(FieldPassword1);
+        FieldPassword1.setBounds(90, 190, 150, 30);
 
         FrameAltaUsuario.getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, -10, 520, 450);
+        jPanel1.setBounds(0, -10, 560, 450);
 
         FrameConsultarUsuario.setBackground(new java.awt.Color(204, 204, 204));
         FrameConsultarUsuario.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -2810,11 +2819,11 @@ public class main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(FrameAltaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(FrameAltaEspectaculo, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(FrameAltaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -3068,6 +3077,8 @@ public class main extends javax.swing.JFrame {
         this.FieldBiografia.setText("");
         this.FieldDescripcion.setText("");
         this.FieldSitioWeb.setText("");
+        this.FieldPassword1.setText("");
+        this.FieldConfPassword1.setText("");
         this.ComboBoxDia.setSelectedIndex(0);
         this.ComboBoxMes.setSelectedIndex(0);
         this.ComboBoxAnio.setSelectedIndex(0);
@@ -3092,6 +3103,8 @@ public class main extends javax.swing.JFrame {
         
         String nombre = this.FieldNombre.getText();
         String apellido = this.FieldApellido.getText();
+        String password = this.FieldPassword1.getText();
+        String confPassword = this.FieldConfPassword1.getText();
         
         int dia = this.ComboBoxDia.getSelectedIndex() + 1;
         int mes = this.ComboBoxMes.getSelectedIndex() + 1;
@@ -3101,22 +3114,29 @@ public class main extends javax.swing.JFrame {
         Boolean hayVacios = false;
         
         
-        if(nickname.isEmpty()|| apellido.isEmpty()|| email.isEmpty() || nombre.isEmpty() ){ hayVacios = true;}
+        if(nickname.isEmpty()|| apellido.isEmpty()|| email.isEmpty() || nombre.isEmpty() || password.isEmpty() || confPassword.isEmpty() ){ hayVacios = true;}
         
         if(hayVacios == true){
             JOptionPane.showMessageDialog(this, "ERROR: Rellene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if( !(password.equals(confPassword))){
+            JOptionPane.showMessageDialog(this, "ERROR: Las password no coinciden", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
      
         Date f = new Date(anio-1900,mes-1,dia,0,0,0);
         
         if(this.EspectadorButton.isSelected()){ // SE QUIERE AGREGAR UN ESPECTADOR
-            sis.ingresarEspectador(nombre, apellido, email, nickname, f);
+            sis.ingresarEspectador(nombre, apellido, email, nickname, f, password);
             JOptionPane.showMessageDialog(this, "Espectador registrado correctamente", "Registro", JOptionPane.INFORMATION_MESSAGE);
             this.FieldNickname.setText("");
             this.FieldNombre.setText("");
             this.FieldApellido.setText("");
             this.FieldEmail.setText("");
+            this.FieldPassword1.setText("");
+            this.FieldConfPassword1.setText("");
             this.ComboBoxDia.setSelectedIndex(0);
             this.ComboBoxMes.setSelectedIndex(0);
             this.ComboBoxAnio.setSelectedIndex(0);
@@ -3137,7 +3157,7 @@ public class main extends javax.swing.JFrame {
                 return;
             }
             
-            sis.ingresarArtista(nombre, apellido, email, nickname, f, biografia, descripcion, link);
+            sis.ingresarArtista(nombre, apellido, email, nickname, f, password, biografia, descripcion, link);
             JOptionPane.showMessageDialog(this, "Artista registrado correctamente", "Registro", JOptionPane.INFORMATION_MESSAGE);
             this.FieldNickname.setText("");
             this.FieldNombre.setText("");
@@ -3146,6 +3166,8 @@ public class main extends javax.swing.JFrame {
             this.FieldBiografia.setText("");
             this.FieldDescripcion.setText("");
             this.FieldSitioWeb.setText("");
+            this.FieldPassword1.setText("");
+            this.FieldConfPassword1.setText("");
             this.ComboBoxDia.setSelectedIndex(0);
             this.ComboBoxMes.setSelectedIndex(0);
             this.ComboBoxAnio.setSelectedIndex(0);
@@ -4089,7 +4111,14 @@ public class main extends javax.swing.JFrame {
             this.ListaEspectaculos11.setListData(espectaculos);
             
             String[] categorias = sis.listarCategoriasxPaquete(paquete);
-            this.ListaCategoria11.setListData(categorias);
+            if( !(categorias[0].equals("Vacio")) ){
+                this.ListaCategoria11.setListData(categorias);
+            }
+            else{
+                String arr[] = new String[1];
+                this.ListaCategoria11.setListData(arr);
+            }
+            
             
         }
     }//GEN-LAST:event_ListaPaquetes11ValueChanged
@@ -4685,6 +4714,9 @@ public class main extends javax.swing.JFrame {
 
             String[] paquetes = sis.listarPaquetesdeEsp(espectaculo);
             this.ListaPaquetes5.setListData(paquetes);
+            
+            String[] categorias = sis.listarCategoriasxEspectaculo(espectaculo);
+            this.ListaCategoria5.setListData(categorias);
             this.FrameConsultaEspectaculo.setVisible(true);
         }
     }//GEN-LAST:event_ListaEspectaculos11ValueChanged
@@ -4767,6 +4799,7 @@ public class main extends javax.swing.JFrame {
         this.ListaEspectaculos22.setModel(listmodel);
         this.ListaFuncion22.setModel(listmodel);
         this.ListaCategoria5.setModel(listmodel);
+        this.ListaCategoria11.setModel(listmodel);
        
     }
     
@@ -4868,6 +4901,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldBiografia;
     private javax.swing.JTextField FieldBiografia2;
     private javax.swing.JTextField FieldBiografia3;
+    private javax.swing.JPasswordField FieldConfPassword1;
     private javax.swing.JTextField FieldCorreo2;
     private javax.swing.JTextField FieldCosto4;
     private javax.swing.JTextField FieldCosto5;
@@ -4915,6 +4949,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField FieldNombre5;
     private javax.swing.JTextField FieldNombre7;
     private javax.swing.JTextField FieldNombre8;
+    private javax.swing.JPasswordField FieldPassword1;
     private javax.swing.JTextField FieldSitioWeb;
     private javax.swing.JTextField FieldURL4;
     private javax.swing.JTextField FieldURL5;
@@ -4967,6 +5002,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel LabelDuracion6;
     private javax.swing.JLabel LabelDuracion8;
     private javax.swing.JLabel LabelEmail;
+    private javax.swing.JLabel LabelEmail1;
+    private javax.swing.JLabel LabelEmail2;
     private javax.swing.JLabel LabelEsp_Max4;
     private javax.swing.JLabel LabelEsp_Max5;
     private javax.swing.JLabel LabelEsp_Max6;

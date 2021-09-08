@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.swing.JOptionPane;
 
@@ -28,10 +29,11 @@ public class Artista extends Usuario {
     
     @OneToMany
     private Map <String,Espectaculo>organiza;
+   
     
-    public Artista(String nombre, String apellido, String email, String nickname, Date fecha_nac, String descripcion, String biografia, String link ){
+    public Artista(String nombre, String apellido, String email, String nickname, Date fecha_nac,String password, String descripcion, String biografia, String link ){
         
-        super(nombre, apellido, email, nickname, fecha_nac);
+        super(nombre, apellido, email, nickname, fecha_nac, password);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.link = link;

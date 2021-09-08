@@ -30,6 +30,7 @@ public class Espectaculo {
     private int duracion; 
     private String plataforma;
     private String descripcion;
+    private int estado;
     @OneToMany
     private Map<String,Funcion> Funciones;
     @OneToMany 
@@ -38,7 +39,7 @@ public class Espectaculo {
     public Espectaculo (){
     }
 
-    public Espectaculo(String nombre, Date fecha_registro, float costo, String url, int cant_max_espec, int cant_min_espec, int duracion, String descripcion, String Plataforma, List categorias) {
+    public Espectaculo(String nombre, Date fecha_registro, float costo, String url, int cant_max_espec, int cant_min_espec, int duracion, String descripcion, String Plataforma, List categorias, int estado) {
         this.nombre = nombre;
         this.fecha_registro = fecha_registro;
         this.costo = costo;
@@ -48,6 +49,7 @@ public class Espectaculo {
         this.duracion = duracion;
         this.descripcion = descripcion;
         this.plataforma = Plataforma;
+        this.estado = estado;
         this.Funciones = new HashMap();
         
         this.categorias = new HashMap();

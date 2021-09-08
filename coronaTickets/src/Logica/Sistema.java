@@ -36,6 +36,13 @@ public class Sistema implements ISistema {
       
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("coronaTicketsPU");
         this.em = emf.createEntityManager();
+        
+        String res[] = this.listarSeguidores("ACastro");
+        for(String s: res){
+            JOptionPane.showMessageDialog(null,s,"PRUEBA",JOptionPane.ERROR_MESSAGE);
+        }
+        
+ 
     }
    
     
@@ -58,7 +65,7 @@ public class Sistema implements ISistema {
         }
         
       
-        Espectaculo e = new Espectaculo(nombre,fecha_registro,costo,url,cant_max_espec,cant_min_espec,duracion,descripcion, Plataforma, Listacategorias);
+        Espectaculo e = new Espectaculo(nombre,fecha_registro,costo,url,cant_max_espec,cant_min_espec,duracion,descripcion, Plataforma, Listacategorias,0);
         em.persist(e);
         p.agregarEspectaculo(e);
         a.asociarEspectaculo(e);
@@ -145,9 +152,9 @@ public class Sistema implements ISistema {
     
     
     // CREA UN NUEVO ESPECTADOR CON LOS DATOS RECIBIDIDOS Y LO PERSISTE.
-    public void ingresarEspectador(String nombre, String apellido, String correo, String nickname, Date fecha_nac){
+    public void ingresarEspectador(String nombre, String apellido, String correo, String nickname, Date fecha_nac, String password){
         
-        Usuario u = new Espectador(nombre, apellido, correo, nickname, fecha_nac);
+        Usuario u = new Espectador(nombre, apellido, correo, nickname, fecha_nac, password);
         em.getTransaction().begin();
         em.persist(u);
         em.getTransaction().commit();
@@ -155,9 +162,9 @@ public class Sistema implements ISistema {
     
     
     // CREA UN NUEVO ARTISTA CON LOS DATOS RECIBIDIDOS Y LO PERSISTE.
-    public void ingresarArtista(String nombre, String apellido, String correo, String nickname, Date fecha_nac, String descripcion, String biografia, String link){
+    public void ingresarArtista(String nombre, String apellido, String correo, String nickname, Date fecha_nac,String password, String descripcion, String biografia, String link){
         
-        Usuario u = new Artista(nombre, apellido, correo, nickname, fecha_nac, biografia, descripcion, link);
+        Usuario u = new Artista(nombre, apellido, correo, nickname, fecha_nac,password, descripcion, biografia, link);
         em.getTransaction().begin();
         em.persist(u);
         em.getTransaction().commit();
@@ -417,8 +424,43 @@ public class Sistema implements ISistema {
     // AÑADE EL ESPECTACULO CON NOMBRE IGUAL AL RECIBIDO POR PARAMETRO AL PAQUETE CON NOMBRE IGUAL AL RECIBIDO POR PARAMETRO
     public void AddEspectaculoaPaquete(String paquete, String espectaculo){
         em.getTransaction().begin();
+        
         Espectaculo esp = em.find(Espectaculo.class,espectaculo);
         Paquete p = em.find(Paquete.class, paquete);
+        
+        // OBTENGO TODAS LAS CATEGORIAS DEL PAQUETE Y DEL ESPECTACULO
+        String[] catdePaquete = this.listarCategoriasxPaquete(paquete);
+        String[] catdeEspectaculo = this.listarCategoriasxEspectaculo(espectaculo);
+        
+        
+        if(catdePaquete[0].equals("Vacio")){ // SI EL PAQUETE NO TIENE NIGNUNA CATEGORIA, SE AGREGAN TODAS LAS DEL ESPECTACULO
+            
+            for(String cat: catdeEspectaculo){
+                Categoria c = em.find(Categoria.class,cat);
+                p.addCategoria(c);
+            }
+        }
+        
+        else{
+            boolean esta;
+            // ESTA PORCION DE CODIGO REVISA CADA UNA DE LAS CATEGORIAS DEL ESPECTACULO NUEVO, Y SI NO SE ENCUENTRAN EN EL PAQUETE, LAS AGREGA.
+            for(String s: catdeEspectaculo){
+                esta = false;
+         
+                for(String s2: catdePaquete){
+                    if(s.equals(s2)){
+                        esta = true;
+                        break;
+                    }
+                }
+                if(esta == false){
+                    Categoria c = em.find(Categoria.class,s);
+                    p.addCategoria(c); 
+                }
+
+            }
+        }
+        
         p.addEsp(esp);
         em.getTransaction().commit();
     }
@@ -833,7 +875,9 @@ public class Sistema implements ISistema {
             return res;
             
         }catch(Exception e){
-            return new String[1];
+            String vacio[] = new String[1];
+            vacio[0] = "Vacio";
+            return vacio;
         }
     }
     
@@ -856,6 +900,110 @@ public class Sistema implements ISistema {
         }catch(Exception e){
             return new String[1];
         }
+    }
+    
+    
+    // EL USUARIO 2 COMIENZA A SER SEGUIDOR DEL USUARIO 1
+    public void AddSeguidor(String usuario1, String usuario2){
+        Usuario u = em.find(Usuario.class, usuario1);
+        Usuario u2 = em.find(Usuario.class, usuario2);
+        
+        u.addSeguidor(u2);
+    }
+    
+    
+    // VERIFICA SI EL USUARIO 2 SIGUE AL USUARIO 1
+    public boolean EsSeguidor(String usuario1, String usuario2){
+        
+        Query q = em.createNativeQuery("SELECT (( SELECT COUNT(*) FROM artista_usuario au WHERE au.seguidores_nickname = '" + usuario2 +"' AND au.artista_nickname = '"+usuario1+"')\n" +
+        "+\n" +
+        "+(SELECT COUNT(*) FROM espectador_usuario eu WHERE eu.seguidores_nickname = '"+usuario2+"' AND eu.espectador_nickname = '"+usuario1+"')\n" +
+        ") ");
+        
+        long cant = (long) q.getSingleResult();
+        JOptionPane.showMessageDialog(null, cant);
+        if(cant == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    
+    public String[] listarSeguidores(String nickname){
+        
+        /*Query q = em.createQuery("SELECT a.seguidores FROM Artista a WHERE a.nickname = :nickname");
+        Query q = em.createQuery("SELECT e.seguidores FROM Espectador e WHERE e.nickname = :nickname");
+        q.setParameter("nickname", nickname);
+        
+       
+        
+        
+        
+        
+        
+       
+        return new String[1];
+
+
+        
+        Usuario u = em.find(Usuario.class, nickname);
+        
+        if(u instanceof Artista){
+            Query q = em.createQuery("SELECT a.seguidores FROM Artista a WHERE a.nickname = :nickname");
+            q.setParameter("nickname", nickname);
+            
+            try{
+                List seguidores = q.getResultList();
+                String[] res = new String[seguidores.size()];
+                int i = 0;
+                
+                for(Object object: seguidores){
+
+                    if(object instanceof Artista){
+                        Artista a = (Artista) object;
+                        res[i] = a.GetNickname();
+                        i++;
+                    }
+                    else{
+                        Espectador e = (Espectador) object;
+                        res[i] = e.GetNickname();
+                        i++;
+                    } 
+                }
+                return res;
+            }catch(Exception e){
+                return new String[1];
+            }
+        }
+        else{
+            Query q = em.createQuery("SELECT e.seguidores FROM Espectador e WHERE e.nickname = :nickname");
+            q.setParameter("nickname", nickname);
+            
+            try{
+                List seguidores = q.getResultList();
+                String[] res = new String[seguidores.size()];
+                int i = 0;
+                
+                for(Object object: seguidores){
+
+                    if(object instanceof Artista){
+                        Artista a = (Artista) object;
+                        res[i] = a.GetNickname();
+                        i++;
+                    }
+                    else{
+                        Espectador e = (Espectador) object;
+                        res[i] = e.GetNickname();
+                        i++;
+                    } 
+                }
+                return res;
+            }catch(Exception e){
+                return new String[1];
+            } 
+        }*/
+       return new String[1]; 
     }
 }
 

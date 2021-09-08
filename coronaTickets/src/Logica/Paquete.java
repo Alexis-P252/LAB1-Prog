@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -110,5 +111,9 @@ public class Paquete {
         this.espectaculos.put(esp.getNombre(), esp);
     }
     
+    public void addCategoria (Categoria c){
+        JOptionPane.showMessageDialog(null,"LLEGA ADENTRO DE LA FUNCION","PRUEBA",JOptionPane.ERROR_MESSAGE);
+        this.categorias.put(c.getNombre(),c);
+    }
     
 }
