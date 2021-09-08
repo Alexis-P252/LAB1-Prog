@@ -29,6 +29,9 @@ public interface ISistema {
     public abstract String[] ColNickname();
     public abstract List ListarRegistros (String espectador);
     public abstract String[] listarCategorias();
+    public abstract String[] listarCategoriasxEspectaculo(String nombre);
+    public abstract String[] listarCategoriasxPaquete(String nombre);
+    public abstract String[] listarEspectaculosxCategoria(String categoria);
     
     // INGRESAR DATOS
     

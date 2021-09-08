@@ -794,5 +794,68 @@ public class Sistema implements ISistema {
             return new String[1];
         }
     }
+    
+    public String[] listarCategoriasxEspectaculo(String nombre){
+        Query q = em.createQuery("SELECT e.categorias FROM Espectaculo e WHERE e.nombre = :nombre");
+        q.setParameter("nombre", nombre);
+        
+        try{
+            List categorias = q.getResultList();
+            String res[] = new String[categorias.size()];
+            int i = 0;
+            
+            for(Object object: categorias ){
+                Categoria cat = (Categoria) object;
+                res[i] = cat.getNombre();
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e){
+            return new String[1];
+        }
+    }
+    
+    public String[] listarCategoriasxPaquete(String nombre){
+        Query q = em.createQuery("SELECT p.categorias FROM Paquete p WHERE p.nombre = :nombre");
+        q.setParameter("nombre", nombre);
+        
+        try{
+            List categorias = q.getResultList();
+            String res[] = new String[categorias.size()];
+            int i = 0;
+            
+            for(Object object: categorias ){
+                Categoria cat = (Categoria) object;
+                res[i] = cat.getNombre();
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e){
+            return new String[1];
+        }
+    }
+    
+    public String[] listarEspectaculosxCategoria(String categoria){
+        
+        Query q = em.createNativeQuery("SELECT DISTINCT ec.espectaculo_nombre FROM espectaculo_categoria ec WHERE ec.categorias_nombre = ' " + categoria +" ';");
+        
+        try{
+            List espectaculos = q.getResultList();
+            String res[] = new String[espectaculos.size()];
+            int i = 0;
+            
+            for(Object object: espectaculos){
+                String s = (String) object;
+                res[i] = s;
+                i++;
+            }
+            return res;
+            
+        }catch(Exception e){
+            return new String[1];
+        }
+    }
 }
 

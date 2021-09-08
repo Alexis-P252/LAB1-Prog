@@ -27,6 +27,8 @@ public class Paquete {
     private Date fecha_ini;
     @OneToMany 
     private Map<String,Espectaculo> espectaculos;
+    @OneToMany
+    private Map<String,Categoria> categorias;
 
     public Paquete(String nombre, String descripcion, float descuento, Date fecha_alta, Date fecha_fin, Date fecha_ini) {
         this.nombre = nombre;
@@ -35,7 +37,8 @@ public class Paquete {
         this.fecha_alta = fecha_alta;
         this.fecha_fin = fecha_fin;
         this.fecha_ini = fecha_ini;
-        this.espectaculos = new HashMap(); 
+        this.espectaculos = new HashMap();
+        this.espectaculos = new HashMap();
     }
     
     public DtPaquete ArmarDT(){
