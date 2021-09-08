@@ -6,6 +6,7 @@
 
 package Logica;
 import Logica.DtEspectaculo;
+import Logica.Categoria;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
@@ -42,14 +43,22 @@ public class Sistema implements ISistema {
     //  ** LO PERSISTE A NIVEL DE LA BASE DE DATOS
     //  ** ASOCIA EL ESPECTACULO CON LA PLATAFORMA EN DONDE SE CREO
     //  ** ASOCIA EL ESPECTACULO CON EL ARTISTA QUE ORGANIZO EL MISMO
-    public void crearEspectaculo(String Plataforma,String nombre,Date fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion, String artista){
+    public void crearEspectaculo(String Plataforma,String nombre,Date fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion, String artista, List categorias){
         
         em.getTransaction().begin();
         
         Plataforma p = em.find(Plataforma.class, Plataforma);
         Artista a = em.find(Artista.class, artista);
         
-        Espectaculo e = new Espectaculo(nombre,fecha_registro,costo,url,cant_max_espec,cant_min_espec,duracion,descripcion, Plataforma);
+        List Listacategorias = new ArrayList();
+        
+        for(Object s: categorias){
+            Categoria c = em.find(Categoria.class, s);
+            Listacategorias.add(c);
+        }
+        
+      
+        Espectaculo e = new Espectaculo(nombre,fecha_registro,costo,url,cant_max_espec,cant_min_espec,duracion,descripcion, Plataforma, Listacategorias);
         em.persist(e);
         p.agregarEspectaculo(e);
         a.asociarEspectaculo(e);
@@ -745,5 +754,45 @@ public class Sistema implements ISistema {
         }
     }
     
+    public boolean ExisteCategoria(String nombre){
+        
+        if( em.find(Categoria.class, nombre) == null){
+            return false;
+        }
+        else{
+            return true;
+        }
+        
+    }
+    
+    public void AgregarCategoria(String categoria){
+        
+        Categoria c = new Categoria(categoria);
+        
+        em.getTransaction().begin();
+        em.persist(c);
+        em.getTransaction().commit();
+    
+    }
+    
+    public String[] listarCategorias(){
+        Query q = em.createQuery("SELECT c FROM Categoria c");
+        
+        try{
+           List categorias = q.getResultList();
+           String[] res = new String[categorias.size()];
+           int i = 0;
+           
+           for(Object object: categorias){
+               Categoria c = (Categoria) object;
+               res[i] = c.getNombre();
+               i++;
+           }
+           return res;
+            
+        }catch(Exception e){
+            return new String[1];
+        }
+    }
 }
 

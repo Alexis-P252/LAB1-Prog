@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -31,11 +32,13 @@ public class Espectaculo {
     private String descripcion;
     @OneToMany
     private Map<String,Funcion> Funciones;
+    @OneToMany 
+    private Map<String,Categoria> categorias;
  
     public Espectaculo (){
     }
 
-    public Espectaculo(String nombre, Date fecha_registro, float costo, String url, int cant_max_espec, int cant_min_espec, int duracion, String descripcion, String Plataforma) {
+    public Espectaculo(String nombre, Date fecha_registro, float costo, String url, int cant_max_espec, int cant_min_espec, int duracion, String descripcion, String Plataforma, List categorias) {
         this.nombre = nombre;
         this.fecha_registro = fecha_registro;
         this.costo = costo;
@@ -46,6 +49,13 @@ public class Espectaculo {
         this.descripcion = descripcion;
         this.plataforma = Plataforma;
         this.Funciones = new HashMap();
+        
+        this.categorias = new HashMap();
+        
+        for(Object cat: categorias){
+            Categoria c = (Categoria) cat;
+            this.categorias.put(c.getNombre(), c);
+        }
     }
 
     public void setNombre(String nombre) {

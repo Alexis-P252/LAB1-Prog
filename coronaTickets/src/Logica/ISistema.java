@@ -28,16 +28,18 @@ public interface ISistema {
     public abstract String[] listarespectaculosXArtista(String artista);
     public abstract String[] ColNickname();
     public abstract List ListarRegistros (String espectador);
+    public abstract String[] listarCategorias();
     
     // INGRESAR DATOS
     
     public abstract void ingresarEspectador(String nombre, String apellido, String correo, String nickname, Date fecha_nac);
     public abstract void ingresarArtista(String nombre, String apellido, String correo, String nickname, Date fecha_nac, String descripcion, String biografia, String link);
-    public abstract void crearEspectaculo(String Plataforma,String nombre,Date fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion, String artista);
+    public abstract void crearEspectaculo(String Plataforma,String nombre,Date fecha_registro,float costo, String url,int cant_max_espec,int cant_min_espec,int duracion,String descripcion, String artista, List categorias);
     public abstract void AgregarPaquete(String nombre, String descripcion, float descuento, Date fecha_alta, Date fecha_fin, Date fecha_ini);
     public abstract void AgregarFuncion(String nombre, Date fecha_hora, Date fecha_registro, String espectaculo, List artistas);
     public abstract void AddEspectaculoaPaquete(String paquete, String espectaculo);
     public abstract void agregarRegistro(String espectador,String funcion, String espectaculo, Date f, int costo);
+    public abstract void AgregarCategoria(String categoria);
     
     // CONTROL DE INFORMACION
     
@@ -50,6 +52,7 @@ public interface ISistema {
     public abstract boolean cantMaxAsistentes(String espectaculo, String funcion);
     public abstract boolean alMenos3Registros (String espectador);
     public abstract boolean EspectaculoenPaq (String paquete, String espectaculo);
+    public abstract boolean ExisteCategoria(String nombre);
     
     // MOSTRAR DATOS
     
